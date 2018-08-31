@@ -1,0 +1,50 @@
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_color"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/ic_news"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_height="@dimen/_70sdp" />
+    <EditText
+       android:id="@+id/edt_subject"
+       android:layout_width="match_parent"
+       android:layout_below="@+id/image_view"
+       android:hint="@string/enter_subject_name"
+       android:paddingLeft="@dimen/_10sdp"
+       android:layout_marginRight="@dimen/_10sdp"
+       android:layout_marginTop="@dimen/_20sdp"
+       android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edt_news"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_below="@+id/edt_subject"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/newsbck"
+        android:gravity="top"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:hint="@string/enter_news"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/submit"
+        android:textColor="@color/white_color"
+        android:background="@color/title_color"
+        android:layout_below="@+id/edt_news"
+        android:layout_height="wrap_content" />
+        </RelativeLayout>

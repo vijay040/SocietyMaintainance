@@ -1,0 +1,132 @@
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="@dimen/_80sdp"
+        android:background="@drawable/ic_profileicon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp" />
+            <TextView
+            android:id="@+id/txtname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_below="@+id/image_profile"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_15sdp" />
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anuradha"
+        android:layout_below="@+id/txtname"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_12sdp" />
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_25sdp"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_below="@+id/user_name"
+        android:background="@color/text_color" />
+
+    <TextView
+        android:id="@+id/txtemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@+id/user_name"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_15sdp" />
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="anu@gmail.com"
+        android:layout_below="@+id/txtemail"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_12sdp" />
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_25sdp"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_below="@+id/user_email"
+        android:background="@color/text_color" />
+    <TextView
+        android:id="@+id/txtphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Number"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@+id/user_email"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_15sdp" />
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7275881989"
+        android:layout_below="@+id/txtphone"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_12sdp" />
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_25sdp"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_below="@+id/user_phone"
+        android:background="@color/text_color" />
+    <TextView
+        android:id="@+id/txtaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@+id/user_phone"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_15sdp" />
+    <TextView
+        android:id="@+id/user_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B-108 office no.4 "
+        android:layout_below="@+id/txtaddress"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_12sdp" />
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_25sdp"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_below="@+id/user_address"
+        android:background="@color/text_color" />
+</RelativeLayout>
+
+
+
+
+
