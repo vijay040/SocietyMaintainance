@@ -23,7 +23,7 @@ import com.mmcs.societymaintainance.R;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edt_username,edt_password;
-    Button loginBtn;
+    Button loginBtn,btn_register;
     Animation animShake;
     public static int TYPE_WIFI = 1;
     public static int TYPE_MOBILE = 2;
@@ -39,7 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         edt_password=findViewById(R.id.edt_password);
         animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
         loginBtn=findViewById(R.id.loginBtn);
+        btn_register=findViewById(R.id.btn_register);
         relativeLayout=findViewById(R.id.relativeLayout);
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(LoginActivity.this,RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

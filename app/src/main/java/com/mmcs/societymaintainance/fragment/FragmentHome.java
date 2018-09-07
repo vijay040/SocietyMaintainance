@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AddResidentActivity;
+import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.MakeRequestActivity;
 import com.mmcs.societymaintainance.activity.NoticeActivity;
@@ -19,7 +20,7 @@ import com.mmcs.societymaintainance.activity.VehicleActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 
 public class FragmentHome extends android.support.v4.app.Fragment{
-    RelativeLayout layUser,layComplaint,layRequest,layVehicle,layFacility,layParking,layNotice,layMeeting,layBilling,layResidency,layVisitor,layAMCservice;
+    RelativeLayout layUser,layComplaint,layRequest,layVehicle,layFacility,layParking,layNotice,layMeeting,layBilling,layResidency,layVisitor,layAMCservice,layAttandance;
     @Override
     public void onCreate( @Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,6 +41,13 @@ public class FragmentHome extends android.support.v4.app.Fragment{
         layAMCservice=view.findViewById(R.id.layAMCservice);
         layFacility=view.findViewById(R.id.layFacility);
         layVehicle=view.findViewById(R.id.layVehicle);
+        layAttandance=view.findViewById(R.id.layAttandance);
+        layAttandance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),AttendanceActivity.class));
+            }
+        });
         layVehicle.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

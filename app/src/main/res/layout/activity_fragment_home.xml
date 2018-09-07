@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:weightSum="7">
+                android:weightSum="8">
                 <RelativeLayout
                     android:id="@+id/layUser"
                     android:layout_width="match_parent"
@@ -207,6 +207,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_below="@+id/txtVechile"
+                        android:background="#A9D3FF" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layAttandance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_left_nine">
+                    <ImageView
+                        android:id="@+id/imageAttandance"
+                        android:layout_width="@dimen/_180sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:src="@drawable/ic_attendance" />
+                    <TextView
+                        android:id="@+id/txtAttandance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imageAttandance"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/attendance"
+                        android:textColor="@color/white_color"
+                        android:textSize="@dimen/_13sdp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@+id/txtAttandance"
                         android:background="#A9D3FF" />
                 </RelativeLayout>
             </LinearLayout>

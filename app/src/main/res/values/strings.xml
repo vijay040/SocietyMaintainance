@@ -1,4 +1,4 @@
-    <resources>
+<resources>
     <string name="app_name">Magic Society</string>
     <string name="email">Enter Email</string>
     <string name="password">Enter Password</string>
@@ -28,6 +28,7 @@
     <string name="logout">Log Out</string>
     <string name="visitor">Visitor Management</string>
     <string name="profile_title">MY PROFILE</string>
+    <string name="attendance">Attendance</string>
     <string name="news">NEWS</string>
     <string name="complaint_title">COMPLAINT</string>
     <string name="visitor_name">Visitor Name</string>
@@ -57,4 +58,30 @@
     <string name="select">Select</string>
     <string name="enter_subject_name">Enter Subject Name</string>
     <string name="enter_news">Enter News</string>
-     </resources>
+    <string name="registration">REGISTRATION</string>
+    <string name="family_member">FAMILY MEMBERS</string>
+    <string name="name">Name</string>
+    <string name="edit">Edit</string>
+    <string name="edt_txt__name">First Name</string>
+    <string name="edt_txt_last_name">Last Name</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="mobile">Phone No.</string>
+    <string name="contact">Contact No.</string>
+    <string name="email_add">Email Address</string>
+    <string name="location">Location</string>
+    <string name="current_date">Current Date</string>
+    <string name="sign_in">SIGNIN</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="register">REGISTER</string>
+    <string name="not_register">Not Register Yet?</string>
+    <string name="enter_name">Enter Your Name</string>
+    <string name="enter_contact">Enter Contact No.</string>
+    <string name="enter_email">Enter Valid Email</string>
+    <string name="enter_cnfrm_pass">Enter Confirm Password></string>
+    <string name="password_not_match">Password does not matches</string>
+    <string name="successfully_registered">Successfully Registered</string>
+    <string-array name="types">
+        <item>Name</item>
+        <item>Contact No.</item>
+    </string-array>
+</resources>

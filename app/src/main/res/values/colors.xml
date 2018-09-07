@@ -7,7 +7,8 @@
     <color name="text_color">#1D1B1B</color>
     <color name="white_color">#ffffff</color>
     <color name="title_color">#283593</color>
-
+<color name="registration_back">#b45705</color>
+    <color name="registration_text">#90c40909</color>
     <color name="bg_screen1">#f64c73</color>
     <color name="bg_screen2">#20d2bb</color>
     <color name="bg_screen3">#3395ff</color>

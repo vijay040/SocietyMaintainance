@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/registration"
+            android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/registration_text"
+        android:textSize="@dimen/_30sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/family_member"
+        android:textColor="@color/registration_text"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold" />
+            <Button
+        android:id="@+id/btn_add"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="end"
+        android:onClick="onAddField"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/ic_plus" />
+            <android.support.design.widget.TextInputLayout
+        android:id="@+id/full_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+            <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/name"
+            android:inputType="textPersonName" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/contact_no"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/full_name"
+        android:layout_marginTop="@dimen/_10sdp">
+        <EditText
+            android:id="@+id/edt_contact_no"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="12"
+            android:hint="@string/contact"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/parent_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal" >
+                <EditText
+                    android:id="@+id/name_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:inputType="text"/>
+                <Spinner
+                    android:id="@+id/type_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:entries="@array/types"
+                    android:gravity="right" />
+                <Button
+                    android:id="@+id/delete_button"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:onClick="onDelete"
+                    android:background="@android:drawable/ic_delete" />
+            </LinearLayout>
+           </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/email_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+        <EditText
+            android:id="@+id/edt_email_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/email_add"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/cnfrm_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+        <EditText
+            android:id="@+id/edt_cnfrm_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/confirm_pass"
+            android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/btn_register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@color/registration_back"
+        android:text="@string/register"
+                android:layout_marginBottom="@dimen/_15sdp"
+        android:textColor="#fff" />
+        </LinearLayout>
+          </ScrollView>
+        </LinearLayout>

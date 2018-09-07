@@ -50,12 +50,12 @@ public class DrawerActivity extends AppCompatActivity {
         ImageView whatsapp=(ImageView) findViewById(R.id.whatsapp);
       imgDrawer.setBackground(ContextCompat.getDrawable(DrawerActivity.this, R.drawable.ic_menu));
         setTitle();
-        whatsapp.setOnClickListener(new View.OnClickListener() {
+      /*  whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openWhatsApp();
             }
-        });
+        });*/
         drawerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +144,7 @@ public class DrawerActivity extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.home_page));
     }
-    private  void openWhatsApp(){
+   /* private  void openWhatsApp(){
         PackageManager packageManager = this.getPackageManager();
         Intent i = new Intent(Intent.ACTION_VIEW);
         String phone="+919910482920";
@@ -160,7 +160,7 @@ public class DrawerActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
     public static void pushFragment(Fragment fragment){
         if (fragment != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
