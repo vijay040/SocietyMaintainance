@@ -3,9 +3,12 @@ package com.mmcs.societymaintainance.fragment;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -21,6 +24,8 @@ import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 
 public class FragmentHome extends android.support.v4.app.Fragment{
     RelativeLayout layUser,layComplaint,layRequest,layVehicle,layFacility,layParking,layNotice,layMeeting,layBilling,layResidency,layVisitor,layAMCservice,layAttandance;
+
+    RecyclerView rvItems;
     @Override
     public void onCreate( @Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -29,7 +34,13 @@ public class FragmentHome extends android.support.v4.app.Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.activity_fragment_home, container, false);
-        layUser=view.findViewById(R.id.layUser);
+        rvItems=view.findViewById(R.id.rvItems);
+        rvItems.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+
+
+
+        /*layUser=view.findViewById(R.id.layUser);
         layComplaint=view.findViewById(R.id.layComplaint);
         layRequest=view.findViewById(R.id.layRequest);
         layParking=view.findViewById(R.id.layParking);
@@ -107,7 +118,7 @@ public class FragmentHome extends android.support.v4.app.Fragment{
             public void onClick(View view){
                 startActivity(new Intent(getActivity(),AddResidentActivity.class));
             }
-        });
+        });*/
         return view;
     }
 }
