@@ -4,31 +4,33 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/layUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@drawable/drawable_left_nine">
+        android:gravity="center"
+       >
         <ImageView
             android:id="@+id/imgUserProfile"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_centerHorizontal="true"
-            android:paddingTop="@dimen/_5sdp" />
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_65sdp"
+            android:layout_centerHorizontal="true" />
         <TextView
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgUserProfile"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/my_profile"
             android:textColor="@color/white_color"
             android:textSize="@dimen/_13sdp" />
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_below="@+id/txt_title"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="#A9D3FF" />
+            android:background="#A9D3FF"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 </RelativeLayout>

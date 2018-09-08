@@ -33,6 +33,8 @@
     <string name="news">NEWS</string>
     <string name="complaint_title">COMPLAINT</string>
     <string name="visitor_name">Visitor Name</string>
+    <string name="title">Title</string>
+    <string name="des">Description</string>
     <string name="mobile_no">Mobile No.</string>
     <string name="to_meet">To Meet</string>
     <string name="purpose">Purpose</string>

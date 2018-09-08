@@ -1,14 +1,15 @@
 package com.mmcs.societymaintainance.model;
 
 public class HomeItemModel {
-    private String Image;
+    private int Image;
     private String title;
 
-    public String getImage() {
+
+    public int getImage() {
         return Image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         Image = image;
     }
 
@@ -19,6 +20,4 @@ public class HomeItemModel {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
 }

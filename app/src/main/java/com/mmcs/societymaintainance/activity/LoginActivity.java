@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.util.Shprefrences;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edt_username,edt_password;
@@ -34,8 +37,11 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout relativeLayout;
     private boolean internetConnected=true;
     Spinner spnLoginType;
+    Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         edt_username=findViewById(R.id.edt_username);
@@ -45,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_register=findViewById(R.id.btn_register);
         relativeLayout=findViewById(R.id.relativeLayout);
         spnLoginType=findViewById(R.id.spnUserType);
-        String typeList[] = {"Select Login Types","User","Management"};
+        sh=new Shprefrences(this);
+        String typeList[] = {"Select Login Types","User","Management","Owner"};
         spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 else{
+                    sh.setString("TYPE",spnLoginType.getSelectedItem()+"");
                     startActivity(new Intent(LoginActivity.this,DrawerActivity.class));
                     showWelcomeTitle();
                 }

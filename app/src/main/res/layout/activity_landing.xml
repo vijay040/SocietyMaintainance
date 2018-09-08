@@ -92,108 +92,15 @@
                          android:layout_width="match_parent"
                          android:layout_height="@dimen/_1sdp"
                          android:background="@color/text_hint_color" />
-                     <LinearLayout
-                   android:layout_width="match_parent"
-                   android:orientation="vertical"
-                   android:layout_weight="1"
-                   android:layout_height="wrap_content">
-                    <TextView
-                    android:id="@+id/txtRequest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/ic_request"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="Make Request"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-                     <TextView
-                    android:id="@+id/txtComplaint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/ic_complain"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="@string/complaint"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-                     <TextView
-                    android:id="@+id/txtParking"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/ic_parking"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="@string/parking"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-                     <TextView
-                    android:id="@+id/txtNotice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/ic_notice"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="Notice"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-                     <TextView
-                    android:id="@+id/txtMeeting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/ic_meeting"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="Meetings"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-                     <TextView
-                    android:id="@+id/txtBilling"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/ic_billing"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="@string/billing"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-                     <TextView
-                         android:id="@+id/txtAddVendor"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="@dimen/_20sdp"
-                         android:layout_marginTop="@dimen/_10sdp"
-                         android:drawableLeft="@drawable/ic_addvendor"
-                         android:drawablePadding="@dimen/_5sdp"
-                         android:text="Add Vendor"
-                         android:textColor="@color/white_color"
-                         android:textSize="@dimen/_14sdp"
-                         android:textStyle="bold" />
-                     <TextView
-                    android:id="@+id/txtlogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/logout"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="@string/logout"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-               </LinearLayout>
+
+                     <ListView
+                         android:id="@+id/listItem"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"/>
+
+
+
+
                     </LinearLayout>
                     </android.support.design.widget.NavigationView>
                     </android.support.v4.widget.DrawerLayout>
