@@ -14,10 +14,9 @@
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_70sdp"
             android:layout_centerHorizontal="true"
-            android:paddingTop="@dimen/_5sdp"
-            android:src="@drawable/ic_userprofile" />
+            android:paddingTop="@dimen/_5sdp" />
         <TextView
-            android:id="@+id/txtUserProfile"
+            android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgUserProfile"
@@ -28,7 +27,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_below="@+id/txtUserProfile"
+            android:layout_below="@+id/txt_title"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="#A9D3FF" />
     </RelativeLayout>

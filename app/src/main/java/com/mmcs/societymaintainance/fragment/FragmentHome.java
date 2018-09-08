@@ -41,11 +41,11 @@ public class FragmentHome extends android.support.v4.app.Fragment{
         rvHome=view.findViewById(R.id.rvItems);
         rvHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         ArrayList<HomeItemModel> list=new ArrayList<>();
-        list.add(new HomeItemModel());
-        list.add(new HomeItemModel());
-        list.add(new HomeItemModel());
-        list.add(new HomeItemModel());
-        list.add(new HomeItemModel());
+        HomeItemModel item=  new HomeItemModel();
+        item.setImage("ic_userprofile");
+        item.setTitle("Profile");
+        list.add(item);
+
         HomeRecyclerAdaptor adaptor=new HomeRecyclerAdaptor(getActivity(),list);
         rvHome.setAdapter(adaptor);
 
