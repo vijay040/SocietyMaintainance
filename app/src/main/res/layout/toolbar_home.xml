@@ -26,6 +26,7 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
            android:layout_toEndOf="@+id/title"
+            android:visibility="gone"
             android:layout_alignTop="@+id/drawerIcon"
            android:layout_marginLeft="@dimen/_15sdp"
             android:src="@drawable/ic_homepage" />
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView"
            android:layout_centerInParent="true"
-            android:text="Home"
+            android:text="Society Management System"
             android:textColor="@color/white_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />

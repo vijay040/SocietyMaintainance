@@ -19,6 +19,7 @@
     <string name="feedback_title">Write Your Complaint Here</string>
     <string name="subject">Subject:</string>
     <string name="flate_no">Flate No.</string>
+    <string name="select_logintype">Select LoginType</string>
     <string name="vehicle">Vehicle Directory</string>
     <string name="residency_directory">Residency Directory</string>
     <string name="comment">Comment:</string>
@@ -59,7 +60,7 @@
     <string name="enter_subject_name">Enter Subject Name</string>
     <string name="enter_news">Enter News</string>
     <string name="registration">REGISTRATION</string>
-    <string name="family_member">FAMILY MEMBERS</string>
+    <string name="family_member">ADD FAMILY MEMBERS</string>
     <string name="name">Name</string>
     <string name="edit">Edit</string>
     <string name="edt_txt__name">First Name</string>
@@ -72,6 +73,8 @@
     <string name="current_date">Current Date</string>
     <string name="sign_in">SIGNIN</string>
     <string name="confirm_pass">Confirm Password</string>
+    <string name="present_address">Present Address</string>
+    <string name="permanent_add">Permanent Address</string>
     <string name="register">REGISTER</string>
     <string name="not_register">Not Register Yet?</string>
     <string name="enter_name">Enter Your Name</string>
@@ -83,5 +86,12 @@
     <string-array name="types">
         <item>Name</item>
         <item>Contact No.</item>
+    </string-array>
+    <string-array name="array_logintypes">
+        <item>Login Types</item>
+        <item>User</item>
+        <item>Management</item>
+        <item>Flate Owner</item>
+
     </string-array>
 </resources>

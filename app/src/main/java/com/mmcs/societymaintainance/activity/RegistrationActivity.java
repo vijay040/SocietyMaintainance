@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
 
 public class RegistrationActivity extends AppCompatActivity {
-    Button btn_add  ,delete_button,btn_register;
-    private LinearLayout parentLinearLayout;
+    Button btn_register;
+
     EditText edt_name,edt_contact_no,edt_email_address,edt_password,edt_cnfrm_password,name_edit_text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +25,8 @@ public class RegistrationActivity extends AppCompatActivity {
         edt_password=findViewById(R.id.edt_password);
         edt_cnfrm_password=findViewById(R.id.edt_cnfrm_password);
         name_edit_text=findViewById(R.id.name_edit_text);
-        btn_add=findViewById(R.id.btn_add);
         btn_register=findViewById(R.id.btn_register);
-        delete_button=findViewById(R.id.delete_button);
-        parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,12 +71,5 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
-    public void onAddField(View v) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View rowView = inflater.inflate(R.layout.field, null);
-        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
-    }
-    public void onDelete(View v) {
-        parentLinearLayout.removeView((View) v.getParent());
-    }
+
 }

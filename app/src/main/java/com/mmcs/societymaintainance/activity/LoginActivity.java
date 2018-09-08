@@ -14,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Snackbar snackbar;
     RelativeLayout relativeLayout;
     private boolean internetConnected=true;
+    Spinner spnLoginType;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -41,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn=findViewById(R.id.loginBtn);
         btn_register=findViewById(R.id.btn_register);
         relativeLayout=findViewById(R.id.relativeLayout);
+        spnLoginType=findViewById(R.id.spnUserType);
+        String typeList[] = {"Select Login Types","User","Management"};
+        spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                 else if(pass.equals("")){
                     edt_password.startAnimation(animShake);
                     Toast.makeText(LoginActivity.this,getString(R.string.password),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(spnLoginType.getSelectedItemPosition()==0) {
+                    Toast.makeText(LoginActivity.this, R.string.select_logintype, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else{
