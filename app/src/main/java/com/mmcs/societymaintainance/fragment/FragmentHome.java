@@ -21,11 +21,15 @@ import com.mmcs.societymaintainance.activity.NoticeActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VehicleActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
+import com.mmcs.societymaintainance.adaptor.HomeRecyclerAdaptor;
+import com.mmcs.societymaintainance.model.HomeItemModel;
+
+import java.util.ArrayList;
 
 public class FragmentHome extends android.support.v4.app.Fragment{
     RelativeLayout layUser,layComplaint,layRequest,layVehicle,layFacility,layParking,layNotice,layMeeting,layBilling,layResidency,layVisitor,layAMCservice,layAttandance;
 
-    RecyclerView rvItems;
+    RecyclerView rvHome;
     @Override
     public void onCreate( @Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -34,9 +38,16 @@ public class FragmentHome extends android.support.v4.app.Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.activity_fragment_home, container, false);
-        rvItems=view.findViewById(R.id.rvItems);
-        rvItems.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-
+        rvHome=view.findViewById(R.id.rvItems);
+        rvHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        ArrayList<HomeItemModel> list=new ArrayList<>();
+        list.add(new HomeItemModel());
+        list.add(new HomeItemModel());
+        list.add(new HomeItemModel());
+        list.add(new HomeItemModel());
+        list.add(new HomeItemModel());
+        HomeRecyclerAdaptor adaptor=new HomeRecyclerAdaptor(getActivity(),list);
+        rvHome.setAdapter(adaptor);
 
 
 
