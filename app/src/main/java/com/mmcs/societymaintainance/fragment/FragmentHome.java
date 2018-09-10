@@ -29,8 +29,6 @@ import com.mmcs.societymaintainance.util.Shprefrences;
 import java.util.ArrayList;
 
 public class FragmentHome extends android.support.v4.app.Fragment{
-    RelativeLayout layUser,layComplaint,layRequest,layVehicle,layFacility,layParking,layNotice,layMeeting,layBilling,layResidency,layVisitor,layAMCservice,layAttandance;
-
     RecyclerView rvHome;
     Shprefrences sh;
     @Override

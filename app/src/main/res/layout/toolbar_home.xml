@@ -21,24 +21,6 @@
                 android:layout_height="@dimen/_25sdp"
                 android:background="@drawable/ic_back" />
                </RelativeLayout>
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-           android:layout_toEndOf="@+id/title"
-            android:visibility="gone"
-            android:layout_alignTop="@+id/drawerIcon"
-           android:layout_marginLeft="@dimen/_15sdp"
-            android:src="@drawable/ic_homepage" />
-        <ImageView
-            android:id="@+id/whatsapp"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_alignTop="@+id/drawerIcon"
-            android:visibility="gone"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:src="@drawable/ic_whatsapp" />
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"

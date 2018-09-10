@@ -18,6 +18,8 @@ import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AddVendorAvtivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
+import com.mmcs.societymaintainance.activity.DriverActivity;
+import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VehicleActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
@@ -60,6 +62,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
         //Picasso.get().load(uri).into(imgUserProfile);
 
         layUser.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 switch (list.get(position).getTitle())
@@ -82,6 +85,13 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
 
                     case "Add Member":
                         context.startActivity(new Intent(context, AddMemberActivity.class));
+                        break;
+
+                    case "Driver":
+                        context.startActivity(new Intent(context, DriverActivity.class));
+                        break;
+                    case "Maid":
+                        context.startActivity(new Intent(context, MaidActivity.class));
                         break;
 
                 }

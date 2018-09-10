@@ -53,10 +53,11 @@
                 android:textColorHint="#000" />
             <Button
                 android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/_200sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_margin="@dimen/_10sdp"
-                android:background="@drawable/btn"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_back"
                 android:text="@string/submit"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_15sdp"

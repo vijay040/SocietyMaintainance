@@ -32,7 +32,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class DrawerActivity extends AppCompatActivity {
-    TextView txtRequest,txtComplaint,txtParking,txtNotice,txtMeeting,txtBilling,txtAddVendor,txtlogout;
     DrawerLayout drawerLayout;
     RelativeLayout drawerIcon;
     ListView listView;
@@ -66,6 +65,16 @@ public class DrawerActivity extends AppCompatActivity {
            item=  new HomeItemModel();
            item.setTitle("Add Member");
            item.setImage(R.drawable.ic_add_member);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Driver");
+           item.setImage(R.drawable.ic_driver);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Maid");
+           item.setImage(R.drawable.ic_maid);
            list.add(item);
        }
        else if(type.equalsIgnoreCase("User"))
@@ -104,19 +113,26 @@ public class DrawerActivity extends AppCompatActivity {
            item.setTitle("Add Member");
            item.setImage(R.drawable.ic_add_member);
            list.add(item);
-       }
 
+           item=  new HomeItemModel();
+           item.setTitle("Driver");
+           item.setImage(R.drawable.ic_driver);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Maid");
+           item.setImage(R.drawable.ic_maid);
+           list.add(item);
+       }
 
         SideBarAdaptor adaptor=new SideBarAdaptor(this,list);
         listView.setAdapter(adaptor);
-
 
         fragmentManager = getSupportFragmentManager();
         pushFragment(new FragmentHome());
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         final ImageView imgDrawer = findViewById(R.id.imgDrawer);
-        ImageView whatsapp=(ImageView) findViewById(R.id.whatsapp);
       imgDrawer.setBackground(ContextCompat.getDrawable(DrawerActivity.this, R.drawable.ic_menu));
         setTitle();
 

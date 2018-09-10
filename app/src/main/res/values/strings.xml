@@ -17,6 +17,8 @@
     <string name="facility_mgmt">Facility and Management</string>
     <string name="send">Send</string>
     <string name="add_new_member">Add New Member</string>
+    <string name="add_maid">Add Maid details</string>
+    <string name="add_driver">Add Driver Details</string>
     <string name="feedback_title">Write Your Complaint Here</string>
     <string name="subject">Subject:</string>
     <string name="flate_no">Flate No.</string>
@@ -33,6 +35,8 @@
     <string name="attendance">Attendance</string>
     <string name="news">NEWS</string>
     <string name="complaint_title">COMPLAINT</string>
+    <string name="maid">Maid Details</string>
+    <string name="driver">Driver Details</string>
     <string name="visitor_name">Visitor Name</string>
     <string name="title">Title</string>
     <string name="des">Description</string>

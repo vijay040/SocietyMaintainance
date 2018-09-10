@@ -16,6 +16,8 @@ import com.mmcs.societymaintainance.activity.AddMemberActivity;
 import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
+import com.mmcs.societymaintainance.activity.DriverActivity;
+import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
@@ -85,6 +87,12 @@ public class SideBarAdaptor extends BaseAdapter {
 
                     case "Add Member":
                         ctx.startActivity(new Intent(ctx, AddMemberActivity.class));
+                        break;
+                    case "Driver":
+                        ctx.startActivity(new Intent(ctx, DriverActivity.class));
+                        break;
+                    case "Maid":
+                        ctx.startActivity(new Intent(ctx, MaidActivity.class));
                         break;
 
                 }

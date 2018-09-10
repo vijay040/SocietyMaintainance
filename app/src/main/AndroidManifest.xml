@@ -40,7 +40,9 @@
         <activity android:name=".activity.VehicleActivity" />
         <activity android:name=".activity.RegistrationActivity" />
         <activity android:name=".activity.AttendanceActivity" />
-        <activity android:name=".activity.AddMemberActivity"></activity>
+        <activity android:name=".activity.AddMemberActivity" />
+        <activity android:name=".activity.DriverActivity" />
+        <activity android:name=".activity.MaidActivity"></activity>
     </application>
 
 </manifest>
