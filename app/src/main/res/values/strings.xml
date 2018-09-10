@@ -16,6 +16,7 @@
     <string name="amc_services">AMC and Services</string>
     <string name="facility_mgmt">Facility and Management</string>
     <string name="send">Send</string>
+    <string name="add_new_member">Add New Member</string>
     <string name="feedback_title">Write Your Complaint Here</string>
     <string name="subject">Subject:</string>
     <string name="flate_no">Flate No.</string>
@@ -40,6 +41,8 @@
     <string name="purpose">Purpose</string>
     <string name="home_page">SOCIETY MANAGEMENT SYSTEM</string>
     <string name="person_name">Person Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="adhar_no">Adhar Card No.</string>
     <string name="occupation">Occupation</string>
     <string name="possession_date">Possession Date</string>
@@ -56,6 +59,7 @@
     <string name="charge">Charge</string>
     <string name="rental">Rental</string>
     <string name="add_resident">ADD RESIDENT</string>
+    <string name="add_member">Add Member</string>
     <string name="welcome_title">Welcome To Magic Society</string>
     <string name="request_type">Type Your Request Here</string>
     <string name="select">Select</string>

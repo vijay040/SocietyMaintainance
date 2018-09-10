@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.activity.AddMemberActivity;
 import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
@@ -80,6 +81,10 @@ public class SideBarAdaptor extends BaseAdapter {
                         break;
                     case "Visitor Management":
                         ctx.startActivity(new Intent(ctx, VisitorMgmtActivity.class));
+                        break;
+
+                    case "Add Member":
+                        ctx.startActivity(new Intent(ctx, AddMemberActivity.class));
                         break;
 
                 }

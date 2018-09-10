@@ -62,6 +62,11 @@ public class DrawerActivity extends AppCompatActivity {
            item.setTitle("Complaint");
            item.setImage(R.drawable.ic_complain);
            list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Add Member");
+           item.setImage(R.drawable.ic_add_member);
+           list.add(item);
        }
        else if(type.equalsIgnoreCase("User"))
        {
@@ -93,6 +98,11 @@ public class DrawerActivity extends AppCompatActivity {
            item=  new HomeItemModel();
            item.setTitle("Visitor Management");
            item.setImage(R.drawable.ic_visitor);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Add Member");
+           item.setImage(R.drawable.ic_add_member);
            list.add(item);
        }
 

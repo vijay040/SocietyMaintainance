@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.activity.AddMemberActivity;
 import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AddVendorAvtivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
@@ -77,6 +78,10 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         break;
                     case "Visitor Management":
                         context.startActivity(new Intent(context, VisitorMgmtActivity.class));
+                        break;
+
+                    case "Add Member":
+                        context.startActivity(new Intent(context, AddMemberActivity.class));
                         break;
 
                 }

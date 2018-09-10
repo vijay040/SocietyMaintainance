@@ -23,39 +23,23 @@
         android:layout_height="@dimen/_80sdp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_userlogin" />
 
-    <RelativeLayout
-        android:id="@+id/layLogOut"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:background="@drawable/btn">
 
         <TextView
             android:id="@+id/text_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawablePadding="@dimen/_5sdp"
-            android:drawableLeft="@drawable/ic_edit"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_25sdp"
+       android:layout_gravity="center"
             android:text="@string/edit"
+            android:background="@drawable/btn_back"
+         android:layout_marginTop="@dimen/_10sdp"
+           android:gravity="center"
             android:textColor="@color/white_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold|italic" />
-    </RelativeLayout>
-
-
-    <View
-        android:id="@+id/divider1"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/imgProfile"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:background="@color/view_devider" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -70,15 +54,14 @@
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@+id/enter_full_name"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_above="@+id/linear_layout_professional_names"
                 android:background="@color/view_devider" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_professional_names"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_below="@+id/view_2_professional_screen_2"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -117,17 +100,15 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/view_professional_screen_2_contact_no"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@+id/edt_txt_contact_no"
                 android:background="@color/view_devider" />
 
+
             <EditText
-                android:id="@+id/edt_txt_email_id"
+                android:id="@+id/edt_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_below="@+id/view_professional_screen_2_contact_no"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white_color"
@@ -144,14 +125,12 @@
                 android:id="@+id/view_personal_number"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@+id/edt_txt_password_professional"
                 android:background="@color/view_devider" />
 
             <EditText
                 android:id="@+id/edt_Flate_no"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_below="@+id/view_professional_screen_2_password"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white_color"
@@ -167,14 +146,12 @@
                 android:id="@+id/view_flate_no"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@+id/edt_txt_password_professional"
                 android:background="@color/view_devider" />
 
             <EditText
-                android:id="@+id/edt_txt_conf_personal_number"
+                android:id="@+id/edt_phone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_below="@+id/view_professional_screen_2_password"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white_color"
@@ -192,15 +169,13 @@
                 android:id="@+id/view_professional_screen_2_email"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@+id/edt_txt_email_id"
                 android:background="@color/view_devider" />
 
 
             <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
-                android:id="@+id/edtAddress"
+                android:id="@+id/edt_Address"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_below="@+id/view_professional_screen_2_password"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white_color"
@@ -212,47 +187,25 @@
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-
-
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
+                android:visibility="gone"
                 android:background="@color/view_devider" />
-
-
-
-
-
-
-
-            <RelativeLayout
+            <Button
+                android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white_color"
+                android:background="@drawable/btn_back"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp">
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:text="@string/submit" />
 
-                <RelativeLayout
-                    android:id="@+id/rel_save"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/btn">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/submit"
-                        android:textAllCaps="true"
-                        android:textStyle="bold"
-                        android:textColor="@color/white_color"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                </RelativeLayout>
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

@@ -158,12 +158,12 @@
 
     <Button
         android:id="@+id/btn_save"
-        android:layout_width="@dimen/_100sdp"
+        android:layout_width="@dimen/_200sdp"
        android:layout_gravity="center"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="SAVE"
+        android:text="@string/submit"
         android:textColor="@color/white_color"
-        android:background="@color/title_color"
+        android:background="@drawable/btn_back"
         android:layout_marginBottom="@dimen/_20sdp"
         android:layout_height="wrap_content" />
         </LinearLayout>
