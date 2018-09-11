@@ -79,8 +79,6 @@ public class DrawerActivity extends AppCompatActivity {
        }
        else if(type.equalsIgnoreCase("User"))
        {
-
-
            list =new ArrayList<>();
            item.setImage(R.drawable.ic_user);
            item.setTitle("Profile");

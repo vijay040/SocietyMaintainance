@@ -30,19 +30,28 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.MakeRequestActivity" />
-        <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.ComplaintActivity" />
+        <activity android:name=".activity.ProfileActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.ComplaintActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.NoticeActivity" />
-        <activity android:name=".activity.VisitorMgmtActivity" />
-        <activity android:name=".activity.AddResidentActivity" />
-        <activity android:name=".activity.AddVendorAvtivity" />
+        <activity android:name=".activity.VisitorMgmtActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.AddResidentActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.AddVendorAvtivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.VehicleActivity" />
-        <activity android:name=".activity.RegistrationActivity" />
+        <activity android:name=".activity.RegistrationActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.AttendanceActivity" />
-        <activity android:name=".activity.AddMemberActivity" />
-        <activity android:name=".activity.DriverActivity" />
-        <activity android:name=".activity.MaidActivity"></activity>
+        <activity android:name=".activity.AddMemberActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.DriverActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.MaidActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>
