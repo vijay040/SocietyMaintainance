@@ -2,7 +2,6 @@ package com.mmcs.societymaintainance.adaptor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.view.menu.MenuAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddMemberActivity;
+import com.mmcs.societymaintainance.activity.AddEmployeeActivity;
 import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
@@ -85,8 +84,8 @@ public class SideBarAdaptor extends BaseAdapter {
                         ctx.startActivity(new Intent(ctx, VisitorMgmtActivity.class));
                         break;
 
-                    case "Add Member":
-                        ctx.startActivity(new Intent(ctx, AddMemberActivity.class));
+                    case "Add Employee":
+                        ctx.startActivity(new Intent(ctx, AddEmployeeActivity.class));
                         break;
                     case "Driver":
                         ctx.startActivity(new Intent(ctx, DriverActivity.class));

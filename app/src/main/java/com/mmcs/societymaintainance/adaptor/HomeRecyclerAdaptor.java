@@ -2,9 +2,7 @@ package com.mmcs.societymaintainance.adaptor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddMemberActivity;
+import com.mmcs.societymaintainance.activity.AddEmployeeActivity;
 import com.mmcs.societymaintainance.activity.AddResidentActivity;
-import com.mmcs.societymaintainance.activity.AddVendorAvtivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
-import com.mmcs.societymaintainance.activity.VehicleActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -83,8 +78,8 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         context.startActivity(new Intent(context, VisitorMgmtActivity.class));
                         break;
 
-                    case "Add Member":
-                        context.startActivity(new Intent(context, AddMemberActivity.class));
+                    case "Add Employee":
+                        context.startActivity(new Intent(context, AddEmployeeActivity.class));
                         break;
 
                     case "Driver":

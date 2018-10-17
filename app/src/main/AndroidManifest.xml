@@ -46,7 +46,7 @@
         <activity android:name=".activity.RegistrationActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.AttendanceActivity" />
-        <activity android:name=".activity.AddMemberActivity"
+        <activity android:name=".activity.AddEmployeeActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.DriverActivity"
             android:windowSoftInputMode="stateHidden"/>

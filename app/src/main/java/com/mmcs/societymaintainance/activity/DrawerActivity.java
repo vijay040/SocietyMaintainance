@@ -63,7 +63,7 @@ public class DrawerActivity extends AppCompatActivity {
            list.add(item);
 
            item=  new HomeItemModel();
-           item.setTitle("Add Member");
+           item.setTitle("Add Employee");
            item.setImage(R.drawable.ic_add_member);
            list.add(item);
 
@@ -108,7 +108,7 @@ public class DrawerActivity extends AppCompatActivity {
            list.add(item);
 
            item=  new HomeItemModel();
-           item.setTitle("Add Member");
+           item.setTitle("Add Employee");
            item.setImage(R.drawable.ic_add_member);
            list.add(item);
 

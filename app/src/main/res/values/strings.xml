@@ -16,7 +16,7 @@
     <string name="amc_services">AMC and Services</string>
     <string name="facility_mgmt">Facility and Management</string>
     <string name="send">Send</string>
-    <string name="add_new_member">Add New Member</string>
+    <string name="add_new_employee">Add New Employee</string>
     <string name="add_maid">Add Maid details</string>
     <string name="add_driver">Add Driver Details</string>
     <string name="feedback_title">Write Your Complaint Here</string>
@@ -40,11 +40,10 @@
     <string name="visitor_name">Visitor Name</string>
     <string name="title">Title</string>
     <string name="des">Description</string>
-    <string name="mobile_no">Mobile No.</string>
+    <string name="contact_no">Contact No.</string>
     <string name="to_meet">To Meet</string>
     <string name="purpose">Purpose</string>
     <string name="home_page">SOCIETY MANAGEMENT SYSTEM</string>
-    <string name="person_name">Person Name</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="adhar_no">Adhar Card No.</string>
@@ -67,6 +66,13 @@
     <string name="welcome_title">Welcome To Magic Society</string>
     <string name="request_type">Type Your Request Here</string>
     <string name="select">Select</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="issue_date">Issue Date</string>
+    <string name="time_in">In Time:</string>
+    <string name="joining_date">Joining Date:</string>
+    <string name="ending_date">Ending Date:</string>
+    <string name="time_out">Out Time:</string>
+    <string name="select_unit">Select Unit No.</string>
     <string name="enter_subject_name">Enter Subject Name</string>
     <string name="enter_news">Enter News</string>
     <string name="registration">REGISTRATION</string>
@@ -86,6 +92,9 @@
     <string name="present_address">Present Address</string>
     <string name="permanent_add">Permanent Address</string>
     <string name="register">REGISTER</string>
+    <string name="national_id">National ID</string>
+    <string name="select_floor">Select Floor</string>
+    <string name="select_designation">Select Designation</string>
     <string name="not_register">Not Register Yet?</string>
     <string name="enter_name">Enter Your Name</string>
     <string name="enter_contact">Enter Contact No.</string>
