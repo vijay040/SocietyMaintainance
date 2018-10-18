@@ -26,10 +26,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import es.dmoral.toasty.Toasty;
+
 public class VisitorMgmtActivity extends AppCompatActivity {
-EditText edtDate,edt_time_in,edt_time_out;
+EditText edtDate,edt_time_in,edt_time_out,edt_visitor_name,edt_mobile,edt_address,edt_floor,edt_unit_no;
 ImageView imageView;
-    Button btn_take_photo;
+    Button btn_take_photo,btn_save;
     private static final int CAMERA_REQUEST = 1888;
     int H, M;
     Calendar calendar;
@@ -49,6 +51,12 @@ ImageView imageView;
         edt_time_in=findViewById(R.id.edt_time_in);
         edt_time_out=findViewById(R.id.edt_time_out);
         btn_take_photo=findViewById(R.id.btn_take_photo);
+        edt_visitor_name=findViewById(R.id.edt_visitor_name);
+        edt_floor=findViewById(R.id.edt_floor);
+        edt_mobile=findViewById(R.id.edt_mobile);
+        edt_address=findViewById(R.id.edt_address);
+        edt_unit_no=findViewById(R.id.edt_unit_no);
+        btn_save=findViewById(R.id.btn_save);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -70,6 +78,55 @@ ImageView imageView;
               edt_time_in.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
               edt_time_out.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
         }
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String date=edtDate.getText().toString();
+                String name=edt_visitor_name.getText().toString();
+                String mobile=edt_mobile.getText().toString();
+                String address=edt_address.getText().toString();
+                String floor=edt_floor.getText().toString();
+                String unit=edt_unit_no.getText().toString();
+                String time_in=edt_time_in.getText().toString();
+                String time_out=edt_time_out.getText().toString();
+                if(date.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this,"Select Date",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(name.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this,"Enter Visitor Name",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
+                    Toasty.error(VisitorMgmtActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(address.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this, "Enter Address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(floor.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this,"Select Floor",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(unit.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this,"Select Unit",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(time_in.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this,"Select In Time",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(time_out.equals("")){
+                    Toasty.error(VisitorMgmtActivity.this,"Select Out Time",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    Toasty.success(VisitorMgmtActivity.this,"Successfully Added",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
         btn_take_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -94,7 +94,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:background="@color/white_color"
                 android:clickable="false"
-                android:drawableLeft="@drawable/ic_calendar"
+                android:drawableRight="@drawable/ic_calendar"
                 android:drawablePadding="@dimen/_10sdp"
                 android:focusable="false"
                 android:hint="@string/date_birth"

@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/edt_person_name"
+                android:id="@+id/edt_name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginRight="@dimen/_10sdp"

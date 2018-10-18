@@ -108,9 +108,11 @@
     </string-array>
     <string-array name="array_logintypes">
         <item>Login Types</item>
-        <item>User</item>
-        <item>Management</item>
-        <item>Flate Owner</item>
+        <item>Admin</item>
+        <item>Owner</item>
+        <item>Employee</item>
+        <item>Renter</item>
+        <item>Super Admin</item>
 
     </string-array>
 </resources>

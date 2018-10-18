@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         relativeLayout=findViewById(R.id.relativeLayout);
         spnLoginType=findViewById(R.id.spnUserType);
         sh=new Shprefrences(this);
-        String typeList[] = {"Select Login Types","User","Management","Owner"};
+        String typeList[] = {"Select Login Types","Admin","Owner","Employee","Renter","Super Admin"};
         spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override

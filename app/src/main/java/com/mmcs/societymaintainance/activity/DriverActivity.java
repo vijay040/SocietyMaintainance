@@ -7,18 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 
 import java.util.Calendar;
 
+import es.dmoral.toasty.Toasty;
+
 public class DriverActivity extends AppCompatActivity {
-    EditText edt_dateof_birth;
+    EditText edt_dateof_birth,edt_first_name,edt_last_name,edt_mobile,edt_email;
     Calendar calendar;
+    Button btn_submit;
     int DD, MM, YY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +32,50 @@ public class DriverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
         edt_dateof_birth=findViewById(R.id.edt_dateof_birth);
+        edt_first_name=findViewById(R.id.edt_first_name);
+        edt_last_name=findViewById(R.id.edt_last_name);
+        edt_mobile=findViewById(R.id.edt_mobile);
+        edt_email=findViewById(R.id.edt_email);
+        btn_submit=findViewById(R.id.btn_submit);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         setTitle();
         back();
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              String f_name=edt_first_name.getText().toString();
+              String l_name=edt_last_name.getText().toString();
+              String mobile=edt_mobile.getText().toString();
+              String dob=edt_dateof_birth.getText().toString();
+              String email=edt_email.getText().toString();
+              if(f_name.equals("")){
+                  Toasty.error(DriverActivity.this,"Enter First Name", Toast.LENGTH_SHORT).show();
+                  return;
+              }
+              else if(l_name.equals("")){
+                  Toasty.error(DriverActivity.this,"Enter Last Name", Toast.LENGTH_SHORT).show();
+               return;
+              }
+              else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
+                  Toasty.error(DriverActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
+                  return;
+              }
+              else if (dob.equals("")){
+                  Toasty.error(DriverActivity.this,"Select Date of Birth", Toast.LENGTH_SHORT).show();
+                  return;
+              }
+              else if(email.equals("")){
+                  Toasty.error(DriverActivity.this,"Enter Email", Toast.LENGTH_SHORT).show();
+                  return;
+              }
+              else{
+                  Toasty.success(DriverActivity.this,"Successfully Added",Toast.LENGTH_SHORT).show();
+              }
+            }
+        });
         edt_dateof_birth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {

@@ -167,7 +167,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:background="@color/white_color"
                     android:clickable="false"
-                    android:drawableRight="@drawable/ic_time_clock"
+                    android:drawableRight="@drawable/ic_clock"
                  android:layout_toRightOf="@+id/txt_time_in"
                     android:focusable="false"
                     android:hint="@string/time_in"
@@ -205,7 +205,7 @@
                     android:layout_toRightOf="@+id/txt_time_out"
                     android:hint="@string/time_out"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:drawableRight="@drawable/ic_time_clock"
+                    android:drawableRight="@drawable/ic_clock"
                     android:singleLine="true"
                     android:textColor="#6d6e71"
                     android:textSize="@dimen/_11sdp" />

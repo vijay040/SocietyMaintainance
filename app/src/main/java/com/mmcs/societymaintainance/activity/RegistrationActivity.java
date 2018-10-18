@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
 
+import es.dmoral.toasty.Toasty;
+
 public class RegistrationActivity extends AppCompatActivity {
     Button btn_register;
 
@@ -36,10 +38,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 String pass=edt_password.getText().toString();
                 String cnfrm_pass=edt_cnfrm_password.getText().toString();
                 if (name.equals("")){
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.enter_name),Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegistrationActivity.this,getString(R.string.enter_name),Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 else if(mob.equals("")){
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.enter_contact),Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegistrationActivity.this,getString(R.string.enter_contact),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(email.trim().isEmpty()||!email.matches("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -50,23 +53,23 @@ public class RegistrationActivity extends AppCompatActivity {
                         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                         ")+")) {
 
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.enter_email),Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegistrationActivity.this,getString(R.string.enter_email),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(pass.equals("")){
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.password),Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegistrationActivity.this,getString(R.string.password),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(cnfrm_pass.equals("")){
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.enter_cnfrm_pass),Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegistrationActivity.this,getString(R.string.enter_cnfrm_pass),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(!pass.equals(cnfrm_pass)){
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.password_not_match),Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegistrationActivity.this,getString(R.string.password_not_match),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else{
-                    Toast.makeText(RegistrationActivity.this,getString(R.string.successfully_registered),Toast.LENGTH_SHORT).show();
+                    Toasty.success(RegistrationActivity.this,getString(R.string.successfully_registered),Toast.LENGTH_SHORT).show();
                 }
             }
         });

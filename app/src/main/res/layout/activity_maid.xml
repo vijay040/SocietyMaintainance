@@ -93,7 +93,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:background="@color/white_color"
                 android:clickable="false"
-                android:drawableLeft="@drawable/ic_calendar"
+                android:drawableRight="@drawable/ic_calendar"
                 android:drawablePadding="@dimen/_10sdp"
                 android:focusable="false"
                 android:hint="@string/date_birth"
@@ -129,7 +129,7 @@
 
 
             <Button
-                android:id="@+id/btn_"
+                android:id="@+id/btn_submit"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
