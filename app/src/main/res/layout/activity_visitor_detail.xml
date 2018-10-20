@@ -98,15 +98,21 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
 
-            <TextView
-                android:id="@+id/txtOuttime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/edt_time_out"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@color/white_color"
+                android:clickable="false"
+                android:focusable="false"
+                android:layout_toRightOf="@+id/txt_time_out"
+                android:hint="@string/time_out"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/time_out"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/_10sdp" />
+                android:drawableRight="@drawable/ic_clock"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
 
             <Button
                 android:id="@+id/btn_close"
