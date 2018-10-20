@@ -472,6 +472,7 @@ ImageView imageView;
         RequestBody requestTimein = RequestBody.create(MediaType.parse("text/plain"), txtInTime);
         RequestBody requestTimeout = RequestBody.create(MediaType.parse("text/plain"), txtOutTime);
 
+
         Singleton.getInstance().getApi().postVisitor(requestUserId, requestUserbranch, requesttxtName,requestDate ,requestMobile, requestAddress, requestFloor,requestUnit,requestTimein,requestTimeout ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
