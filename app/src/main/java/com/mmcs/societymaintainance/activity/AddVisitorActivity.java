@@ -173,7 +173,7 @@ ImageView imageView;
                 }
                 else {
                     progress.setVisibility(View.VISIBLE);
-                    postVisitor("", "", name,date ,mobile,address,floor,unit,time_in,time_out,imageImagePath);
+                    postVisitor("", "", name,date ,mobile,address,time_in,time_out,imageImagePath);
                                    }
 
             }
@@ -346,7 +346,7 @@ ImageView imageView;
     ArrayList<FloorModel> floorList = new ArrayList<>();
     FloorPopupAdapter floorPopupAdapter;
     private int popupId = 0;
-    private String purposeId;
+    String floorId;
     private void showFloorPopup() {
 
         floorPopupAdapter = new FloorPopupAdapter(AddVisitorActivity.this, floorList);
@@ -373,7 +373,7 @@ ImageView imageView;
                                     int position, long id) {
                 FloorModel obj = (FloorModel) listFloor.getAdapter().getItem(position);
                 edt_floor.setText(obj.getFloor_no());
-                purposeId=obj.getFid();
+                floorId=obj.getFid();
                 alertDialog.dismiss();
             }
         });
@@ -382,7 +382,7 @@ ImageView imageView;
 
     ArrayList<UnitModel> unitModels;
     UnitAdapter unitAdapter;
-
+String unitId;
     private void showUnitPopup() {
 
         unitAdapter = new UnitAdapter(AddVisitorActivity.this, unitModels);
@@ -409,6 +409,7 @@ ImageView imageView;
                                     int position, long id) {
                 UnitModel obj = (UnitModel) listUnit.getAdapter().getItem(position);
                 edt_unit_no.setText(obj.getUnit_no());
+                unitId=obj.getUid();
                 alertDialog.dismiss();
             }
         });
@@ -447,7 +448,7 @@ ImageView imageView;
         });
     }
 
-    private void postVisitor(String userid, String branchid,String txtName ,String txtIssueDate, String txtMobile,String txtAddress,String ddlFloorNo,String ddlUnitNo ,String txtInTime,String txtOutTime, String fileUrl) {
+    private void postVisitor(String userid, String branchid,String txtName ,String txtIssueDate, String txtMobile,String txtAddress ,String txtInTime,String txtOutTime, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
@@ -460,10 +461,10 @@ ImageView imageView;
         RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), txtIssueDate);
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), txtMobile);
         RequestBody requestAddress = RequestBody.create(MediaType.parse("text/plain"), txtAddress);
-        RequestBody requestFloor = RequestBody.create(MediaType.parse("text/plain"), ddlFloorNo);
-        RequestBody requestUnit = RequestBody.create(MediaType.parse("text/plain"), ddlUnitNo);
+        RequestBody requestFloor = RequestBody.create(MediaType.parse("text/plain"), floorId);
+        RequestBody requestUnit = RequestBody.create(MediaType.parse("text/plain"), unitId);
         RequestBody requestTimein = RequestBody.create(MediaType.parse("text/plain"), txtInTime);
-        RequestBody requestTimeout = RequestBody.create(MediaType.parse("text/plain"), txtOutTime);
+        RequestBody requestTimeout = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
         Singleton.getInstance().getApi().postVisitor(requestUserId, requestUserbranch, requesttxtName,requestDate ,requestMobile, requestAddress, requestFloor,requestUnit,requestTimein,requestTimeout ,imgFile).enqueue(new Callback<LoginResMeta>() {

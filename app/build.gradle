@@ -31,6 +31,7 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.google.code.gson:gson:+'
+    compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.google.code.gson:gson:2.6.1'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:+'

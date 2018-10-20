@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -44,6 +45,18 @@ public class VisitorListActivity extends AppCompatActivity {
                 startActivity(new Intent(VisitorListActivity.this,AddVisitorActivity.class));
             }
         });
+
+        listVisitor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                VisitorAdapter adapter = (VisitorAdapter) adapterView.getAdapter();
+                VisitorModel model = adapter.list.get(i);
+                Intent intent = new Intent(VisitorListActivity.this, VisitorDetailActivity.class);
+                intent.putExtra(getString(R.string.visitor_model), model);
+                startActivity(intent);
+            }
+        });
+
         setTitle();
         back();
     }

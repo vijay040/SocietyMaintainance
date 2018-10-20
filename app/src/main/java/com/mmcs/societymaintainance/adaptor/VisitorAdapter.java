@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.VisitorModel;
 
@@ -57,13 +58,19 @@ public class VisitorAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.activity_visitorlist_item, null);
         }
         TextView txtName = view.findViewById(R.id.txtName);
-      /*  txtName.setText(list.get(i).getDescreption());*/
+        txtName.setText(context.getString(R.string.name)+list.get(i).getName());
       TextView txtMobile=view.findViewById(R.id.txtMobile);
+        txtMobile.setText(context.getString(R.string.mobile_no)+list.get(i).getMobile());
       TextView txtAddress=view.findViewById(R.id.txtAddress);
+        txtAddress.setText(context.getString(R.string.address)+list.get(i).getAddress());
       TextView txtFloor=view.findViewById(R.id.txtFloor);
+        txtFloor.setText(context.getString(R.string.floor)+list.get(i).getFloor_no());
       TextView txtUnit_no=view.findViewById(R.id.txtUnit_no);
+        txtUnit_no.setText(context.getString(R.string.unit_no)+list.get(i).getUnit_no());
       TextView txt_time_in=view.findViewById(R.id.txt_time_in);
+        txt_time_in.setText(context.getString(R.string.time_in)+list.get(i).getIntime());
       TextView txt_time_out=view.findViewById(R.id.txt_time_out);
+        txt_time_out.setText(context.getString(R.string.time_out)+list.get(i).getOuttime());
         ImageView img = view.findViewById(R.id.img);
         ImageView imz_down=view.findViewById(R.id.imz_down);
         final ImageView   hide=view.findViewById(R.id.imz_down);
@@ -92,6 +99,7 @@ public class VisitorAdapter extends BaseAdapter {
                 }
             }
         });
+        Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.no_image).into(img);
         return view;
     }
 }
