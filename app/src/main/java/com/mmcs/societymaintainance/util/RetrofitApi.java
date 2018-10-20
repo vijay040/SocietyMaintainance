@@ -43,6 +43,8 @@ public interface RetrofitApi {
                                      @Part("ddlFloorNo") RequestBody ddlFloorNo , @Part("ddlUnitNo") RequestBody ddlUnitNo, @Part("txtInTime") RequestBody txtInTime,@Part("txtOutTime") RequestBody txtOutTime ,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
-
+    @FormUrlEncoded
+    @POST("update_visitor_api.php")
+    Call<UnitRestMeta> updateVisitor(@Field("vid") String user_id, @Field("txtOutTime") String txtOutTime);
 
 }

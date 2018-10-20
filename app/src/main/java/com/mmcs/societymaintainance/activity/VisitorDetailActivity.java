@@ -5,17 +5,26 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorModel;
+import com.mmcs.societymaintainance.util.Singleton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VisitorDetailActivity extends AppCompatActivity {
     VisitorModel visitorModel;
     TextView txtName,txt_mobile,txt_address,txtFloor,txtUnit,txtIntime,txtOuttime;
     ImageView image_visitor;
+    Button btn_close;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +38,9 @@ public class VisitorDetailActivity extends AppCompatActivity {
         txtUnit=findViewById(R.id.txtUnit);
         txtOuttime=findViewById(R.id.txtOuttime);
         image_visitor=findViewById(R.id.image_visitor);
+        btn_close=findViewById(R.id.btn_close);
+        if(visitorModel.getOuttime().equalsIgnoreCase(""))
+            btn_close.setText("Update");
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
         txt_address.setText(getString(R.string.address) + visitorModel.getAddress());
@@ -80,7 +92,33 @@ public class VisitorDetailActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtOuttime.setText(sb);
 
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(visitorModel.getOuttime().equalsIgnoreCase(""))
+                {
 
+                }
+                else
+                    finish();
+            }
+        });
 
+    }
+
+    private void updateVisitor(String outTime)
+    {
+        Singleton.getInstance().getApi().updateVisitor("",outTime).enqueue(new Callback<UnitRestMeta>() {
+            @Override
+            public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
+
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<UnitRestMeta> call, Throwable t) {
+
+            }
+        });
     }
 }
