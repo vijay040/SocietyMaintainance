@@ -12,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.LoginModel;
+import com.mmcs.societymaintainance.util.Shprefrences;
 
 public class SplashActivity extends AppCompatActivity {
     ImageView image_wlcm, image_view;
     Animation animBlink, animZoom_out;
-
+Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -29,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         animZoom_out = AnimationUtils.loadAnimation(this, R.anim.zoom_out);
         image_wlcm.startAnimation(animBlink);
         image_view.startAnimation(animZoom_out);
+        sh=new Shprefrences(this);
         // set animation listener
         Handler h = new Handler(new Handler.Callback() {
             @Override
@@ -41,6 +44,8 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+               if(sh.getBoolean("ISLOGIN",false))
+                   intent = new Intent(SplashActivity.this, DrawerActivity.class);
                 startActivity(intent);
                 finish();
             }

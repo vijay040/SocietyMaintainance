@@ -5,100 +5,97 @@
     android:orientation="vertical">
     <include layout="@layout/toolbar_home"
         android:id="@+id/toolbar_home"/>
-    <android.support.v4.widget.DrawerLayout
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <android.support.v4.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/drawer"
-        android:layout_below="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_home"
         tools:openDrawer="start">
+
         <FrameLayout
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/gh">
-           </FrameLayout>
-           <android.support.design.widget.NavigationView
+            android:layout_below="@+id/gh"></FrameLayout>
+
+        <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:background="#408ad4"
             android:fitsSystemWindows="true">
-               <RelativeLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-                    <ImageView
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_70sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                   android:layout_centerHorizontal="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:src="@drawable/ic_userlogin" />
-                         <TextView
-                        android:id="@+id/txtName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Anuradha Singh"
-                             android:layout_below="@+id/imgProfile"
-                             android:layout_centerHorizontal="true"
-                        android:textColor="@color/white_color"
-                        android:textSize="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textAllCaps="true"
-                             android:layout_marginTop="@dimen/_10sdp"
-                             android:textStyle="bold|italic"  />
-                            <TextView
-                        android:id="@+id/txtEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_color"
-                        android:textSize="@dimen/_8sdp"
-                                android:layout_below="@+id/txtName"
-                                android:layout_centerHorizontal="true"
-                        android:textStyle="bold"
-                        android:text="anu@gmail.com"
-                        android:layout_gravity="center"
-                        android:gravity="center" />
-                            <TextView
-                        android:id="@+id/txtSociety"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_color"
-                        android:textSize="@dimen/_8sdp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                                android:layout_below="@+id/txtEmail"
-                                android:layout_centerHorizontal="true"
-                        android:gravity="center"
-                        android:text="Supertech"  />
-                            <TextView
-                        android:id="@+id/txtFlateNo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_color"
-                        android:textSize="@dimen/_8sdp"
-                        android:textStyle="bold"
-                                android:layout_below="@+id/txtSociety"
-                                android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Flate No. 108"  />
-                   <View
-                       android:id="@+id/view"
-                       android:layout_width="match_parent"
-                       android:layout_height="@dimen/_1sdp"
-                       android:layout_below="@+id/txtFlateNo"
-                       android:layout_marginTop="@dimen/_10sdp"
-                       android:background="@color/text_hint_color" />
-                   <ListView
-                       android:id="@+id/listItem"
-                       android:layout_width="wrap_content"
-                       android:layout_below="@+id/view"
-                       android:layout_height="wrap_content">
-                   </ListView>
-               </RelativeLayout>
-           </android.support.design.widget.NavigationView>
-                    </android.support.v4.widget.DrawerLayout>
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgProfile"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Anuradha Singh"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="anu@gmail.com"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold" />
+
+
+
+                <TextView
+                    android:id="@+id/txtFlateNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtEmail"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Flate No. 108"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/txtFlateNo"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/text_hint_color" />
+
+                <ListView
+                    android:id="@+id/listItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"></ListView>
+            </RelativeLayout>
+        </android.support.design.widget.NavigationView>
+    </android.support.v4.widget.DrawerLayout>
                     </LinearLayout>

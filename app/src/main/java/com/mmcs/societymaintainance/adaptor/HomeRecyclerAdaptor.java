@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AddEmployeeActivity;
@@ -16,10 +17,12 @@ import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
+import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
+import com.mmcs.societymaintainance.util.Shprefrences;
 
 import java.util.ArrayList;
 
@@ -32,11 +35,13 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
     ImageView imgUserProfile;
     TextView txtTitle;
     RelativeLayout layUser;
+    Shprefrences sh;
     public HomeRecyclerAdaptor(Context context, ArrayList<HomeItemModel> list)
     {
         this.list=list;
         this.context=context;
         this.mInflater = LayoutInflater.from(context);
+        sh=new Shprefrences(context);
     }
 
     @Override
@@ -56,6 +61,9 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
         imgUserProfile.setBackground(context.getResources().getDrawable(list.get(position).getImage()));
         //Picasso.get().load(uri).into(imgUserProfile);
 
+        if(list.get(position).getTitle().equalsIgnoreCase("Logout")) {
+            layUser.setVisibility(View.GONE);
+        }
         layUser.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -87,6 +95,12 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         break;
                     case "Maid":
                         context.startActivity(new Intent(context, MaidActivity.class));
+                        break;
+                    case "Logout":
+                        sh.clearData();
+                        Toast.makeText(context, context.getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(context, LoginActivity.class);
+                        context.startActivity(in);
                         break;
 
                 }

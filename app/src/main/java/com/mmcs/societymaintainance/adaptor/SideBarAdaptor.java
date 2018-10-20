@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AddEmployeeActivity;
@@ -16,10 +17,12 @@ import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
+import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
+import com.mmcs.societymaintainance.util.Shprefrences;
 
 import java.util.ArrayList;
 
@@ -30,10 +33,11 @@ import java.util.ArrayList;
 public class SideBarAdaptor extends BaseAdapter {
     ArrayList<HomeItemModel> list;
     Context ctx;
-
+Shprefrences sh;
     public SideBarAdaptor(Context ctx, ArrayList<HomeItemModel> list) {
         this.ctx = ctx;
         this.list = list;
+        sh=new Shprefrences(ctx);
     }
 
     @Override
@@ -92,6 +96,12 @@ public class SideBarAdaptor extends BaseAdapter {
                         break;
                     case "Maid":
                         ctx.startActivity(new Intent(ctx, MaidActivity.class));
+                        break;
+                    case "Logout":
+                        sh.clearData();
+                        Toast.makeText(ctx, ctx.getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(ctx, LoginActivity.class);
+                        ctx.startActivity(in);
                         break;
 
                 }

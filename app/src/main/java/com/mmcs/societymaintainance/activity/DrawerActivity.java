@@ -26,6 +26,7 @@ import com.mmcs.societymaintainance.adaptor.HomeRecyclerAdaptor;
 import com.mmcs.societymaintainance.adaptor.SideBarAdaptor;
 import com.mmcs.societymaintainance.fragment.FragmentHome;
 import com.mmcs.societymaintainance.model.HomeItemModel;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
 
 import java.net.URLEncoder;
@@ -35,17 +36,26 @@ public class DrawerActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     RelativeLayout drawerIcon;
     ListView listView;
+    TextView txtName,txtEmail,txtFlateNo;
     public static FragmentManager fragmentManager;
     Shprefrences sh;
     public static ArrayList<HomeItemModel> list;
+    LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+        txtName=findViewById(R.id.txtName);
+        txtEmail=findViewById(R.id.txtEmail);
+        txtFlateNo=findViewById(R.id.txtFlateNo);
         listView=findViewById(R.id.listItem);
         sh=new Shprefrences(this);
+        loginModel=sh.getLoginModel(getString(R.string.login_model));
+        txtName.setText(loginModel.getName());
+        txtEmail.setText(loginModel.getEmail());
+        txtFlateNo.setText(loginModel.getFloor_no());
         String type= sh.getString("TYPE","");
 
         HomeItemModel item=  new HomeItemModel();
@@ -76,8 +86,13 @@ public class DrawerActivity extends AppCompatActivity {
            item.setTitle("Maid");
            item.setImage(R.drawable.ic_maid);
            list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Logout");
+           item.setImage(R.drawable.logout);
+           list.add(item);
        }
-       else if(type.equalsIgnoreCase("User"))
+       else if(type.equalsIgnoreCase("Employee"))
        {
            list =new ArrayList<>();
            item.setImage(R.drawable.ic_user);
@@ -88,8 +103,13 @@ public class DrawerActivity extends AppCompatActivity {
            item.setTitle("Attendance");
            item.setImage(R.drawable.ic_attendance);
            list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Logout");
+           item.setImage(R.drawable.logout);
+           list.add(item);
        }
-       else if(type.equalsIgnoreCase("Management"))
+       else if(type.equalsIgnoreCase("Admin"))
        {
            list =new ArrayList<>();
            item.setImage(R.drawable.ic_user);
@@ -100,7 +120,6 @@ public class DrawerActivity extends AppCompatActivity {
            item.setTitle("Add Owner");
            item.setImage(R.drawable.ic_recidency);
            list.add(item);
-
 
            item=  new HomeItemModel();
            item.setTitle("Visitor Management");
@@ -120,6 +139,40 @@ public class DrawerActivity extends AppCompatActivity {
            item=  new HomeItemModel();
            item.setTitle("Maid");
            item.setImage(R.drawable.ic_maid);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Logout");
+           item.setImage(R.drawable.logout);
+           list.add(item);
+       }
+
+
+       else if(type.equalsIgnoreCase("Renter"))
+       {
+           list =new ArrayList<>();
+           item.setImage(R.drawable.ic_user);
+           item.setTitle("Profile");
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Driver");
+           item.setImage(R.drawable.ic_driver);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Maid");
+           item.setImage(R.drawable.ic_maid);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Complaint");
+           item.setImage(R.drawable.ic_complain);
+           list.add(item);
+
+           item=  new HomeItemModel();
+           item.setTitle("Logout");
+           item.setImage(R.drawable.logout);
            list.add(item);
        }
 

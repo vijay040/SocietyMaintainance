@@ -24,7 +24,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.LoginModel;
+import com.mmcs.societymaintainance.model.LoginResMeta;
 import com.mmcs.societymaintainance.util.Shprefrences;
+import com.mmcs.societymaintainance.util.Singleton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edt_username,edt_password;
@@ -52,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         relativeLayout=findViewById(R.id.relativeLayout);
         spnLoginType=findViewById(R.id.spnUserType);
         sh=new Shprefrences(this);
-        String typeList[] = {"Select Login Types","Admin","Owner","Employee","Renter","Super Admin"};
+        String typeList[] = {"Select Login Types","Admin","Owner","Employee","Renter"};//,"Super Admin"
         spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 else{
-                    sh.setString("TYPE",spnLoginType.getSelectedItem()+"");
-                    startActivity(new Intent(LoginActivity.this,DrawerActivity.class));
-                    showWelcomeTitle();
+
+                    getLogin(user_name,pass,spnLoginType.getSelectedItemPosition()+"");
+
                 }
             }
         });
@@ -182,5 +189,33 @@ public class LoginActivity extends AppCompatActivity {
         wlcmtoast.setGravity(Gravity.BOTTOM,0, 0);
         wlcmtoast.setDuration(Toast.LENGTH_SHORT);
         wlcmtoast.show();
+    }
+
+
+    public void getLogin( String username, String password,String loginType)
+    {
+        Singleton.getInstance().getApi().login(username,password,"","","",loginType).enqueue(new Callback<LoginResMeta>() {
+            @Override
+            public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
+              if( response.body().getCode().equalsIgnoreCase("200")) {
+                    sh.setString("TYPE", spnLoginType.getSelectedItem() + "");
+                    sh.setBoolean("ISLOGIN", true);
+                    LoginModel model = response.body().getResponse().get(0);
+                    sh.setLoginModel(getString(R.string.login_model), model);
+                    startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
+                    showWelcomeTitle();
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, ""+response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResMeta> call, Throwable t) {
+
+            }
+        });
     }
 }
