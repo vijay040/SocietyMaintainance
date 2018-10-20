@@ -57,7 +57,8 @@ public class VisitorDetailActivity extends AppCompatActivity {
         M = calendar.get(Calendar.MINUTE);
         if (visitorModel.getOuttime().equalsIgnoreCase(""))
             btn_close.setText("Update");
-
+else
+            edt_time_out.setEnabled(false);
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
         txt_address.setText(getString(R.string.address) + visitorModel.getAddress());
