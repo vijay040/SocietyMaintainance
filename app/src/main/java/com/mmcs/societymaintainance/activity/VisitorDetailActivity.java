@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class VisitorDetailActivity extends AppCompatActivity {
     VisitorModel visitorModel;
-    TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime, txtOuttime;
+    TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
     ImageView image_visitor;
     Button btn_close;
     EditText edt_time_out;
@@ -49,7 +49,6 @@ public class VisitorDetailActivity extends AppCompatActivity {
         txtIntime = findViewById(R.id.txtIntime);
         txtFloor = findViewById(R.id.txtFloor);
         txtUnit = findViewById(R.id.txtUnit);
-        txtOuttime = findViewById(R.id.txtOuttime);
         image_visitor = findViewById(R.id.image_visitor);
         btn_close = findViewById(R.id.btn_close);
         edt_time_out = findViewById(R.id.edt_time_out);
@@ -58,15 +57,14 @@ public class VisitorDetailActivity extends AppCompatActivity {
         M = calendar.get(Calendar.MINUTE);
         if (visitorModel.getOuttime().equalsIgnoreCase(""))
             btn_close.setText("Update");
-        else
-            txtOuttime.setVisibility(View.GONE);
+
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
         txt_address.setText(getString(R.string.address) + visitorModel.getAddress());
         txtFloor.setText(getString(R.string.floor) + visitorModel.getFloor_no());
         txtUnit.setText(getString(R.string.unit_no) + visitorModel.getUnit_no());
         txtIntime.setText(getString(R.string.time_in) + visitorModel.getIntime());
-        txtOuttime.setText(getString(R.string.time_out) + visitorModel.getOuttime());
+        edt_time_out.setText(getString(R.string.time_out) + visitorModel.getOuttime());
         edt_time_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,10 +111,10 @@ public class VisitorDetailActivity extends AppCompatActivity {
         txtIntime.setText(sb);
 
 
-        sb = new SpannableStringBuilder(txtOuttime.getText());
+        sb = new SpannableStringBuilder(edt_time_out.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txtOuttime.setText(sb);
+        edt_time_out.setText(sb);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +129,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
     }
 
     private void updateVisitor(String outTime) {
-        Singleton.getInstance().getApi().updateVisitor("", outTime).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().updateVisitor(visitorModel.getVid(), outTime).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
 

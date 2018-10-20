@@ -99,7 +99,7 @@
                 android:textSize="@dimen/_10sdp" />
 
             <EditText
-                android:id="@+id/txtOuttime"
+                android:id="@+id/edt_time_out"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginRight="@dimen/_10sdp"
@@ -121,6 +121,8 @@
                 android:layout_gravity="center"
                 android:background="@drawable/btn"
                 android:text="@string/ok"
+                android:textColor="@color/white_color"
+                android:textStyle="bold"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:textSize="@dimen/_15sdp" />
         </LinearLayout>

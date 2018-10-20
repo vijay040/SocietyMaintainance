@@ -45,6 +45,6 @@ public interface RetrofitApi {
     );
     @FormUrlEncoded
     @POST("update_visitor_api.php")
-    Call<UnitRestMeta> updateVisitor(@Field("vid") String user_id, @Field("txtOutTime") String txtOutTime);
+    Call<UnitRestMeta> updateVisitor(@Field("vid") String vid, @Field("txtOutTime") String txtOutTime);
 
 }

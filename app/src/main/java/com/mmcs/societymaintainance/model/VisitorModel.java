@@ -7,15 +7,24 @@ import java.io.Serializable;
  */
 
 public class VisitorModel implements Serializable {
-    public boolean isVisible=false;
+    public boolean isVisible = false;
     private String name;
-    private  String mobile;
+    private String mobile;
     private String address;
     private String floor_no;
     private String unit_no;
     private String intime;
     private String outtime;
     private String image;
+    private String vid;
+
+    public String getVid() {
+        return vid;
+    }
+
+    public void setVid(String vid) {
+        this.vid = vid;
+    }
 
     public String getImage() {
         return image;
