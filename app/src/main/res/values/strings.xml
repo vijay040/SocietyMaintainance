@@ -31,8 +31,15 @@
     <string name="start">GOT IT</string>
     <string name="logout">Log Out</string>
     <string name="visitor">Visitor Management</string>
+    <string name="visitor_list">Visitor List</string>
+    <string name="add_visitor">Add Visitor</string>
     <string name="profile_title">MY PROFILE</string>
     <string name="attendance">Attendance</string>
+    <string name="ListValue">List Value</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_photo">Add Photo!</string>
     <string name="news">NEWS</string>
     <string name="complaint_title">COMPLAINT</string>
     <string name="maid">Maid Details</string>
@@ -99,6 +106,8 @@
     <string name="enter_name">Enter Your Name</string>
     <string name="enter_contact">Enter Contact No.</string>
     <string name="enter_email">Enter Valid Email</string>
+   <string name="floor">Floor No.</string>
+    <string name="unit_no">Unit No.</string>
     <string name="enter_cnfrm_pass">Enter Confirm Password></string>
     <string name="password_not_match">Password does not matches</string>
     <string name="successfully_registered">Successfully Registered</string>

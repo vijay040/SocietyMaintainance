@@ -20,7 +20,8 @@ import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
-import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
+import com.mmcs.societymaintainance.activity.AddVisitorActivity;
+import com.mmcs.societymaintainance.activity.VisitorListActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
 
@@ -85,7 +86,7 @@ Shprefrences sh;
                         ctx.startActivity(new Intent(ctx, ComplaintActivity.class));
                         break;
                     case "Visitor Management":
-                        ctx.startActivity(new Intent(ctx, VisitorMgmtActivity.class));
+                        ctx.startActivity(new Intent(ctx, VisitorListActivity.class));
                         break;
 
                     case "Add Employee":

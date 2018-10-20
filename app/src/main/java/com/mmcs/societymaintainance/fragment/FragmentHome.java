@@ -1,6 +1,5 @@
 package com.mmcs.societymaintainance.fragment;
 
-import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,25 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddResidentActivity;
-import com.mmcs.societymaintainance.activity.AttendanceActivity;
-import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DrawerActivity;
-import com.mmcs.societymaintainance.activity.MakeRequestActivity;
-import com.mmcs.societymaintainance.activity.NoticeActivity;
-import com.mmcs.societymaintainance.activity.ProfileActivity;
-import com.mmcs.societymaintainance.activity.VehicleActivity;
-import com.mmcs.societymaintainance.activity.VisitorMgmtActivity;
 import com.mmcs.societymaintainance.adaptor.HomeRecyclerAdaptor;
-import com.mmcs.societymaintainance.model.HomeItemModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
-
-import java.util.ArrayList;
 
 public class FragmentHome extends android.support.v4.app.Fragment{
     RecyclerView rvHome;
