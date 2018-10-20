@@ -60,19 +60,18 @@ public class VisitorListActivity extends AppCompatActivity {
             }
         });
     }
-   /* @Override
+    @Override
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
-        getVisitorList();
+        getVisitors("","");
     }
-   private void getVisitorList()
-    {
-        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().getVisitorList(model.getId()).enqueue(new Callback<VisitorRestMeta>() {
+
+    public void getVisitors(String userid, String branchid) {
+
+        Singleton.getInstance().getApi().getVisitorList(userid, branchid).enqueue(new Callback<VisitorRestMeta>() {
             @Override
             public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
-
                 if(response.body()==null)
                     return;
                 visitorModels=response.body().getResponse();
@@ -80,11 +79,16 @@ public class VisitorListActivity extends AppCompatActivity {
                 listVisitor.setAdapter(visitorAdapter);
                 listVisitor.setEmptyView(findViewById(R.id.imz_nodata));
                 progressBar.setVisibility(View.GONE);
+
             }
+
             @Override
             public void onFailure(Call<VisitorRestMeta> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
             }
         });
-    }*/
+    }
+
+
+
 }

@@ -63,7 +63,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddVisitorActivity extends AppCompatActivity {
+public class AddVisitorActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 EditText edtDate,edt_time_in,edt_time_out,edt_visitor_name,edt_mobile,edt_address,edt_floor,edt_unit_no;
 ImageView imageView;
     Button btn_take_photo,btn_save;
@@ -174,8 +174,7 @@ ImageView imageView;
                 else {
                     progress.setVisibility(View.VISIBLE);
                     postVisitor("", "", name,date ,mobile,address,floor,unit,time_in,time_out,imageImagePath);
-                    Toasty.success(AddVisitorActivity.this,"Successfully Added",Toast.LENGTH_SHORT).show();
-                }
+                                   }
 
             }
         });
@@ -349,11 +348,7 @@ ImageView imageView;
     private int popupId = 0;
     private String purposeId;
     private void showFloorPopup() {
-       /* PurposeModel m=new PurposeModel();
-        m.setPurpose("Business Meeting in Noida");
-        m.setId("0");
 
-        purposeList.add(m);*/
         floorPopupAdapter = new FloorPopupAdapter(AddVisitorActivity.this, floorList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -363,8 +358,10 @@ ImageView imageView;
         final ListView listFloor = dialogView.findViewById(R.id.listFloor);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-       /* editTextName.setQueryHint(getString(R.string.search_here));
-        editTextName.setOnQueryTextListener(this);*/
+        TextView title = dialogView.findViewById(R.id.title);
+        editTextName.setQueryHint(getString(R.string.search_here));
+        title.setText(getString(R.string.select_floor));
+        editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         alertDialog.show();
@@ -387,11 +384,7 @@ ImageView imageView;
     UnitAdapter unitAdapter;
 
     private void showUnitPopup() {
-       /* PurposeModel m=new PurposeModel();
-        m.setPurpose("Business Meeting in Noida");
-        m.setId("0");
 
-        purposeList.add(m);*/
         unitAdapter = new UnitAdapter(AddVisitorActivity.this, unitModels);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -401,9 +394,9 @@ ImageView imageView;
         final ListView listUnit = dialogView.findViewById(R.id.listFloor);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-       /* editTextName.setQueryHint(getString(R.string.search_here));
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText(getString(R.string.select_customer));*/
+        title.setText(getString(R.string.select_unit));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -608,5 +601,38 @@ ImageView imageView;
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s = s.toLowerCase();
+        switch (popupId) {
+            case 1:
+                ArrayList<FloorModel> newlist = new ArrayList<>();
+                for (FloorModel list : floorList) {
+                    String getPurpose = list.getFloor_no().toLowerCase();
+
+                    if (getPurpose.contains(s)) {
+                        newlist.add(list);
+                    }
+                }
+                floorPopupAdapter.filter(newlist);
+                break;
+
+            case 2:
+                ArrayList<UnitModel> newlist1 = new ArrayList<>();
+                for (UnitModel list : unitModels) {
+                    String getCustomer = list.getUnit_no().toLowerCase();
+                    if (getCustomer.contains(s)) {
+                        newlist1.add(list);
+                    }
+                }
+                unitAdapter.filter(newlist1);
+                break;
+        }
+        return false;
+    }
 }

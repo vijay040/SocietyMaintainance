@@ -25,7 +25,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("visitor_get_api.php")
-    Call<VisitorRestMeta> getVisitorList(@Field("user_id") String user_id);
+    Call<VisitorRestMeta> getVisitorList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
     @POST("floorlist_get_api.php")
