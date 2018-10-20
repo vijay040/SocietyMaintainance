@@ -98,6 +98,18 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
 
+            <TextView
+                android:id="@+id/txtTimeOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/time_out"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp" />
+
+
             <EditText
                 android:id="@+id/edt_time_out"
                 android:layout_width="match_parent"

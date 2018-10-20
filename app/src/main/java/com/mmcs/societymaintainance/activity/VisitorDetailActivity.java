@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
@@ -23,6 +24,7 @@ import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.Calendar;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,7 +67,7 @@ else
         txtFloor.setText(getString(R.string.floor) + visitorModel.getFloor_no());
         txtUnit.setText(getString(R.string.unit_no) + visitorModel.getUnit_no());
         txtIntime.setText(getString(R.string.time_in) + visitorModel.getIntime());
-        edt_time_out.setText(getString(R.string.time_out) + visitorModel.getOuttime());
+        edt_time_out.setText(visitorModel.getOuttime());
         edt_time_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,16 +114,23 @@ else
         txtIntime.setText(sb);
 
 
-        sb = new SpannableStringBuilder(edt_time_out.getText());
+       /* sb = new SpannableStringBuilder(edt_time_out.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         edt_time_out.setText(sb);
-
+*/
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (visitorModel.getOuttime().equalsIgnoreCase("")) {
-                    updateVisitor(edt_time_out.getText().toString());
+                    String time_out=edt_time_out.getText().toString();
+                    if(time_out.equals("")){
+                        Toasty.error(VisitorDetailActivity.this,"Select Out Time", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        updateVisitor(edt_time_out.getText().toString());
+                    }
+
                 } else
                     finish();
             }
