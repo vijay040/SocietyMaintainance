@@ -20,7 +20,7 @@
 
     <ListView
         android:layout_below="@+id/edt"
-        android:id="@+id/listVisitor"
+        android:id="@+id/listEmployee"
         android:layout_width="match_parent"
         android:smoothScrollbar="true"
         android:stackFromBottom="true"

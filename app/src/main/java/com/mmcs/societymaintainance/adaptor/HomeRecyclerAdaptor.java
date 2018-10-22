@@ -17,6 +17,7 @@ import com.mmcs.societymaintainance.activity.AddResidentActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
+import com.mmcs.societymaintainance.activity.EmployeeListActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
@@ -88,7 +89,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         break;
 
                     case "Add Employee":
-                        context.startActivity(new Intent(context, AddEmployeeActivity.class));
+                        context.startActivity(new Intent(context, EmployeeListActivity.class));
                         break;
 
                     case "Driver":

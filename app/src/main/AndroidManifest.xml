@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD-Ty0w3efIQagx5I21iJdQkRgHml6z0dU" />
+
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.MakeRequestActivity" />
@@ -62,7 +67,8 @@
             android:name=".activity.MaidActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.VisitorListActivity" />
-        <activity android:name=".activity.VisitorDetailActivity"></activity>
+        <activity android:name=".activity.VisitorDetailActivity" />
+        <activity android:name=".activity.EmployeeListActivity"></activity>
     </application>
 
 </manifest>

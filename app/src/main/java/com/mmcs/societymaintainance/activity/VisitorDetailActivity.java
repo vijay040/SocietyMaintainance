@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
@@ -77,6 +78,7 @@ else
         });
 
         Glide.with(this).load(visitorModel.getImage()).placeholder(R.drawable.no_image).into(image_visitor);
+        image_visitor.setOnTouchListener(new ImageMatrixTouchHandler(VisitorDetailActivity.this));
         SpannableStringBuilder sb = new SpannableStringBuilder(txtName.getText());
 
         // Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);

@@ -33,8 +33,12 @@ dependencies {
     compile 'com.google.code.gson:gson:+'
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.google.code.gson:gson:2.6.1'
+    implementation 'com.google.android.gms:play-services-maps:12.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.0'
+    compile 'com.google.android.gms:play-services-places:+'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:+'
+    compile 'com.bogdwellers:pinchtozoom:0.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
