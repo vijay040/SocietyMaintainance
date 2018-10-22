@@ -15,6 +15,15 @@ public class EmployeeModel implements Serializable {
     private String email;
     private String name;
     private String pre_address;
+    private String ending_date;
+
+    public String getEnding_date() {
+        return ending_date;
+    }
+
+    public void setEnding_date(String ending_date) {
+        this.ending_date = ending_date;
+    }
 
     public String getId() {
         return id;

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -58,9 +59,11 @@ public class VisitorDetailActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
+        back();
+        setTitle();
         if (visitorModel.getOuttime().equalsIgnoreCase(""))
             btn_close.setText("Update");
-else
+          else
             edt_time_out.setEnabled(false);
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
@@ -138,6 +141,19 @@ else
             }
         });
 
+    }
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
+        title.setText(getString(R.string.visitor_detail));
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void updateVisitor(String outTime) {

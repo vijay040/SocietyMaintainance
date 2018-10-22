@@ -58,7 +58,7 @@ public interface RetrofitApi {
     @POST("add_employee_post_api.php")
     Call<LoginResMeta> postEmployee(@Part("user_id") RequestBody user_id, @Part("branch_id") RequestBody branch_id,
                                    @Part("txtEmpName") RequestBody txtEmpName,@Part("txtEmpEmail") RequestBody txtEmpEmail ,@Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
-                                   @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress , @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType,@Part("txtEmpDate") RequestBody txtEmpDate,@Part("txtEndingDate") RequestBody txtEndingDate ,@Part("e_password") RequestBody e_password,@Part("e_status") RequestBody e_status,@Part("image\"; filename=\"profile.jpg") RequestBody image
+                                   @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress , @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType,@Part("txtEmpDate") RequestBody txtEmpDate,@Part("txtEndingDate") RequestBody txtEndingDate ,@Part("e_password") RequestBody e_password,@Part("e_status") RequestBody e_status,@Part("added_date") RequestBody added_date,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
 
@@ -67,5 +67,10 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("update_visitor_api.php")
     Call<UnitRestMeta> updateVisitor(@Field("vid") String vid, @Field("txtOutTime") String txtOutTime);
+
+    @FormUrlEncoded
+    @POST("update_employee_api.php")
+    Call<UnitRestMeta> updateEmployee(@Field("eid") String eid, @Field("ending_date") String ending_date);
+
 
 }

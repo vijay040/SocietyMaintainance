@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -51,6 +52,17 @@ public class EmployeeListActivity extends AppCompatActivity implements SearchVie
                 startActivity(new Intent(EmployeeListActivity.this,AddEmployeeActivity.class));
             }
         });
+        listEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EmployeeAdapter adapter = (EmployeeAdapter) adapterView.getAdapter();
+                EmployeeModel model = adapter.list.get(i);
+                Intent intent = new Intent(EmployeeListActivity.this, EmployeeDetailActivity.class);
+                intent.putExtra(getString(R.string.employee_model), model);
+                startActivity(intent);
+            }
+        });
+
         setTitle();
         back();
     }

@@ -68,7 +68,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.VisitorListActivity" />
         <activity android:name=".activity.VisitorDetailActivity" />
-        <activity android:name=".activity.EmployeeListActivity"></activity>
+        <activity android:name=".activity.EmployeeListActivity" />
+        <activity android:name=".activity.EmployeeDetailActivity"></activity>
     </application>
 
 </manifest>

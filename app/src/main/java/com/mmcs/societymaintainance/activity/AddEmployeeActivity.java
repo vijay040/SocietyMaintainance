@@ -78,7 +78,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements SearchView
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
-
+    String curr_date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -109,6 +109,10 @@ public class AddEmployeeActivity extends AppCompatActivity implements SearchView
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
         }
+        if ((MM + 1) < 10)
+             curr_date=(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+        else
+            curr_date=(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +192,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements SearchView
 
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText(getString(R.string.add_member));
+        title.setText(getString(R.string.add_employee));
     }
 
     private void back() {
@@ -490,12 +494,13 @@ public class AddEmployeeActivity extends AppCompatActivity implements SearchView
         RequestBody requestper_Address = RequestBody.create(MediaType.parse("text/plain"), peradress);
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
+        RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
         RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), DesiId);
         RequestBody requestStatus = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postEmployee(requestUserId, requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postEmployee(requestUserId, requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddEmployeeActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
