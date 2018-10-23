@@ -284,6 +284,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                 e.printStackTrace();
             }
 
+
         } else if (requestCode == SELECT_PHOTO) {
             if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
