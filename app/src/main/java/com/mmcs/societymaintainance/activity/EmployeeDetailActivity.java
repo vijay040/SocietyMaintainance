@@ -183,7 +183,7 @@ EditText edt_ending_date;
                 System.out.println("onCreateDialog  : " + id);
                 cur = DATE_DIALOG_ID;
                 DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
                 return  datePickerDialog;
 
         }

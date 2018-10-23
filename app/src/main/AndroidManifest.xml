@@ -47,7 +47,7 @@
             android:name=".activity.AddVisitorActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.AddResidentActivity"
+            android:name=".activity.AddOwnerActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.AddVendorAvtivity"
@@ -69,7 +69,9 @@
         <activity android:name=".activity.VisitorListActivity" />
         <activity android:name=".activity.VisitorDetailActivity" />
         <activity android:name=".activity.EmployeeListActivity" />
-        <activity android:name=".activity.EmployeeDetailActivity"></activity>
+        <activity android:name=".activity.EmployeeDetailActivity" />
+        <activity android:name=".activity.OwnerListActivity" />
+        <activity android:name=".activity.OwnerDetailActivity"></activity>
     </application>
 
 </manifest>

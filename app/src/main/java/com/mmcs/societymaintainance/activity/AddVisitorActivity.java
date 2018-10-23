@@ -93,9 +93,9 @@ ImageView imageView;
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
-    static final int DATE_DIALOG_ID = 1;
-    static final int TIME_DIALOG_ID = 2;
-    static final int TIME_DIALOG_ID2 = 3;
+
+    static final int TIME_DIALOG_ID = 1;
+    static final int TIME_DIALOG_ID2 = 2;
     int cur = 0;
     Shprefrences sh;
     public static String imgUrl;
@@ -217,13 +217,6 @@ ImageView imageView;
         });
 
 
-        edtDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                showDialog(DATE_DIALOG_ID);
-            }
-        });
         edt_time_in.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -313,10 +306,6 @@ ImageView imageView;
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-            case DATE_DIALOG_ID:
-                System.out.println("onCreateDialog  : " + id);
-                cur = DATE_DIALOG_ID;
-                return new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
 
             case TIME_DIALOG_ID:
                 System.out.println("onCreateDialog  : " + id);
@@ -362,16 +351,6 @@ ImageView imageView;
             }
         }
     };
-    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-            if ((m + 1) < 10)
-                edtDate.setText(String.valueOf(y) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(d));
-            else
-                edtDate.setText(String.valueOf(y) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(d));
-        }
-    };
-
 
     AlertDialog alertDialog;
     ArrayList<FloorModel> floorList = new ArrayList<>();

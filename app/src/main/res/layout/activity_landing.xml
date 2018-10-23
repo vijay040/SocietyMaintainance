@@ -50,8 +50,10 @@
                     android:gravity="center"
                     android:text="Anuradha Singh"
                     android:textAllCaps="true"
+                    android:drawableRight="@drawable/ic_login"
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_3sdp"
                     android:textStyle="bold|italic" />
 
                 <TextView

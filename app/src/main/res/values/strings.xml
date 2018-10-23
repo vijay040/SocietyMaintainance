@@ -32,6 +32,7 @@
     <string name="logout">Log Out</string>
     <string name="visitor">Visitor Management</string>
     <string name="visitor_list">Visitor List</string>
+    <string name="owner_list">Owner List</string>
     <string name="employee_list">Employee List</string>
     <string name="add_visitor">Add Visitor</string>
     <string name="add_employee">Add Employee</string>
@@ -72,7 +73,7 @@
     <string name="alote_area">Allote Area</string>
     <string name="charge">Charge</string>
     <string name="rental">Rental</string>
-    <string name="add_resident">ADD RESIDENT</string>
+    <string name="add_owner">Add Owner</string>
     <string name="add_member">Add Member</string>
     <string name="add_memployee">Add Employee</string>
     <string name="welcome_title">Welcome To Magic Society</string>
@@ -83,8 +84,10 @@
     <string name="time_in">In Time:</string>
     <string name="visitor_model">VISITORMODEL</string>
     <string name="employee_model">EMPLOYEEMODEL</string>
+    <string name="owner_model">OWNERMODEL</string>
     <string name="visitor_detail">Visitor Detail</string>
     <string name="emp_detail">Employee Detail</string>
+    <string name="owner_detail">Owner Detail</string>
     <string name="joining_date">Joining Date:</string>
     <string name="ending_date">Ending Date:</string>
     <string name="time_out">Out Time:</string>

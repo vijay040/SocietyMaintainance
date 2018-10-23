@@ -12,16 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddEmployeeActivity;
-import com.mmcs.societymaintainance.activity.AddResidentActivity;
+import com.mmcs.societymaintainance.activity.AddOwnerActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
+import com.mmcs.societymaintainance.activity.OwnerListActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
-import com.mmcs.societymaintainance.activity.AddVisitorActivity;
 import com.mmcs.societymaintainance.activity.VisitorListActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
@@ -76,7 +75,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         context.startActivity(new Intent(context, ProfileActivity.class));
                         break;
                     case "Add Owner":
-                        context.startActivity(new Intent(context, AddResidentActivity.class));
+                        context.startActivity(new Intent(context, OwnerListActivity.class));
                         break;
                     case "Attendance":
                         context.startActivity(new Intent(context, AttendanceActivity.class));

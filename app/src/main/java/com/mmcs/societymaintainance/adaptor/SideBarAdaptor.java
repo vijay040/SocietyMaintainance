@@ -12,16 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddEmployeeActivity;
-import com.mmcs.societymaintainance.activity.AddResidentActivity;
+import com.mmcs.societymaintainance.activity.AddOwnerActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
+import com.mmcs.societymaintainance.activity.OwnerListActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
-import com.mmcs.societymaintainance.activity.AddVisitorActivity;
 import com.mmcs.societymaintainance.activity.VisitorListActivity;
 import com.mmcs.societymaintainance.model.HomeItemModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
@@ -78,7 +77,7 @@ Shprefrences sh;
                         ctx.startActivity(new Intent(ctx, ProfileActivity.class));
                         break;
                     case "Add Owner":
-                        ctx.startActivity(new Intent(ctx, AddResidentActivity.class));
+                        ctx.startActivity(new Intent(ctx, OwnerListActivity.class));
                         break;
                     case "Attendance":
                         ctx.startActivity(new Intent(ctx, AttendanceActivity.class));

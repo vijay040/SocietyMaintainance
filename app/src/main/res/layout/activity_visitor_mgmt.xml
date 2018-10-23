@@ -37,7 +37,7 @@
                 android:background="@color/white_color"
                 android:clickable="false"
                 android:focusable="false"
-                android:drawableRight="@drawable/ic_calendar"
+             android:editable="false"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:hint="@string/issue_date"
                 android:paddingLeft="@dimen/_15sdp"

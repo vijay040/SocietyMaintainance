@@ -4,6 +4,7 @@ import com.mmcs.societymaintainance.model.DesignationRestMeta;
 import com.mmcs.societymaintainance.model.EmployeeRestMeta;
 import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.LoginResMeta;
+import com.mmcs.societymaintainance.model.OwnerRestMeta;
 import com.mmcs.societymaintainance.model.ResponseMeta;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
@@ -30,6 +31,11 @@ public interface RetrofitApi {
     Call<VisitorRestMeta> getVisitorList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
+    @POST("owner_get_api.php")
+    Call<OwnerRestMeta> getOwnerList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+
+
+    @FormUrlEncoded
     @POST("employee_get_api.php")
     Call<EmployeeRestMeta> getEmployeeList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
 
@@ -53,6 +59,16 @@ public interface RetrofitApi {
                                      @Part("ddlFloorNo") RequestBody ddlFloorNo , @Part("ddlUnitNo") RequestBody ddlUnitNo, @Part("txtInTime") RequestBody txtInTime,@Part("txtOutTime") RequestBody txtOutTime ,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
+    @Multipart
+    @POST("add_owner_post_api.php")
+    Call<LoginResMeta> postOwner(@Part("user_id") RequestBody user_id, @Part("branch_id") RequestBody branch_id,
+                                   @Part("txtOwnerName") RequestBody txtOwnerName,@Part("txtOwnerEmail") RequestBody txtOwnerEmail ,@Part("txtOwnerContact") RequestBody txtOwnerContact, @Part("txtOwnerPreAddress") RequestBody txtOwnerPreAddress,
+                                   @Part("txtOwnerPerAddress") RequestBody txtOwnerPerAddress , @Part("txtOwnerNID") RequestBody txtOwnerNID, @Part("o_password") RequestBody o_password,@Part("floor_id") RequestBody floor_id,@Part("unit_id") RequestBody unit_id ,@Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
+
+
 
     @Multipart
     @POST("add_employee_post_api.php")
