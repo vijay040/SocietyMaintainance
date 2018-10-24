@@ -126,7 +126,8 @@ public class EmployeeListActivity extends AppCompatActivity implements SearchVie
             String email =filterlist.getEmail().toLowerCase();
             String desi =filterlist.getMember_type().toLowerCase();
             String mob =filterlist.getContact().toLowerCase();
-            if(name.contains(s)||address.contains(s)||email.contains(s)||desi.contains(s)||mob.contains(s)) {
+            String membertype =filterlist.getMember_type().toLowerCase();
+            if(name.contains(s)||address.contains(s)||email.contains(s)||desi.contains(s)||mob.contains(s)||membertype.contains(s)) {
                 newlist.add(filterlist);
             }
         }

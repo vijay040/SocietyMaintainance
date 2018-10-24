@@ -2,88 +2,74 @@ package com.mmcs.societymaintainance.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.adaptor.EmployeeAdapter;
+import com.mmcs.societymaintainance.model.EmployeeModel;
+import com.mmcs.societymaintainance.model.EmployeeRestMeta;
+import com.mmcs.societymaintainance.util.Shprefrences;
+import com.mmcs.societymaintainance.util.Singleton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MaidActivity extends AppCompatActivity {
-    EditText edt_dateof_birth,edt_first_name,edt_last_name,edt_mobile,edt_email;
-    Calendar calendar;
-    int DD, MM, YY;
-    Button btn_submit;
+public class MaidActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+    ListView listEmployee;
+    ProgressBar progressBar;
+    Shprefrences sh;
+    ArrayList<EmployeeModel> employeeModels=new ArrayList();
+    EmployeeAdapter employeeAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maid);
-        edt_dateof_birth=findViewById(R.id.edt_dateof_birth);
-        edt_first_name=findViewById(R.id.edt_first_name);
-        edt_last_name=findViewById(R.id.edt_last_name);
-        edt_mobile=findViewById(R.id.edt_mobile);
-        edt_email=findViewById(R.id.edt_email);
-        btn_submit=findViewById(R.id.btn_submit);
-        calendar = Calendar.getInstance();
-        DD = calendar.get(Calendar.DAY_OF_MONTH);
-        MM = calendar.get(Calendar.MONTH);
-        YY = calendar.get(Calendar.YEAR);
+        listEmployee=findViewById(R.id.listEmployee);
+        progressBar=findViewById(R.id.progress);
+        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        editTextName.setQueryHint(getString(R.string.search_here));
+        editTextName.setOnQueryTextListener(this);
+        sh=new Shprefrences(this);
         setTitle();
         back();
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String f_name=edt_first_name.getText().toString();
-                String l_name=edt_last_name.getText().toString();
-                String mobile=edt_mobile.getText().toString();
-                String dob=edt_dateof_birth.getText().toString();
-                String email=edt_email.getText().toString();
-                if(f_name.equals("")){
-                    Toasty.error(MaidActivity.this,"Enter First Name", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(l_name.equals("")){
-                    Toasty.error(MaidActivity.this,"Enter Last Name",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
-                    Toasty.error(MaidActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(dob.equals("")){
-                    Toasty.error(MaidActivity.this, "Enter Date Of Birth", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(email.equals("")){
-                    Toasty.error(MaidActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else{
-                    Toasty.success(MaidActivity.this,"Successfully Added",Toast.LENGTH_SHORT).show();
-                }
+        progressBar.setVisibility(View.VISIBLE);
+        getEmployee("","");
 
-            }
-        });
-        edt_dateof_birth.setOnClickListener(new View.OnClickListener() {
+        setTitle();
+        back();
+        listEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                showDialog(111);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EmployeeAdapter adapter = (EmployeeAdapter) adapterView.getAdapter();
+                EmployeeModel model = adapter.list.get(i);
+                Intent intent = new Intent(MaidActivity.this, MaidDetailActivity.class);
+                intent.putExtra(getString(R.string.maid_model), model);
+                startActivity(intent);
             }
         });
+
     }
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
@@ -99,22 +85,55 @@ public class MaidActivity extends AppCompatActivity {
         });
     }
     @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == 111) {
-            DatePickerDialog dialog = new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
-            dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            return dialog;
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s=s.toLowerCase();
+        ArrayList<EmployeeModel> newlist=new ArrayList<>();
+        for(EmployeeModel filterlist:employeeModels)
+        {
+            String name=filterlist.getName().toLowerCase();
+            String address =filterlist.getPre_address().toLowerCase();
+            String email =filterlist.getEmail().toLowerCase();
+            String desi =filterlist.getMember_type().toLowerCase();
+            String mob =filterlist.getContact().toLowerCase();
+            if(name.contains(s)||address.contains(s)||email.contains(s)||desi.contains(s)||mob.contains(s)) {
+                newlist.add(filterlist);
+            }
         }
-        return onCreateDialog(id);
+        employeeAdapter.filter(newlist);
+        return true;
     }
 
-    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-            if ((m + 1) < 10)
-                edt_dateof_birth.setText(String.valueOf(y) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(d));
-            else
-                edt_dateof_birth.setText(String.valueOf(y) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(d));
-        }
-    };
+    public void getEmployee(String userid, String branchid) {
+
+        Singleton.getInstance().getApi().getEmployeeList(userid, branchid).enqueue(new Callback<EmployeeRestMeta>() {
+            @Override
+            public void onResponse(Call<EmployeeRestMeta> call, Response<EmployeeRestMeta> response) {
+                if(response.body()==null)
+                    return;
+                ArrayList<EmployeeModel> model=response.body().getResponse();
+                for(EmployeeModel m:model)
+                {
+                    if(m.getMember_type().equalsIgnoreCase("MAID"))
+                        employeeModels.add(m);
+                }
+                employeeAdapter=new EmployeeAdapter(MaidActivity.this,employeeModels);
+                listEmployee.setAdapter(employeeAdapter);
+                listEmployee.setEmptyView(findViewById(R.id.imz_nodata));
+                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<EmployeeRestMeta> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
 }

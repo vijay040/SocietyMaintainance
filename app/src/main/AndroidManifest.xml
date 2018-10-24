@@ -71,7 +71,9 @@
         <activity android:name=".activity.EmployeeListActivity" />
         <activity android:name=".activity.EmployeeDetailActivity" />
         <activity android:name=".activity.OwnerListActivity" />
-        <activity android:name=".activity.OwnerDetailActivity"></activity>
+        <activity android:name=".activity.OwnerDetailActivity" />
+        <activity android:name=".activity.DriverDetailActivity" />
+        <activity android:name=".activity.MaidDetailActivity"></activity>
     </application>
 
 </manifest>

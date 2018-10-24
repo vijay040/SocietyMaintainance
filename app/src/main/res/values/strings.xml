@@ -46,8 +46,8 @@
     <string name="search_here">Search Here</string>
     <string name="news">NEWS</string>
     <string name="complaint_title">COMPLAINT</string>
-    <string name="maid">Maid Details</string>
-    <string name="driver">Driver Details</string>
+    <string name="maid">Maid List</string>
+    <string name="driver">Driver List</string>
     <string name="visitor_name">Visitor Name</string>
     <string name="title">Title</string>
     <string name="des">Description</string>
@@ -84,9 +84,13 @@
     <string name="time_in">In Time:</string>
     <string name="visitor_model">VISITORMODEL</string>
     <string name="employee_model">EMPLOYEEMODEL</string>
+    <string name="driver_model">DRIVERMODEL</string>
+    <string name="maid_model">MAIDMODEL</string>
     <string name="owner_model">OWNERMODEL</string>
     <string name="visitor_detail">Visitor Detail</string>
     <string name="emp_detail">Employee Detail</string>
+    <string name="maid_detail">Maid Detail</string>
+    <string name="driver_detail">Driver Detail</string>
     <string name="owner_detail">Owner Detail</string>
     <string name="joining_date">Joining Date:</string>
     <string name="ending_date">Ending Date:</string>
