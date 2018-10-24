@@ -12,9 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddOwnerActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
-import com.mmcs.societymaintainance.activity.ComplaintActivity;
+import com.mmcs.societymaintainance.activity.ComplaintListActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
@@ -81,7 +80,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         context.startActivity(new Intent(context, AttendanceActivity.class));
                         break;
                     case "Complaint":
-                        context.startActivity(new Intent(context, ComplaintActivity.class));
+                        context.startActivity(new Intent(context, ComplaintListActivity.class));
                         break;
                     case "Visitor Management":
                         context.startActivity(new Intent(context, VisitorListActivity.class));

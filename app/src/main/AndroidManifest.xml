@@ -39,7 +39,7 @@
             android:name=".activity.ProfileActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.ComplaintActivity"
+            android:name=".activity.AddComplaintActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.NoticeActivity" />
@@ -73,7 +73,8 @@
         <activity android:name=".activity.OwnerListActivity" />
         <activity android:name=".activity.OwnerDetailActivity" />
         <activity android:name=".activity.DriverDetailActivity" />
-        <activity android:name=".activity.MaidDetailActivity"></activity>
+        <activity android:name=".activity.MaidDetailActivity" />
+        <activity android:name=".activity.ComplaintListActivity"></activity>
     </application>
 
 </manifest>

@@ -12,9 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.activity.AddOwnerActivity;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
-import com.mmcs.societymaintainance.activity.ComplaintActivity;
+import com.mmcs.societymaintainance.activity.ComplaintListActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
@@ -83,7 +82,7 @@ Shprefrences sh;
                         ctx.startActivity(new Intent(ctx, AttendanceActivity.class));
                         break;
                     case "Complaint":
-                        ctx.startActivity(new Intent(ctx, ComplaintActivity.class));
+                        ctx.startActivity(new Intent(ctx, ComplaintListActivity.class));
                         break;
                     case "Visitor Management":
                         ctx.startActivity(new Intent(ctx, VisitorListActivity.class));

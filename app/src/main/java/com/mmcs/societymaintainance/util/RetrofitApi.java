@@ -1,5 +1,6 @@
 package com.mmcs.societymaintainance.util;
 
+import com.mmcs.societymaintainance.model.ComplaintRestMeta;
 import com.mmcs.societymaintainance.model.DesignationRestMeta;
 import com.mmcs.societymaintainance.model.EmployeeRestMeta;
 import com.mmcs.societymaintainance.model.LoginModel;
@@ -29,6 +30,11 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("visitor_get_api.php")
     Call<VisitorRestMeta> getVisitorList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+
+    @FormUrlEncoded
+    @POST("complain_get_api.php")
+    Call<ComplaintRestMeta> getComplaintList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+
 
     @FormUrlEncoded
     @POST("owner_get_api.php")
@@ -64,6 +70,13 @@ public interface RetrofitApi {
     Call<LoginResMeta> postOwner(@Part("user_id") RequestBody user_id, @Part("branch_id") RequestBody branch_id,
                                    @Part("txtOwnerName") RequestBody txtOwnerName,@Part("txtOwnerEmail") RequestBody txtOwnerEmail ,@Part("txtOwnerContact") RequestBody txtOwnerContact, @Part("txtOwnerPreAddress") RequestBody txtOwnerPreAddress,
                                    @Part("txtOwnerPerAddress") RequestBody txtOwnerPerAddress , @Part("txtOwnerNID") RequestBody txtOwnerNID, @Part("o_password") RequestBody o_password,@Part("floor_id") RequestBody floor_id,@Part("unit_id") RequestBody unit_id ,@Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
+    @FormUrlEncoded
+    @POST("add_complain_post_api.php")
+    Call<LoginResMeta> postComplaint(@Field("user_id") String user_id, @Field("branch_id") String branch_id,@Field("txtCTitle") String txtCTitle
+            ,@Field("txtCDescription") String txtCDescription ,@Field("txtCDate") String txtCDate,@Field("xmonth") String xmonth,@Field("xyear") String xyear
 
     );
 

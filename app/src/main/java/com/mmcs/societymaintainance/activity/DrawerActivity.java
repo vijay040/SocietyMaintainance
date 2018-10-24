@@ -137,6 +137,11 @@ public class DrawerActivity extends AppCompatActivity {
            list.add(item);
 
            item=  new HomeItemModel();
+           item.setTitle("Complaint");
+           item.setImage(R.drawable.ic_complain);
+           list.add(item);
+
+           item=  new HomeItemModel();
            item.setTitle("Maid");
            item.setImage(R.drawable.ic_maid);
            list.add(item);
