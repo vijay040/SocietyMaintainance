@@ -15,10 +15,28 @@ private String member_type;
 private String contact;
 private String email;
 private  String name;
+private String unit_no;
+private String floor_no;
 private String pre_address;
 private String per_address;
 private String nid;
 private String image;
+
+    public String getUnit_no() {
+        return unit_no;
+    }
+
+    public void setUnit_no(String unit_no) {
+        this.unit_no = unit_no;
+    }
+
+    public String getFloor_no() {
+        return floor_no;
+    }
+
+    public void setFloor_no(String floor_no) {
+        this.floor_no = floor_no;
+    }
 
     public String getId() {
         return id;

@@ -186,10 +186,10 @@ ImageView imageView;
                     Toasty.error(AddVisitorActivity.this, "Enter Address", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(floor.equals("")){
+               /* else if(floor.equals("")){
                     Toasty.error(AddVisitorActivity.this,"Select Floor",Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
                 else if(unit.equals("")){
                     Toasty.error(AddVisitorActivity.this,"Select Unit",Toast.LENGTH_SHORT).show();
                     return;
@@ -418,8 +418,11 @@ String unitId;
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 UnitModel obj = (UnitModel) listUnit.getAdapter().getItem(position);
-                edt_unit_no.setText(obj.getUnit_no());
-                unitId=obj.getUid();
+                edt_unit_no.setText(obj.getFloor_no()+" "+obj.getUnit_no());
+                unitId = obj.getUid();
+                floorId = obj.getFid();
+                Log.e("uid"+obj.getUid(),"obj.getNum"+obj.getUnit_no());
+                Log.e("floorno"+obj.getUnit_no(),"floorno"+obj.getUnit_no());
                 alertDialog.dismiss();
             }
         });
@@ -624,9 +627,9 @@ String unitId;
             case 1:
                 ArrayList<FloorModel> newlist = new ArrayList<>();
                 for (FloorModel list : floorList) {
-                    String getPurpose = list.getFloor_no().toLowerCase();
+                    String fl = list.getFloor_no().toLowerCase();
 
-                    if (getPurpose.contains(s)) {
+                    if (fl.contains(s)) {
                         newlist.add(list);
                     }
                 }
@@ -636,8 +639,9 @@ String unitId;
             case 2:
                 ArrayList<UnitModel> newlist1 = new ArrayList<>();
                 for (UnitModel list : unitModels) {
-                    String getCustomer = list.getUnit_no().toLowerCase();
-                    if (getCustomer.contains(s)) {
+                    String  unit = list.getUnit_no().toLowerCase();
+                    String fl=list.getFloor_no().toLowerCase();
+                    if (unit.contains(s)||fl.contains(s)) {
                         newlist1.add(list);
                     }
                 }

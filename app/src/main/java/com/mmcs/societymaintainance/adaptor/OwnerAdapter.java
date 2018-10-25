@@ -63,10 +63,10 @@ public class OwnerAdapter  extends BaseAdapter {
         TextView txtMobile=view.findViewById(R.id.txtMobile);
         txtMobile.setText(context.getString(R.string.mobile_no)+list.get(i).getContact());
         TextView txtFloor=view.findViewById(R.id.txtFloor);
-       // txtFloor.setText(context.getString(R.string.floor)+list.get(i).getFloor());
+        txtFloor.setText(context.getString(R.string.floor)+list.get(i).getFloor_no());
 
         TextView txtUnit_no=view.findViewById(R.id.txtUnit_no);
-       // txtUnit_no.setText(context.getString(R.string.unit_no)+list.get(i).getUnit_no());
+        txtUnit_no.setText(context.getString(R.string.unit_no)+list.get(i).getUnit_no());
 
         TextView txtEmail=view.findViewById(R.id.txtEmail);
         txtEmail.setText(context.getString(R.string.email_add)+list.get(i).getEmail());

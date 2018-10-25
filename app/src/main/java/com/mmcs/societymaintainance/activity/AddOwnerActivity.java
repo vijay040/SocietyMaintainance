@@ -526,23 +526,13 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
         switch (popupId) {
-            case 1:
-                ArrayList<FloorModel> newlist = new ArrayList<>();
-                for (FloorModel list : floorList) {
-                    String getPurpose = list.getFloor_no().toLowerCase();
-
-                    if (getPurpose.contains(s)) {
-                        newlist.add(list);
-                    }
-                }
-                floorPopupAdapter.filter(newlist);
-                break;
 
             case 2:
                 ArrayList<UnitModel> newlist1 = new ArrayList<>();
                 for (UnitModel list : unitModels) {
-                    String getCustomer = list.getUnit_no().toLowerCase();
-                    if (getCustomer.contains(s)) {
+                    String  unit = list.getUnit_no().toLowerCase();
+                    String fl=list.getFloor_no().toLowerCase();
+                    if (unit.contains(s)||fl.contains(s)) {
                         newlist1.add(list);
                     }
                 }
