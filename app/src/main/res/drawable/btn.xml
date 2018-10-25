@@ -11,7 +11,7 @@
                 android:bottomLeftRadius="@dimen/_10sdp"
                 android:topLeftRadius="@dimen/_10sdp"
                 android:topRightRadius="@dimen/_10sdp" />
-            <solid android:color="#FFC700" /> <!-- background color -->
+            <solid android:color="@color/colorPrimary" /> <!-- background color -->
         </shape>
     </item>
 </ripple>
