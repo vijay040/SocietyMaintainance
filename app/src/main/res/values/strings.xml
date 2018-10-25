@@ -34,6 +34,8 @@
     <string name="visitor_list">Visitor List</string>
     <string name="owner_list">Owner List</string>
     <string name="complaint_list">Complaint List</string>
+    <string name="accept">ACCEPT</string>
+    <string name="reject">REJECT</string>
     <string name="employee_list">Employee List</string>
     <string name="add_visitor">Add Visitor</string>
     <string name="add_employee">Add Employee</string>
