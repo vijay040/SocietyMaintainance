@@ -9,9 +9,7 @@ import com.mmcs.societymaintainance.model.OwnerRestMeta;
 import com.mmcs.societymaintainance.model.ResponseMeta;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
-
 import java.util.ArrayList;
-
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;

@@ -8,6 +8,15 @@ public class UnitModel {
     private String uid;
     private String unit_no;
     private String floor_no;
+    private String fid;
+
+    public String getFid() {
+        return fid;
+    }
+
+    public void setFid(String fid) {
+        this.fid = fid;
+    }
 
     public String getUid() {
         return uid;

@@ -184,10 +184,10 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 } else if (national_id.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (floor.equals("")) {
+                }/* else if (floor.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Select Floor", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (unit.equals("")) {
+                }*/ else if (unit.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Select Unit No.", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
@@ -473,9 +473,11 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 UnitModel obj = (UnitModel) listUnit.getAdapter().getItem(position);
-                edt_unit_no.setText(obj.getUnit_no());
+                edt_unit_no.setText(obj.getFloor_no()+" "+obj.getUnit_no());
                 unitId = obj.getUid();
+                floorId = obj.getFid();
                 Log.e("uid"+obj.getUid(),"obj.getNum"+obj.getUnit_no());
+                Log.e("floorno"+obj.getUnit_no(),"floorno"+obj.getUnit_no());
                 alertDialog.dismiss();
             }
         });

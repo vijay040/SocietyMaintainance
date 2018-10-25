@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.UnitModel;
-
 import java.util.ArrayList;
-
 /**
  * Created by Lenovo on 20-10-2018.
  */
@@ -59,7 +56,7 @@ public class UnitAdapter extends BaseAdapter {
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
 
-        txtTitle.setText(list.get(i).getUnit_no());
+        txtTitle.setText(list.get(i).getFloor_no()+" "+list.get(i).getUnit_no());
 
         return view;
     }

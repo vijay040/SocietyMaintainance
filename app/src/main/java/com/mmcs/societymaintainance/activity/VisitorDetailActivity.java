@@ -83,7 +83,6 @@ public class VisitorDetailActivity extends AppCompatActivity {
         Glide.with(this).load(visitorModel.getImage()).placeholder(R.drawable.no_image).into(image_visitor);
         image_visitor.setOnTouchListener(new ImageMatrixTouchHandler(VisitorDetailActivity.this));
         SpannableStringBuilder sb = new SpannableStringBuilder(txtName.getText());
-
         // Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));

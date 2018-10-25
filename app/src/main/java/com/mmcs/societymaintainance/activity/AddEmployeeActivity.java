@@ -511,7 +511,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
-        Log.e("***********", "*************" + fileUrl);
+        Log.e("****image*******", "*****imagepath********" + fileUrl);
         if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
