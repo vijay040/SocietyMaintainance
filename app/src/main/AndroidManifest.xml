@@ -74,7 +74,8 @@
         <activity android:name=".activity.OwnerDetailActivity" />
         <activity android:name=".activity.DriverDetailActivity" />
         <activity android:name=".activity.MaidDetailActivity" />
-        <activity android:name=".activity.ComplaintListActivity"></activity>
+        <activity android:name=".activity.ComplaintListActivity" />
+        <activity android:name=".activity.VisitorNotificationActivity"></activity>
     </application>
 
 </manifest>
