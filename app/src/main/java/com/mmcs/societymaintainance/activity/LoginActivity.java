@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -210,6 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                     sh.setString("TYPE", spnLoginType.getSelectedItem() + "");
                     sh.setBoolean("ISLOGIN", true);
                     LoginModel model = response.body().getResponse().get(0);
+                    Log.e("loginModel.getId()","**************loginModel.getId()"+model.getId());
                     model.setType(loginType);
                     sh.setLoginModel(getString(R.string.login_model), model);
                     startActivity(new Intent(LoginActivity.this, DrawerActivity.class));

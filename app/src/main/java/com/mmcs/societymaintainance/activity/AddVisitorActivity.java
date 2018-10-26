@@ -122,7 +122,7 @@ ImageView imageView;
         edt_unit_no=findViewById(R.id.edt_unit_no);
         progress.setVisibility(View.VISIBLE);
         btn_save=findViewById(R.id.btn_save);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -206,8 +206,9 @@ ImageView imageView;
                 }
                 else {
                     progress.setVisibility(View.VISIBLE);
+                    Log.e("loginModel.getId()","**************loginModel.getId()"+loginModel.getId());
                     postVisitor(loginModel.getId(),loginModel.getType(), loginModel.getBranch_id(), name,date ,mobile,address,time_in,time_out,imageImagePath);
-                                   }
+                    }
 
             }
         });
@@ -471,7 +472,7 @@ String unitId;
         if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), ""+branchid);
         RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), txtIssueDate);
