@@ -1,4 +1,5 @@
 package com.mmcs.societymaintainance.activity;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.LoginResMeta;
@@ -34,79 +36,82 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText edt_username,edt_password;
-    Button loginBtn,btn_register;
+    EditText edt_username, edt_password;
+    Button loginBtn, btn_register;
     Animation animShake;
     public static int TYPE_WIFI = 1;
     public static int TYPE_MOBILE = 2;
     public static int TYPE_NOT_CONNECTED = 0;
     private Snackbar snackbar;
     RelativeLayout relativeLayout;
-    private boolean internetConnected=true;
+    private boolean internetConnected = true;
     Spinner spnLoginType;
+    public static String fcmToken;
     Shprefrences sh;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        edt_username=findViewById(R.id.edt_username);
-        edt_password=findViewById(R.id.edt_password);
+        edt_username = findViewById(R.id.edt_username);
+        edt_password = findViewById(R.id.edt_password);
         animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
-        loginBtn=findViewById(R.id.loginBtn);
-        btn_register=findViewById(R.id.btn_register);
-        relativeLayout=findViewById(R.id.relativeLayout);
-        spnLoginType=findViewById(R.id.spnUserType);
-        sh=new Shprefrences(this);
-        String typeList[] = {"Select Login Types","Admin","Owner","Employee","Renter"};//,"Super Admin"
-        spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
+        loginBtn = findViewById(R.id.loginBtn);
+        btn_register = findViewById(R.id.btn_register);
+        relativeLayout = findViewById(R.id.relativeLayout);
+        spnLoginType = findViewById(R.id.spnUserType);
+        sh = new Shprefrences(this);
+        String typeList[] = {"Select Login Types", "Admin", "Owner", "Employee", "Renter"};//,"Super Admin"
+        spnLoginType.setAdapter(new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item, typeList));
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this,RegistrationActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent);
             }
         });
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user_name=edt_username.getText().toString();
-                String pass=edt_password.getText().toString();
-                if ((user_name.equals(""))){
+                String user_name = edt_username.getText().toString();
+                String pass = edt_password.getText().toString();
+                if ((user_name.equals(""))) {
                     edt_username.startAnimation(animShake);
-                    Toast.makeText(LoginActivity.this,getString(R.string.email),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.email), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(pass.equals("")){
+                } else if (pass.equals("")) {
                     edt_password.startAnimation(animShake);
-                    Toast.makeText(LoginActivity.this,getString(R.string.password),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.password), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(spnLoginType.getSelectedItemPosition()==0) {
+                if (spnLoginType.getSelectedItemPosition() == 0) {
                     Toast.makeText(LoginActivity.this, R.string.select_logintype, Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else{
+                } else {
 
-                    getLogin(user_name,pass,spnLoginType.getSelectedItemPosition()+"");
+                    getLogin(user_name, pass, spnLoginType.getSelectedItemPosition() + "");
 
                 }
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         registerInternetCheckReceiver();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(broadcastReceiver);
     }
+
     /**
-     *  Method to register runtime broadcast receiver to show snackbar alert for internet connection..
+     * Method to register runtime broadcast receiver to show snackbar alert for internet connection..
      */
     private void registerInternetCheckReceiver() {
         IntentFilter internetFilter = new IntentFilter();
@@ -114,29 +119,32 @@ public class LoginActivity extends AppCompatActivity {
         internetFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(broadcastReceiver, internetFilter);
     }
+
     /**
-     *  Runtime Broadcast receiver inner class to capture internet connectivity events
+     * Runtime Broadcast receiver inner class to capture internet connectivity events
      */
     public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String status = getConnectivityStatusString(context);
-            setSnackbarMessage(status,false);
+            setSnackbarMessage(status, false);
         }
     };
+
     public static int getConnectivityStatus(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (null != activeNetwork) {
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
                 return TYPE_WIFI;
 
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
                 return TYPE_MOBILE;
         }
         return TYPE_NOT_CONNECTED;
     }
+
     public static String getConnectivityStatusString(Context context) {
         int conn = getConnectivityStatus(context);
         String status = null;
@@ -149,12 +157,13 @@ public class LoginActivity extends AppCompatActivity {
         }
         return status;
     }
-    private void setSnackbarMessage(String status,boolean showBar) {
-        String internetStatus="";
-        if(status.equalsIgnoreCase("Wifi enabled")||status.equalsIgnoreCase("Mobile data enabled")){
-            internetStatus="Internet Connected";
-        }else {
-            internetStatus="Lost Internet Connection";
+
+    private void setSnackbarMessage(String status, boolean showBar) {
+        String internetStatus = "";
+        if (status.equalsIgnoreCase("Wifi enabled") || status.equalsIgnoreCase("Mobile data enabled")) {
+            internetStatus = "Internet Connected";
+        } else {
+            internetStatus = "Lost Internet Connection";
         }
         snackbar = Snackbar
                 .make(relativeLayout, internetStatus, Snackbar.LENGTH_LONG)
@@ -168,47 +177,46 @@ public class LoginActivity extends AppCompatActivity {
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
-        if(internetStatus.equalsIgnoreCase("Lost Internet Connection")){
-            if(internetConnected){
+        if (internetStatus.equalsIgnoreCase("Lost Internet Connection")) {
+            if (internetConnected) {
                 snackbar.show();
-                internetConnected=false;
+                internetConnected = false;
             }
-        }else{
-            if(!internetConnected){
-                internetConnected=true;
+        } else {
+            if (!internetConnected) {
+                internetConnected = true;
                 snackbar.show();
             }
         }
     }
-    public void showWelcomeTitle(){
-        Context context=getApplicationContext();
-        LayoutInflater inflater=getLayoutInflater();
-        View wlcm_Toast =inflater.inflate(R.layout.welcome_toast, null);
-        Toast wlcmtoast=new Toast(context);
+
+    public void showWelcomeTitle() {
+        Context context = getApplicationContext();
+        LayoutInflater inflater = getLayoutInflater();
+        View wlcm_Toast = inflater.inflate(R.layout.welcome_toast, null);
+        Toast wlcmtoast = new Toast(context);
         wlcmtoast.setView(wlcm_Toast);
-        wlcmtoast.setGravity(Gravity.BOTTOM,0, 0);
+        wlcmtoast.setGravity(Gravity.BOTTOM, 0, 0);
         wlcmtoast.setDuration(Toast.LENGTH_SHORT);
         wlcmtoast.show();
     }
 
 
-    public void getLogin( String username, String password,String loginType)
-    {
-        Singleton.getInstance().getApi().login(username,password,"","","",loginType).enqueue(new Callback<LoginResMeta>() {
+    public void getLogin(String username, String password, final String loginType) {
+        Singleton.getInstance().getApi().login(username, password, "", fcmToken, "", loginType).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
-              if( response.body().getCode().equalsIgnoreCase("200")) {
+                if (response.body().getCode().equalsIgnoreCase("200")) {
                     sh.setString("TYPE", spnLoginType.getSelectedItem() + "");
                     sh.setBoolean("ISLOGIN", true);
                     LoginModel model = response.body().getResponse().get(0);
+                    model.setType(loginType);
                     sh.setLoginModel(getString(R.string.login_model), model);
                     startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
                     showWelcomeTitle();
                     finish();
-                }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, ""+response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "" + response.body().getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 

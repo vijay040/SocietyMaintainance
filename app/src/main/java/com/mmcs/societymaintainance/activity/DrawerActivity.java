@@ -27,10 +27,16 @@ import com.mmcs.societymaintainance.adaptor.SideBarAdaptor;
 import com.mmcs.societymaintainance.fragment.FragmentHome;
 import com.mmcs.societymaintainance.model.HomeItemModel;
 import com.mmcs.societymaintainance.model.LoginModel;
+import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.util.Shprefrences;
+import com.mmcs.societymaintainance.util.Singleton;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DrawerActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -53,6 +59,7 @@ public class DrawerActivity extends AppCompatActivity {
         listView=findViewById(R.id.listItem);
         sh=new Shprefrences(this);
         loginModel=sh.getLoginModel(getString(R.string.login_model));
+        updateToken();
         txtName.setText(loginModel.getName());
         txtEmail.setText(loginModel.getEmail());
         txtFlateNo.setText(loginModel.getFloor_no());
@@ -229,6 +236,20 @@ public class DrawerActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void updateToken()
+    {
+        Singleton.getInstance().getApi().updateToken(loginModel.getId(),loginModel.getType(),LoginActivity.fcmToken).enqueue(new Callback<UnitRestMeta>() {
+            @Override
+            public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
+
+            }
+            @Override
+            public void onFailure(Call<UnitRestMeta> call, Throwable t) {
+
+            }
+        });
     }
 
 }

@@ -99,5 +99,7 @@ public interface RetrofitApi {
     @POST("update_employee_api.php")
     Call<UnitRestMeta> updateEmployee(@Field("eid") String eid, @Field("ending_date") String ending_date);
 
-
+    @FormUrlEncoded
+    @POST("update_fcm_token.php")
+    Call<UnitRestMeta> updateToken(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType,@Field("fcm_token") String fcm_token);
 }
