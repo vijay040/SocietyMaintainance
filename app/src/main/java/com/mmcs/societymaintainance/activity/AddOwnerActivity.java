@@ -107,7 +107,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         edt_floor = findViewById(R.id.edt_floor);
         edt_unit_no = findViewById(R.id.edt_unit_no);
         progress = findViewById(R.id.progress);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         progress.setVisibility(View.VISIBLE);
         btn_take_photo = findViewById(R.id.btn_take_photo);
         btn_save = findViewById(R.id.btn_save);
@@ -209,7 +209,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), ""+branchid);
         RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);

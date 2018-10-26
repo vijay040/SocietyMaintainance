@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         edt_phone=findViewById(R.id.edt_phone);
         edt_Address=findViewById(R.id.edt_Address);
         sh=new Shprefrences(this);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         edt_txt_first_name.setText(loginModel.getName());
         edt_email_id.setText(loginModel.getEmail());
         edt_Flate_no.setText(loginModel.getFloor_no());

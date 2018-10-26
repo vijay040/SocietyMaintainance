@@ -54,7 +54,7 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         sh=new Shprefrences(this);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);

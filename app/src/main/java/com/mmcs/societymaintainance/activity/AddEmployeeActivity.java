@@ -119,7 +119,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         btn_take_photo = findViewById(R.id.btn_take_photo);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         mGoogleApiClient = new GoogleApiClient.Builder(AddEmployeeActivity.this)
@@ -517,7 +517,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"),"" +branchid);
         RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), name);
         RequestBody requestJoiningDate = RequestBody.create(MediaType.parse("text/plain"), date);

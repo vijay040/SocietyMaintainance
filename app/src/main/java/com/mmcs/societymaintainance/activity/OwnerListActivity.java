@@ -45,11 +45,11 @@ public class OwnerListActivity extends AppCompatActivity implements SearchView.O
         listOwner=findViewById(R.id.listOwner);
         progressBar=findViewById(R.id.progress);
         txtAdd=findViewById(R.id.txtAdd);
-        loginModel=new LoginModel();
+        sh=new Shprefrences(this);
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -43,8 +43,8 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         txtAdd=findViewById(R.id.txtAdd);
-        loginModel=new LoginModel();
         sh=new Shprefrences(this);
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

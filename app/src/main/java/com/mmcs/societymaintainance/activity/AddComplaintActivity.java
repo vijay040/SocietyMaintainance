@@ -51,7 +51,7 @@ public class AddComplaintActivity extends AppCompatActivity{
         sh=new Shprefrences(this);
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         YY = calendar.get(Calendar.YEAR);
         if ((MM + 1) < 10)
             edt_date.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
@@ -95,7 +95,7 @@ public class AddComplaintActivity extends AppCompatActivity{
         });
     }
     private void postComplaint(String user_id,String type ,String branchId, String title,String des,String date,String month,String year){
-        Singleton.getInstance().getApi().postComplaint(user_id,type ,branchId,title,des,date,month,year).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postComplaint(user_id,type ,""+branchId,title,des,date,month,year).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 progress.setVisibility(View.GONE);

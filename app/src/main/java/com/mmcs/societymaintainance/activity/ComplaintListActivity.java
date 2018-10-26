@@ -42,12 +42,12 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
         setContentView(R.layout.activity_complaint_list);
         listComplaint=findViewById(R.id.listComplaint);
         progressBar=findViewById(R.id.progress);
+        sh=new Shprefrences(this);
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        loginModel=new LoginModel();
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         txtAdd=findViewById(R.id.txtAdd);
-        sh=new Shprefrences(this);
         back();
         setTitle();
         txtAdd.setOnClickListener(new View.OnClickListener() {

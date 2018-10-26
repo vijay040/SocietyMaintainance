@@ -42,12 +42,12 @@ public class EmployeeListActivity extends AppCompatActivity implements SearchVie
         setContentView(R.layout.activity_member_list);
         listEmployee=findViewById(R.id.listEmployee);
         progressBar=findViewById(R.id.progress);
-        loginModel=new LoginModel();
+        sh=new Shprefrences(this);
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         txtAdd=findViewById(R.id.txtAdd);
-        sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
