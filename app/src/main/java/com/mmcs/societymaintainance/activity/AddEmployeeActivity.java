@@ -76,6 +76,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
     Calendar calendar;
     int DD, MM, YY;
     ImageView imageView;
+    LoginModel loginModel;
     Button btn_take_photo, btn_save;
     private static final int CAMERA_REQUEST = 1888;
     static final int DATE_DIALOG_ID = 1;
@@ -118,6 +119,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         btn_take_photo = findViewById(R.id.btn_take_photo);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
+        loginModel=new LoginModel();
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         mGoogleApiClient = new GoogleApiClient.Builder(AddEmployeeActivity.this)
@@ -184,7 +186,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postEmployee("", "", name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
+                    postEmployee(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
                 }
             }
         });
@@ -213,7 +215,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
             }
         });
 
-        getDesignationList("", "");
+        getDesignationList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
         setTitle();
         back();
 
@@ -466,9 +468,9 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
 
 
 
-    public void getDesignationList(String userid, String branchid) {
+    public void getDesignationList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getDesignationList(userid, branchid).enqueue(new Callback<DesignationRestMeta>() {
+        Singleton.getInstance().getApi().getDesignationList(userid, type ,branchid).enqueue(new Callback<DesignationRestMeta>() {
             @Override
             public void onResponse(Call<DesignationRestMeta> call, Response<DesignationRestMeta> response) {
                 designationModels = response.body().getResponse();
@@ -507,7 +509,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         }
         return false;
     }
-    private void postEmployee(String userid, String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
+    private void postEmployee(String userid,String type ,String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
@@ -516,6 +518,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
         RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), branchid);
+        RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), name);
         RequestBody requestJoiningDate = RequestBody.create(MediaType.parse("text/plain"), date);
         RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);
@@ -530,7 +533,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postEmployee(requestUserId, requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddEmployeeActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

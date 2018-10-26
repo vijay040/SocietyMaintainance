@@ -16,6 +16,7 @@ import com.mmcs.societymaintainance.adaptor.EmployeeAdapter;
 import com.mmcs.societymaintainance.adaptor.OwnerAdapter;
 import com.mmcs.societymaintainance.adaptor.VisitorAdapter;
 import com.mmcs.societymaintainance.model.EmployeeModel;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.OwnerModel;
 import com.mmcs.societymaintainance.model.OwnerRestMeta;
 import com.mmcs.societymaintainance.model.VisitorModel;
@@ -36,7 +37,7 @@ public class OwnerListActivity extends AppCompatActivity implements SearchView.O
     ArrayList<OwnerModel> ownerModels=new ArrayList();
     Shprefrences sh;
     OwnerAdapter ownerAdapter;
-
+    LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class OwnerListActivity extends AppCompatActivity implements SearchView.O
         listOwner=findViewById(R.id.listOwner);
         progressBar=findViewById(R.id.progress);
         txtAdd=findViewById(R.id.txtAdd);
+        loginModel=new LoginModel();
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
@@ -85,12 +87,12 @@ public class OwnerListActivity extends AppCompatActivity implements SearchView.O
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
-        getOwnerList("","");
+        getOwnerList(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
     }
 
-    public void getOwnerList(String userid, String branchid) {
+    public void getOwnerList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getOwnerList(userid, branchid).enqueue(new Callback<OwnerRestMeta>() {
+        Singleton.getInstance().getApi().getOwnerList(userid,type ,branchid).enqueue(new Callback<OwnerRestMeta>() {
             @Override
             public void onResponse(Call<OwnerRestMeta> call, Response<OwnerRestMeta> response) {
                 if(response.body()==null)

@@ -27,45 +27,45 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("visitor_get_api.php")
-    Call<VisitorRestMeta> getVisitorList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+    Call<VisitorRestMeta> getVisitorList(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
     @POST("complain_get_api.php")
-    Call<ComplaintRestMeta> getComplaintList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+    Call<ComplaintRestMeta> getComplaintList(@Field("id") String id, @Field("ddlLoginType") String type,@Field("branch_id") String branch_id);
 
 
     @FormUrlEncoded
     @POST("owner_get_api.php")
-    Call<OwnerRestMeta> getOwnerList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+    Call<OwnerRestMeta> getOwnerList(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
 
     @FormUrlEncoded
     @POST("employee_get_api.php")
-    Call<EmployeeRestMeta> getEmployeeList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+    Call<EmployeeRestMeta> getEmployeeList(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
     @POST("floorlist_get_api.php")
-    Call<ResponseMeta> getFloorList( @Field("user_id") String user_id,@Field("branch_id") String branch_id);
+    Call<ResponseMeta> getFloorList( @Field("id") String id,@Field("ddlLoginType") String ddlLoginType,@Field("branch_id") String branch_id);
 
     @FormUrlEncoded
     @POST("unitlist_get_api.php")
-    Call<UnitRestMeta> getUnitList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+    Call<UnitRestMeta> getUnitList(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
     @POST("get_designation_api.php")
-    Call<DesignationRestMeta> getDesignationList(@Field("user_id") String user_id, @Field("branch_id") String branch_id);
+    Call<DesignationRestMeta> getDesignationList(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType ,@Field("branch_id") String branch_id);
 
 
     @Multipart
     @POST("add_visitor_post_api.php")
-    Call<LoginResMeta> postVisitor(@Part("user_id") RequestBody user_id, @Part("branch_id") RequestBody branch_id,
+    Call<LoginResMeta> postVisitor(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType,@Part("branch_id") RequestBody branch_id,
                                      @Part("txtName") RequestBody txtName,@Part("txtIssueDate") RequestBody txtIssueDate ,@Part("txtMobile") RequestBody txtMobile, @Part("txtAddress") RequestBody txtAddress,
                                      @Part("ddlFloorNo") RequestBody ddlFloorNo , @Part("ddlUnitNo") RequestBody ddlUnitNo, @Part("txtInTime") RequestBody txtInTime,@Part("txtOutTime") RequestBody txtOutTime ,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
     @Multipart
     @POST("add_owner_post_api.php")
-    Call<LoginResMeta> postOwner(@Part("user_id") RequestBody user_id, @Part("branch_id") RequestBody branch_id,
+    Call<LoginResMeta> postOwner(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType,@Part("branch_id") RequestBody branch_id,
                                    @Part("txtOwnerName") RequestBody txtOwnerName,@Part("txtOwnerEmail") RequestBody txtOwnerEmail ,@Part("txtOwnerContact") RequestBody txtOwnerContact, @Part("txtOwnerPreAddress") RequestBody txtOwnerPreAddress,
                                    @Part("txtOwnerPerAddress") RequestBody txtOwnerPerAddress , @Part("txtOwnerNID") RequestBody txtOwnerNID, @Part("o_password") RequestBody o_password,@Part("floor_id") RequestBody floor_id,@Part("unit_id") RequestBody unit_id ,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
@@ -73,7 +73,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("add_complain_post_api.php")
-    Call<LoginResMeta> postComplaint(@Field("user_id") String user_id, @Field("branch_id") String branch_id,@Field("txtCTitle") String txtCTitle
+    Call<LoginResMeta> postComplaint(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType,@Field("branch_id") String branch_id,@Field("txtCTitle") String txtCTitle
             ,@Field("txtCDescription") String txtCDescription ,@Field("txtCDate") String txtCDate,@Field("xmonth") String xmonth,@Field("xyear") String xyear
 
     );
@@ -83,7 +83,7 @@ public interface RetrofitApi {
 
     @Multipart
     @POST("add_employee_post_api.php")
-    Call<LoginResMeta> postEmployee(@Part("user_id") RequestBody user_id, @Part("branch_id") RequestBody branch_id,
+    Call<LoginResMeta> postEmployee(@Part("id") RequestBody id,@Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
                                    @Part("txtEmpName") RequestBody txtEmpName,@Part("txtEmpEmail") RequestBody txtEmpEmail ,@Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
                                    @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress , @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType,@Part("txtEmpDate") RequestBody txtEmpDate,@Part("txtEndingDate") RequestBody txtEndingDate ,@Part("e_password") RequestBody e_password,@Part("e_status") RequestBody e_status,@Part("added_date") RequestBody added_date,@Part("image\"; filename=\"profile.jpg") RequestBody image
 

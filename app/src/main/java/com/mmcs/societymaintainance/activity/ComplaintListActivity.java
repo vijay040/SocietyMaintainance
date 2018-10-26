@@ -15,11 +15,13 @@ import com.mmcs.societymaintainance.adaptor.ComplaintAdapter;
 import com.mmcs.societymaintainance.adaptor.VisitorAdapter;
 import com.mmcs.societymaintainance.model.ComplaintModel;
 import com.mmcs.societymaintainance.model.ComplaintRestMeta;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
 import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +34,8 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
     ArrayList<ComplaintModel> complaintModels=new ArrayList();
     Shprefrences sh;
     ComplaintAdapter complaintAdapter;
+    LoginModel loginModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,7 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
+        loginModel=new LoginModel();
         txtAdd=findViewById(R.id.txtAdd);
         sh=new Shprefrences(this);
         back();
@@ -69,12 +74,12 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
-        getComplaintList("","");
+        getComplaintList(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
     }
 
-    public void getComplaintList(String userid, String branchid) {
+    public void getComplaintList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getComplaintList(userid, branchid).enqueue(new Callback<ComplaintRestMeta>() {
+        Singleton.getInstance().getApi().getComplaintList(userid,type ,branchid).enqueue(new Callback<ComplaintRestMeta>() {
             @Override
             public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
                 if(response.body()==null)

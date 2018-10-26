@@ -23,6 +23,7 @@ import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.adaptor.EmployeeAdapter;
 import com.mmcs.societymaintainance.model.EmployeeModel;
 import com.mmcs.societymaintainance.model.EmployeeRestMeta;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
@@ -40,6 +41,7 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
     Shprefrences sh;
     ArrayList<EmployeeModel> employeeModels=new ArrayList();
     EmployeeAdapter employeeAdapter;
+    LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -51,11 +53,12 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
+        loginModel=new LoginModel();
         sh=new Shprefrences(this);
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
-        getEmployee("","");
+        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
         listEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -106,9 +109,9 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
         return true;
     }
 
-    public void getEmployee(String userid, String branchid) {
+    public void getEmployee(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getEmployeeList(userid, branchid).enqueue(new Callback<EmployeeRestMeta>() {
+        Singleton.getInstance().getApi().getEmployeeList(userid,type ,branchid).enqueue(new Callback<EmployeeRestMeta>() {
             @Override
             public void onResponse(Call<EmployeeRestMeta> call, Response<EmployeeRestMeta> response) {
                 if(response.body()==null)

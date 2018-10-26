@@ -80,6 +80,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
 EditText edtDate,edt_time_in,edt_time_out,edt_visitor_name,edt_mobile,edt_floor,edt_unit_no;
 ImageView imageView;
+    LoginModel loginModel;
     Button btn_take_photo,btn_save;
     private static final int CAMERA_REQUEST = 1888;
     private static final int GOOGLE_API_CLIENT_ID = 0;
@@ -121,6 +122,7 @@ ImageView imageView;
         edt_unit_no=findViewById(R.id.edt_unit_no);
         progress.setVisibility(View.VISIBLE);
         btn_save=findViewById(R.id.btn_save);
+        loginModel=new LoginModel();
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -204,7 +206,7 @@ ImageView imageView;
                 }
                 else {
                     progress.setVisibility(View.VISIBLE);
-                    postVisitor("", "", name,date ,mobile,address,time_in,time_out,imageImagePath);
+                    postVisitor(loginModel.getId(),loginModel.getType(), loginModel.getBranch_id(), name,date ,mobile,address,time_in,time_out,imageImagePath);
                                    }
 
             }
@@ -246,8 +248,8 @@ ImageView imageView;
                 showUnitPopup();
             }
         });
-        getFloorList("","");
-        getUnitList("","");
+        getFloorList(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        getUnitList(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
 
         setTitle();
         back();
@@ -428,8 +430,8 @@ String unitId;
         });
 
     }
-    public void getFloorList(String userid, String branchid) {
-        Singleton.getInstance().getApi().getFloorList(userid, branchid).enqueue(new Callback<ResponseMeta>() {
+    public void getFloorList(String userid,String type ,String branchid) {
+        Singleton.getInstance().getApi().getFloorList(userid,type ,branchid).enqueue(new Callback<ResponseMeta>() {
             @Override
             public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
                floorList=response.body().getResponse();
@@ -444,9 +446,9 @@ String unitId;
         });
     }
 
-    public void getUnitList(String userid, String branchid) {
+    public void getUnitList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi(). getUnitList(userid, branchid).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi(). getUnitList(userid,type,branchid).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
                 unitModels=response.body().getResponse();
@@ -461,7 +463,7 @@ String unitId;
         });
     }
 
-    private void postVisitor(String userid, String branchid,String txtName ,String txtIssueDate, String txtMobile,String txtAddress ,String txtInTime,String txtOutTime, String fileUrl) {
+    private void postVisitor(String userid,String type ,String branchid,String txtName ,String txtIssueDate, String txtMobile,String txtAddress ,String txtInTime,String txtOutTime, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
@@ -470,6 +472,7 @@ String unitId;
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
         RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), branchid);
+        RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), txtIssueDate);
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), txtMobile);
@@ -480,7 +483,7 @@ String unitId;
         RequestBody requestTimeout = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postVisitor(requestUserId, requestUserbranch, requesttxtName,requestDate ,requestMobile, requestAddress, requestFloor,requestUnit,requestTimein,requestTimeout ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postVisitor(requestUserId,requestType ,requestUserbranch, requesttxtName,requestDate ,requestMobile, requestAddress, requestFloor,requestUnit,requestTimein,requestTimeout ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddVisitorActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

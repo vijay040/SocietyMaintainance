@@ -23,6 +23,7 @@ import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.adaptor.EmployeeAdapter;
 import com.mmcs.societymaintainance.model.EmployeeModel;
 import com.mmcs.societymaintainance.model.EmployeeRestMeta;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
@@ -40,6 +41,7 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
     Shprefrences sh;
     ArrayList<EmployeeModel> employeeModels=new ArrayList();
     EmployeeAdapter employeeAdapter;
+    LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -52,10 +54,11 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         sh=new Shprefrences(this);
+        loginModel=new LoginModel();
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
-        getEmployee("","");
+        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
 
         setTitle();
         back();
@@ -107,9 +110,9 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
         return true;
     }
 
-    public void getEmployee(String userid, String branchid) {
+    public void getEmployee(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getEmployeeList(userid, branchid).enqueue(new Callback<EmployeeRestMeta>() {
+        Singleton.getInstance().getApi().getEmployeeList(userid,type ,branchid).enqueue(new Callback<EmployeeRestMeta>() {
             @Override
             public void onResponse(Call<EmployeeRestMeta> call, Response<EmployeeRestMeta> response) {
                 if(response.body()==null)

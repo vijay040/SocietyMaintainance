@@ -32,6 +32,7 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
     ArrayList<VisitorModel> visitorModels=new ArrayList();
     Shprefrences sh;
     VisitorAdapter visitorAdapter;
+    LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         txtAdd=findViewById(R.id.txtAdd);
+        loginModel=new LoginModel();
         sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,12 +83,12 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
-        getVisitors("","");
+        getVisitors(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
     }
 
-    public void getVisitors(String userid, String branchid) {
+    public void getVisitors(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getVisitorList(userid, branchid).enqueue(new Callback<VisitorRestMeta>() {
+        Singleton.getInstance().getApi().getVisitorList(userid,type ,branchid).enqueue(new Callback<VisitorRestMeta>() {
             @Override
             public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
                 if(response.body()==null)

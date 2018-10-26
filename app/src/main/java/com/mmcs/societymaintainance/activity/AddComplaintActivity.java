@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.LoginResMeta;
+import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
 import java.text.DateFormat;
@@ -29,7 +31,9 @@ public class AddComplaintActivity extends AppCompatActivity{
     EditText edt_date,edt_complaint_title,edt_description;
     Button btn_submit;
     ProgressBar progress;
+    LoginModel loginModel;
     Calendar calendar;
+    Shprefrences sh;
     int DD, MM, YY;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -44,8 +48,10 @@ public class AddComplaintActivity extends AppCompatActivity{
         progress = findViewById(R.id.progress);
         btn_submit=findViewById(R.id.btn_submit);
         calendar = Calendar.getInstance();
+        sh=new Shprefrences(this);
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
+        loginModel=new LoginModel();
         YY = calendar.get(Calendar.YEAR);
         if ((MM + 1) < 10)
             edt_date.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
@@ -67,7 +73,7 @@ public class AddComplaintActivity extends AppCompatActivity{
                 }
                 else{
                     progress.setVisibility(View.VISIBLE);
-                  postComplaint("","",title,description,date,date.split("-")[1],date.split("-")[0]);
+                  postComplaint(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id(),title,description,date,date.split("-")[1],date.split("-")[0]);
                 }
 
             }
@@ -88,8 +94,8 @@ public class AddComplaintActivity extends AppCompatActivity{
             }
         });
     }
-    private void postComplaint(String user_id, String branchId, String title,String des,String date,String month,String year){
-        Singleton.getInstance().getApi().postComplaint(user_id, branchId,title,des,date,month,year).enqueue(new Callback<LoginResMeta>() {
+    private void postComplaint(String user_id,String type ,String branchId, String title,String des,String date,String month,String year){
+        Singleton.getInstance().getApi().postComplaint(user_id,type ,branchId,title,des,date,month,year).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 progress.setVisibility(View.GONE);

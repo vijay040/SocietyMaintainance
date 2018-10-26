@@ -80,6 +80,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
     ProgressBar progress;
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
+    LoginModel loginModel;
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     private AutoCompleteTextView edt_present_address,edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
@@ -106,6 +107,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         edt_floor = findViewById(R.id.edt_floor);
         edt_unit_no = findViewById(R.id.edt_unit_no);
         progress = findViewById(R.id.progress);
+        loginModel=new LoginModel();
         progress.setVisibility(View.VISIBLE);
         btn_take_photo = findViewById(R.id.btn_take_photo);
         btn_save = findViewById(R.id.btn_save);
@@ -149,8 +151,8 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 showUnitPopup();
             }
         });
-        getFloorList("", "");
-        getUnitList("", "");
+        getFloorList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
+        getUnitList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,14 +194,14 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postOwner("", "", name,email,mobile,present_add,permanent_add,national_id,password,imageImagePath);
+                    postOwner(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,password,imageImagePath);
                 }
             }
         });
         setTitle();
         back();
     }
-    private void postOwner(String userid, String branchid,String txtName ,String email, String txtMobile,String txtPreAddress ,String txtPerAddress,String NID, String pass,String fileUrl) {
+    private void postOwner(String userid,String type ,String branchid,String txtName ,String email, String txtMobile,String txtPreAddress ,String txtPerAddress,String NID, String pass,String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
@@ -208,6 +210,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
         RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), branchid);
+        RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), txtMobile);
@@ -218,7 +221,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         RequestBody requestNational = RequestBody.create(MediaType.parse("text/plain"), NID);
         RequestBody requestPass = RequestBody.create(MediaType.parse("text/plain"), pass);
 
-        Singleton.getInstance().getApi().postOwner(requestUserId, requestUserbranch, requesttxtName,requestEmail ,requestMobile, requestPreAddress, requestPerAddress,requestNational,requestPass,requestFloor,requestUnit ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postOwner(requestUserId,requestType ,requestUserbranch, requesttxtName,requestEmail ,requestMobile, requestPreAddress, requestPerAddress,requestNational,requestPass,requestFloor,requestUnit ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddOwnerActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -484,8 +487,8 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
 
     }
 
-    public void getFloorList(String userid, String branchid) {
-        Singleton.getInstance().getApi().getFloorList(userid, branchid).enqueue(new Callback<ResponseMeta>() {
+    public void getFloorList(String userid,String type ,String branchid) {
+        Singleton.getInstance().getApi().getFloorList(userid,type ,branchid).enqueue(new Callback<ResponseMeta>() {
             @Override
             public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
                 floorList = response.body().getResponse();
@@ -500,9 +503,9 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         });
     }
 
-    public void getUnitList(String userid, String branchid) {
+    public void getUnitList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getUnitList(userid, branchid).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().getUnitList(userid,type ,branchid).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
                 unitModels = response.body().getResponse();
