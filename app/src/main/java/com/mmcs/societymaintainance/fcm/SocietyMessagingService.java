@@ -13,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.DrawerActivity;
+import com.mmcs.societymaintainance.activity.VisitorNotificationActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class SocietyMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         Log.e("dataChat", remoteMessage.getData() + "");
-        Log.e("remoteMessage","************************"+remoteMessage);
+        Log.e("remoteMessage", "************************" + remoteMessage);
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Message data payload: " + remoteMessage.getData());
         }
@@ -61,12 +62,12 @@ public class SocietyMessagingService extends FirebaseMessagingService {
             for (int i = 0; i < a.length(); i++) {
                 Log.d("Type", a.getString(i));
             }
-        }catch (Exception e){}
-        Log.e("str****************",""+str);
-        intent = new Intent(this, DrawerActivity.class);
-       // if( remoteMessage.getNotification().getTitle().contains("Messaged"))
-          //  intent = new Intent(this, MessageActivity.class);
-
+        } catch (Exception e) {
+        }
+        Log.e("str****************", "" + str);
+        intent = new Intent(this, VisitorNotificationActivity.class);
+        // if( remoteMessage.getNotification().getTitle().contains("Messaged"))
+        //  intent = new Intent(this, MessageActivity.class);
 
         intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
 
