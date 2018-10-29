@@ -75,8 +75,7 @@
         <activity android:name=".activity.DriverDetailActivity" />
         <activity android:name=".activity.MaidDetailActivity" />
         <activity android:name=".activity.ComplaintListActivity" />
-        <activity android:name=".activity.VisitorNotificationActivity"></activity>
-
+        <activity android:name=".activity.VisitorNotificationActivity" />
 
         <service
             android:name=".fcm.SocietyIstanceIDService"
@@ -101,9 +100,12 @@
           Set color used with incoming notification messages. This is used when no color is set for the incoming
           notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
-        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/them_color" />
 
+        <activity android:name=".activity.AddDriverActivity" />
+        <activity android:name=".activity.AddMaidActivity"></activity>
     </application>
 
 </manifest>

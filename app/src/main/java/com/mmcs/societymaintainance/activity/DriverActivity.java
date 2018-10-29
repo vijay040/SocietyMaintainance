@@ -41,6 +41,7 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
     Shprefrences sh;
     ArrayList<EmployeeModel> employeeModels=new ArrayList();
     EmployeeAdapter employeeAdapter;
+    RelativeLayout txtAdd;
     LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +51,23 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_driver);
         listEmployee=findViewById(R.id.listEmployee);
         progressBar=findViewById(R.id.progress);
+        txtAdd=findViewById(R.id.txtAdd);
         SearchView editTextName=(SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        loginModel=new LoginModel();
         sh=new Shprefrences(this);
+        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
         getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        txtAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(DriverActivity.this,AddDriverActivity.class);
+                startActivity(intent);
+            }
+        });
         listEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

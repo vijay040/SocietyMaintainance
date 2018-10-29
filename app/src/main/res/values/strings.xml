@@ -16,6 +16,8 @@
     <string name="amc_services">AMC and Services</string>
     <string name="facility_mgmt">Facility and Management</string>
     <string name="send">Send</string>
+    <string name="add_dvr">Add Driver</string>
+    <string name="add_md">Add Maid</string>
     <string name="add_new_employee">Add New Employee</string>
     <string name="add_maid">Add Maid details</string>
     <string name="add_driver">Add Driver Details</string>
@@ -108,6 +110,8 @@
     <string name="family_member">ADD FAMILY MEMBERS</string>
     <string name="name">Name:</string>
     <string name="employee_name">Employee Name</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="maid_name">Maid Name</string>
     <string name="edit">Edit</string>
     <string name="edt_txt__name">First Name</string>
     <string name="edt_txt_last_name">Last Name</string>
@@ -129,6 +133,7 @@
     <string name="national">National ID:</string>
     <string name="select_floor">Select Floor</string>
     <string name="select_designation">Select Designation</string>
+    <string name="select_dept">Select Department</string>
     <string name="not_register">Not Register Yet?</string>
     <string name="enter_name">Enter Your Name</string>
     <string name="enter_contact">Enter Contact No.</string>
