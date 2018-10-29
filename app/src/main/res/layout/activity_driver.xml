@@ -37,5 +37,14 @@
         android:background="@drawable/notdatafound"
         android:layout_centerInParent="true"
         android:layout_height="@dimen/_200sdp" />
+    <RelativeLayout
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:id="@+id/txtAdd"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_addicon"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp" />
 
 </RelativeLayout>

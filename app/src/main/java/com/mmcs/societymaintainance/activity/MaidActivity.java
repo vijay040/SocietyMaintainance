@@ -42,6 +42,7 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
     ArrayList<EmployeeModel> employeeModels=new ArrayList();
     EmployeeAdapter employeeAdapter;
     LoginModel loginModel;
+    RelativeLayout txtAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -55,10 +56,18 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
         editTextName.setOnQueryTextListener(this);
         sh=new Shprefrences(this);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        txtAdd=findViewById(R.id.txtAdd);
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
         getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        txtAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MaidActivity.this,AddMaidActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setTitle();
         back();
