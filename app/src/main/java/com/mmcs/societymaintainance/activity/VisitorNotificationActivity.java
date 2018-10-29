@@ -5,20 +5,29 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
+import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.VisitorModel;
+import com.mmcs.societymaintainance.model.VisitorRestMeta;
+import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VisitorNotificationActivity extends AppCompatActivity {
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
     ImageView image_visitor;
-   VisitorModel visitorModels=new VisitorModel();
+    VisitorModel visitorModels = new VisitorModel();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +39,34 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         txtFloor = findViewById(R.id.txtFloor);
         txtUnit = findViewById(R.id.txtUnit);
         image_visitor = findViewById(R.id.image_visitor);
+        RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
+        String body = remoteMessage.getNotification().getBody();
+        Log.e("body", "body********" + body);
+        String strID[] = body.split("#");
+        getVisitor(strID[1]);
+        Log.e("strID size" + strID.length, "***********************************id*****" + strID[1]);
+    }
+
+
+
+    public  void getVisitor(String id)
+    {
+        Singleton.getInstance().getApi().getVisitorById(id).enqueue(new Callback<VisitorRestMeta>() {
+            @Override
+            public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
+                visitorModels=response.body().getResponse().get(0);
+                setData();
+            }
+
+            @Override
+            public void onFailure(Call<VisitorRestMeta> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void setData()
+    {
         txtName.setText(getString(R.string.name) + visitorModels.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModels.getMobile());
         txt_address.setText(getString(R.string.address) + visitorModels.getAddress());
@@ -72,6 +109,6 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtIntime.setText(sb);
 
-
     }
+
 }

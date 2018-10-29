@@ -78,10 +78,10 @@ import retrofit2.Response;
 
 public class AddVisitorActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
-EditText edtDate,edt_time_in,edt_time_out,edt_visitor_name,edt_mobile,edt_floor,edt_unit_no;
-ImageView imageView;
+    EditText edtDate, edt_time_in, edt_time_out, edt_visitor_name, edt_mobile, edt_floor, edt_unit_no;
+    ImageView imageView;
     LoginModel loginModel;
-    Button btn_take_photo,btn_save;
+    Button btn_take_photo, btn_save;
     private static final int CAMERA_REQUEST = 1888;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edt_address;
@@ -102,27 +102,28 @@ ImageView imageView;
     public static String imgUrl;
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     ProgressBar progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visitor_mgmt);
-        imageView=findViewById(R.id.imageView);
-        edtDate=findViewById(R.id.edtDate);
-        edt_time_in=findViewById(R.id.edt_time_in);
-        edt_time_out=findViewById(R.id.edt_time_out);
-        btn_take_photo=findViewById(R.id.btn_take_photo);
+        imageView = findViewById(R.id.imageView);
+        edtDate = findViewById(R.id.edtDate);
+        edt_time_in = findViewById(R.id.edt_time_in);
+        edt_time_out = findViewById(R.id.edt_time_out);
+        btn_take_photo = findViewById(R.id.btn_take_photo);
         sh = new Shprefrences(this);
-        edt_visitor_name=findViewById(R.id.edt_visitor_name);
-        edt_floor=findViewById(R.id.edt_floor);
-        edt_mobile=findViewById(R.id.edt_mobile);
+        edt_visitor_name = findViewById(R.id.edt_visitor_name);
+        edt_floor = findViewById(R.id.edt_floor);
+        edt_mobile = findViewById(R.id.edt_mobile);
         progress = findViewById(R.id.progress);
-        edt_address=findViewById(R.id.edt_address);
-        edt_unit_no=findViewById(R.id.edt_unit_no);
+        edt_address = findViewById(R.id.edt_address);
+        edt_unit_no = findViewById(R.id.edt_unit_no);
         progress.setVisibility(View.VISIBLE);
-        btn_save=findViewById(R.id.btn_save);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        btn_save = findViewById(R.id.btn_save);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -148,43 +149,40 @@ ImageView imageView;
             edtDate.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         else
             edtDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
-          if (H < 12 && H >= 0) {
-              edt_time_in.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
-              edt_time_out.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
+        if (H < 12 && H >= 0) {
+            edt_time_in.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
+            edt_time_out.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
         } else {
             H -= 12;
             if (H == 0) {
                 H = 12;
             }
-              edt_time_in.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
-              edt_time_out.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
+            edt_time_in.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
+            edt_time_out.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
         }
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String date=edtDate.getText().toString();
-                String name=edt_visitor_name.getText().toString();
-                String mobile=edt_mobile.getText().toString();
-                String address=edt_address.getText().toString();
-                String floor=edt_floor.getText().toString();
-                String unit=edt_unit_no.getText().toString();
-                String time_in=edt_time_in.getText().toString();
-                String time_out=edt_time_out.getText().toString();
-                if(date.equals("")){
-                    Toasty.error(AddVisitorActivity.this,"Select Date",Toast.LENGTH_SHORT).show();
+                String date = edtDate.getText().toString();
+                String name = edt_visitor_name.getText().toString();
+                String mobile = edt_mobile.getText().toString();
+                String address = edt_address.getText().toString();
+                String floor = edt_floor.getText().toString();
+                String unit = edt_unit_no.getText().toString();
+                String time_in = edt_time_in.getText().toString();
+                String time_out = edt_time_out.getText().toString();
+                if (date.equals("")) {
+                    Toasty.error(AddVisitorActivity.this, "Select Date", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(name.equals("")){
-                    Toasty.error(AddVisitorActivity.this,"Enter Visitor Name",Toast.LENGTH_SHORT).show();
+                } else if (name.equals("")) {
+                    Toasty.error(AddVisitorActivity.this, "Enter Visitor Name", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
+                } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
                     Toasty.error(AddVisitorActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(address.equals("")){
+                } else if (address.equals("")) {
                     Toasty.error(AddVisitorActivity.this, "Enter Address", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -192,23 +190,20 @@ ImageView imageView;
                     Toasty.error(AddVisitorActivity.this,"Select Floor",Toast.LENGTH_SHORT).show();
                     return;
                 }*/
-                else if(unit.equals("")){
-                    Toasty.error(AddVisitorActivity.this,"Select Unit",Toast.LENGTH_SHORT).show();
+                else if (unit.equals("")) {
+                    Toasty.error(AddVisitorActivity.this, "Select Unit", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(time_in.equals("")){
-                    Toasty.error(AddVisitorActivity.this,"Select In Time",Toast.LENGTH_SHORT).show();
+                } else if (time_in.equals("")) {
+                    Toasty.error(AddVisitorActivity.this, "Select In Time", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(time_out.equals("")){
-                    Toasty.error(AddVisitorActivity.this,"Select Out Time",Toast.LENGTH_SHORT).show();
+                } else if (time_out.equals("")) {
+                    Toasty.error(AddVisitorActivity.this, "Select Out Time", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else {
+                } else {
                     progress.setVisibility(View.VISIBLE);
-                    Log.e("loginModel.getId()","**************loginModel.getId()"+loginModel.getId());
-                    postVisitor(loginModel.getId(),loginModel.getType(), loginModel.getBranch_id(), name,date ,mobile,address,time_in,time_out,imageImagePath);
-                    }
+                    Log.e("loginModel.getId()", "**************loginModel.getId()" + loginModel.getId());
+                    postVisitor(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), name, date, mobile, address, time_in, time_out, imageImagePath);
+                }
 
             }
         });
@@ -249,16 +244,18 @@ ImageView imageView;
                 showUnitPopup();
             }
         });
-        getFloorList(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
-        getUnitList(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        getFloorList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
+        getUnitList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
 
         setTitle();
         back();
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.add_visitor));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -323,10 +320,11 @@ ImageView imageView;
 
         return null;
     }
+
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int h, int m) {
-           // timePicker.is24HourView();
+            // timePicker.is24HourView();
             if (cur == TIME_DIALOG_ID) {
                 // set selected date into textview
                 if (h < 12 && h >= 0) {
@@ -360,6 +358,7 @@ ImageView imageView;
     FloorPopupAdapter floorPopupAdapter;
     private int popupId = 0;
     String floorId;
+
     private void showFloorPopup() {
 
         floorPopupAdapter = new FloorPopupAdapter(AddVisitorActivity.this, floorList);
@@ -386,7 +385,7 @@ ImageView imageView;
                                     int position, long id) {
                 FloorModel obj = (FloorModel) listFloor.getAdapter().getItem(position);
                 edt_floor.setText(obj.getFloor_no());
-                floorId=obj.getFid();
+                floorId = obj.getFid();
                 alertDialog.dismiss();
             }
         });
@@ -395,7 +394,8 @@ ImageView imageView;
 
     ArrayList<UnitModel> unitModels;
     UnitAdapter unitAdapter;
-String unitId;
+    String unitId;
+
     private void showUnitPopup() {
 
         unitAdapter = new UnitAdapter(AddVisitorActivity.this, unitModels);
@@ -421,21 +421,22 @@ String unitId;
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 UnitModel obj = (UnitModel) listUnit.getAdapter().getItem(position);
-                edt_unit_no.setText(obj.getFloor_no()+" "+obj.getUnit_no());
+                edt_unit_no.setText(obj.getFloor_no() + " " + obj.getUnit_no());
                 unitId = obj.getUid();
                 floorId = obj.getFid();
-                Log.e("uid"+obj.getUid(),"obj.getNum"+obj.getUnit_no());
-                Log.e("floorno"+obj.getUnit_no(),"floorno"+obj.getUnit_no());
+                Log.e("uid" + obj.getUid(), "obj.getNum" + obj.getUnit_no());
+                Log.e("floorno" + obj.getUnit_no(), "floorno" + obj.getUnit_no());
                 alertDialog.dismiss();
             }
         });
 
     }
-    public void getFloorList(String userid,String type ,String branchid) {
-        Singleton.getInstance().getApi().getFloorList(userid,type ,branchid).enqueue(new Callback<ResponseMeta>() {
+
+    public void getFloorList(String userid, String type, String branchid) {
+        Singleton.getInstance().getApi().getFloorList(userid, type, branchid).enqueue(new Callback<ResponseMeta>() {
             @Override
             public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
-               floorList=response.body().getResponse();
+                floorList = response.body().getResponse();
                 progress.setVisibility(View.GONE);
             }
 
@@ -447,12 +448,12 @@ String unitId;
         });
     }
 
-    public void getUnitList(String userid,String type ,String branchid) {
+    public void getUnitList(String userid, String type, String branchid) {
 
-        Singleton.getInstance().getApi(). getUnitList(userid,type,branchid).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().getUnitList(userid, type, branchid).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
-                unitModels=response.body().getResponse();
+                unitModels = response.body().getResponse();
                 progress.setVisibility(View.GONE);
             }
 
@@ -464,15 +465,15 @@ String unitId;
         });
     }
 
-    private void postVisitor(String userid,String type ,String branchid,String txtName ,String txtIssueDate, String txtMobile,String txtAddress ,String txtInTime,String txtOutTime, String fileUrl) {
+    private void postVisitor(String userid, String type, String branchid, String txtName, String txtIssueDate, String txtMobile, String txtAddress, String txtInTime, String txtOutTime, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("***********", "*************" + fileUrl);
-        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
+        if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), ""+branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), "" + branchid);
         RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), txtIssueDate);
@@ -483,8 +484,7 @@ String unitId;
         RequestBody requestTimein = RequestBody.create(MediaType.parse("text/plain"), txtInTime);
         RequestBody requestTimeout = RequestBody.create(MediaType.parse("text/plain"), "");
 
-
-        Singleton.getInstance().getApi().postVisitor(requestUserId,requestType ,requestUserbranch, requesttxtName,requestDate ,requestMobile, requestAddress, requestFloor,requestUnit,requestTimein,requestTimeout ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postVisitor(requestUserId, requestType, requestUserbranch, requesttxtName, requestDate, requestMobile, requestAddress, requestFloor, requestUnit, requestTimein, requestTimeout, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddVisitorActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -494,20 +494,22 @@ String unitId;
 
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
-              progress.setVisibility(View.GONE);
-                Toasty.error(AddVisitorActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                progress.setVisibility(View.GONE);
+                Toasty.error(AddVisitorActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     String imageImagePath = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
 
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -521,13 +523,14 @@ String unitId;
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
+                    File file = new File(imageImagePath);
+                    resize(file, "");
 
                 }
             }
         }
     }
+
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
         BitmapFactory.Options o = new BitmapFactory.Options();
 
@@ -583,6 +586,7 @@ String unitId;
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -643,9 +647,9 @@ String unitId;
             case 2:
                 ArrayList<UnitModel> newlist1 = new ArrayList<>();
                 for (UnitModel list : unitModels) {
-                    String  unit = list.getUnit_no().toLowerCase();
-                    String fl=list.getFloor_no().toLowerCase();
-                    if (unit.contains(s)||fl.contains(s)) {
+                    String unit = list.getUnit_no().toLowerCase();
+                    String fl = list.getFloor_no().toLowerCase();
+                    if (unit.contains(s) || fl.contains(s)) {
                         newlist1.add(list);
                     }
                 }
@@ -654,6 +658,7 @@ String unitId;
         }
         return false;
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override

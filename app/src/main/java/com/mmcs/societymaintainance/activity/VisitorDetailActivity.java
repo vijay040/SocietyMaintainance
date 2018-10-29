@@ -3,6 +3,7 @@ package com.mmcs.societymaintainance.activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorModel;
+import com.mmcs.societymaintainance.model.VisitorRestMeta;
 import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.Calendar;
@@ -41,7 +43,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
     int cur = 0;
     int H, M;
     Calendar calendar;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,102 @@ public class VisitorDetailActivity extends AppCompatActivity {
         image_visitor = findViewById(R.id.image_visitor);
         btn_close = findViewById(R.id.btn_close);
         edt_time_out = findViewById(R.id.edt_time_out);
+        mSwipeRefreshLayout=findViewById(R.id.mSwipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getVisitor(visitorModel.getVid());
+                setData();
+            }
+        });
+        setData();
+
+    }
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
+        title.setText(getString(R.string.visitor_detail));
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void updateVisitor(String outTime) {
+        Singleton.getInstance().getApi().updateVisitor(visitorModel.getVid(), outTime).enqueue(new Callback<UnitRestMeta>() {
+            @Override
+            public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
+
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<UnitRestMeta> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+
+            case TIME_DIALOG_ID:
+                System.out.println("onCreateDialog  : " + id);
+                cur = TIME_DIALOG_ID;
+                return new TimePickerDialog(this, onTimeSetListener, H, M, false);
+
+        }
+
+        return null;
+    }
+
+    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int h, int m) {
+            // timePicker.is24HourView();
+            if (cur == TIME_DIALOG_ID) {
+                // set selected date into textview
+                if (h < 12 && h >= 0) {
+                    edt_time_out.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
+                } else {
+                    h -= 12;
+                    if (h == 0) {
+                        h = 12;
+                    }
+                    edt_time_out.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
+                }
+
+
+            }
+        }
+    };
+
+
+    public  void getVisitor(String id)
+    {
+        Singleton.getInstance().getApi().getVisitorById(id).enqueue(new Callback<VisitorRestMeta>() {
+            @Override
+            public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
+                visitorModel=response.body().getResponse().get(0);
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+
+            @Override
+            public void onFailure(Call<VisitorRestMeta> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void setData()
+    {
         calendar = Calendar.getInstance();
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
@@ -63,7 +161,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
         setTitle();
         if (visitorModel.getOuttime().equalsIgnoreCase(""))
             btn_close.setText("Update");
-          else
+        else
             edt_time_out.setEnabled(false);
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
@@ -139,69 +237,5 @@ public class VisitorDetailActivity extends AppCompatActivity {
                     finish();
             }
         });
-
     }
-    private void setTitle() {
-        TextView title = (TextView) findViewById(R.id.title);
-        title.setText(getString(R.string.visitor_detail));
-    }
-    private void back() {
-        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
-        drawerIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    private void updateVisitor(String outTime) {
-        Singleton.getInstance().getApi().updateVisitor(visitorModel.getVid(), outTime).enqueue(new Callback<UnitRestMeta>() {
-            @Override
-            public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
-
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<UnitRestMeta> call, Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-
-            case TIME_DIALOG_ID:
-                System.out.println("onCreateDialog  : " + id);
-                cur = TIME_DIALOG_ID;
-                return new TimePickerDialog(this, onTimeSetListener, H, M, false);
-
-        }
-
-        return null;
-    }
-
-    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker timePicker, int h, int m) {
-            // timePicker.is24HourView();
-            if (cur == TIME_DIALOG_ID) {
-                // set selected date into textview
-                if (h < 12 && h >= 0) {
-                    edt_time_out.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
-                } else {
-                    h -= 12;
-                    if (h == 0) {
-                        h = 12;
-                    }
-                    edt_time_out.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
-                }
-
-
-            }
-        }
-    };
 }

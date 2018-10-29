@@ -66,8 +66,12 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         }
         Log.e("str****************", "" + str);
         intent = new Intent(this, VisitorNotificationActivity.class);
-        // if( remoteMessage.getNotification().getTitle().contains("Messaged"))
-        //  intent = new Intent(this, MessageActivity.class);
+      /*  String body=remoteMessage.getNotification().getBody();
+        Log.e("body","body********"+body);
+        String strID[]=body.split("#");
+        Log.e("strID size"+strID.length,"***********************************id*****"+strID[1]);*/
+         if( remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Gest is waiting!"))
+          intent = new Intent(this, VisitorNotificationActivity.class);
 
         intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
 
@@ -89,7 +93,7 @@ public class SocietyMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.magiclogo)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)

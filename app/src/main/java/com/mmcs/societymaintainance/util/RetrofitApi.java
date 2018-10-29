@@ -30,6 +30,11 @@ public interface RetrofitApi {
     Call<VisitorRestMeta> getVisitorList(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
+    @POST("get_visitorbyid_api.php")
+    Call<VisitorRestMeta> getVisitorById(@Field("id") String id);
+
+
+    @FormUrlEncoded
     @POST("complain_get_api.php")
     Call<ComplaintRestMeta> getComplaintList(@Field("id") String id, @Field("ddlLoginType") String type,@Field("branch_id") String branch_id);
 
