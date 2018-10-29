@@ -30,6 +30,7 @@ public class VisitorNotificationActivity extends AppCompatActivity {
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
     ImageView image_visitor;
     Button reject,accept;
+
     VisitorModel visitorModels = new VisitorModel();
 
     @Override
