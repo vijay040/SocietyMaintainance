@@ -495,6 +495,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
+                Log.e("Error","**********error***********"+t.getMessage());
                 Toasty.error(AddVisitorActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
