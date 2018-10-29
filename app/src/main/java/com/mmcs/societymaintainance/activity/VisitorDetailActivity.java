@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class VisitorDetailActivity extends AppCompatActivity {
     VisitorModel visitorModel;
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
-    ImageView image_visitor,imgStatus;
+    ImageView image_visitor, imgStatus;
     Button btn_close;
     EditText edt_time_out;
     static final int TIME_DIALOG_ID = 1;
@@ -44,6 +44,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
     int H, M;
     Calendar calendar;
     SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +59,8 @@ public class VisitorDetailActivity extends AppCompatActivity {
         image_visitor = findViewById(R.id.image_visitor);
         btn_close = findViewById(R.id.btn_close);
         edt_time_out = findViewById(R.id.edt_time_out);
-        imgStatus=findViewById(R.id.imgStatus);
-        mSwipeRefreshLayout=findViewById(R.id.mSwipeRefreshLayout);
+        imgStatus = findViewById(R.id.imgStatus);
+        mSwipeRefreshLayout = findViewById(R.id.mSwipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,10 +71,12 @@ public class VisitorDetailActivity extends AppCompatActivity {
         });
         setData();
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.visitor_detail));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -135,12 +138,11 @@ public class VisitorDetailActivity extends AppCompatActivity {
     };
 
 
-    public  void getVisitor(String id)
-    {
+    public void getVisitor(String id) {
         Singleton.getInstance().getApi().getVisitorById(id).enqueue(new Callback<VisitorRestMeta>() {
             @Override
             public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
-                visitorModel=response.body().getResponse().get(0);
+                visitorModel = response.body().getResponse().get(0);
                 mSwipeRefreshLayout.setRefreshing(false);
 
             }
@@ -152,8 +154,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void setData()
-    {
+    private void setData() {
         calendar = Calendar.getInstance();
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
@@ -163,12 +164,14 @@ public class VisitorDetailActivity extends AppCompatActivity {
             btn_close.setText("Update");
         else
             edt_time_out.setEnabled(false);
-        if(visitorModel.getStatus().equalsIgnoreCase("PENDING"))
-            imgStatus.setImageResource(R.drawable.ic_stopwatch);
-       else if(visitorModel.getStatus().equalsIgnoreCase("APPROVED"))
-            imgStatus.setImageResource(R.drawable.ic_done);
-       else  if(visitorModel.getStatus().equalsIgnoreCase("REJECTED"))
-            imgStatus.setImageResource(R.drawable.ic_cancel);
+        if (visitorModel.getStatus() != null) {
+            if (visitorModel.getStatus().equalsIgnoreCase("PENDING"))
+                imgStatus.setImageResource(R.drawable.ic_stopwatch);
+            else if (visitorModel.getStatus().equalsIgnoreCase("APPROVED"))
+                imgStatus.setImageResource(R.drawable.ic_done);
+            else if (visitorModel.getStatus().equalsIgnoreCase("REJECTED"))
+                imgStatus.setImageResource(R.drawable.ic_cancel);
+        }
 
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
@@ -232,11 +235,10 @@ public class VisitorDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (visitorModel.getOuttime().equalsIgnoreCase("")) {
-                    String time_out=edt_time_out.getText().toString();
-                    if(time_out.equals("")){
-                        Toasty.error(VisitorDetailActivity.this,"Select Out Time", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
+                    String time_out = edt_time_out.getText().toString();
+                    if (time_out.equals("")) {
+                        Toasty.error(VisitorDetailActivity.this, "Select Out Time", Toast.LENGTH_SHORT).show();
+                    } else {
                         updateVisitor(edt_time_out.getText().toString());
                     }
 

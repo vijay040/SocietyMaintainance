@@ -81,8 +81,8 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("add_complain_post_api.php")
-    Call<LoginResMeta> postComplaint(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id, @Field("txtCTitle") String txtCTitle
-            , @Field("txtCDescription") String txtCDescription, @Field("txtCDate") String txtCDate, @Field("xmonth") String xmonth, @Field("xyear") String xyear
+    Call<LoginResMeta> postComplaint(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType,@Field("branch_id") String branch_id,@Field("dept") String dept,@Field("txtCTitle") String txtCTitle
+            ,@Field("txtCDescription") String txtCDescription ,@Field("txtCDate") String txtCDate,@Field("xmonth") String xmonth,@Field("xyear") String xyear
 
     );
 
