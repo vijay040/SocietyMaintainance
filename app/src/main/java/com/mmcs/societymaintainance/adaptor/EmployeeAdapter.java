@@ -11,8 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.EmployeeModel;
+import com.mmcs.societymaintainance.util.CircleTransform;
 
 import java.util.ArrayList;
 
@@ -100,7 +102,8 @@ public class EmployeeAdapter extends BaseAdapter {
                 }
             }
         });
-        Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.no_image).into(img);
+        Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.no_image).transform(new CircleTransform(context))
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(img);
         return view;
     }
 }

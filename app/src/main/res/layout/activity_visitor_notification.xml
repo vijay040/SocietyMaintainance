@@ -97,6 +97,14 @@
                 android:text="@string/time_in"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateDrawable="@drawable/progressbar"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

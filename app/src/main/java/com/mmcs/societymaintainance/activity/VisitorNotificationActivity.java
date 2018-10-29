@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
@@ -22,6 +24,7 @@ import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +33,7 @@ public class VisitorNotificationActivity extends AppCompatActivity {
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
     ImageView image_visitor;
     Button reject,accept;
-
+ProgressBar progress;
     VisitorModel visitorModels = new VisitorModel();
 
     @Override
@@ -43,6 +46,7 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         txtIntime = findViewById(R.id.txtIntime);
         txtFloor = findViewById(R.id.txtFloor);
         txtUnit = findViewById(R.id.txtUnit);
+        progress=findViewById(R.id.progress);
         image_visitor = findViewById(R.id.image_visitor);
         reject=findViewById(R.id.reject);
         accept=findViewById(R.id.accept);
@@ -54,12 +58,14 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progress.setVisibility(View.VISIBLE);
                 updateStatus(strID[1],"REJECTED");
             }
         });
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progress.setVisibility(View.VISIBLE);
                 updateStatus(strID[1],"APPROVED");
             }
         });
@@ -137,11 +143,17 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().updateVisitorStatus(id,status).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
+                progress.setVisibility(View.GONE);
+                Toasty.success(VisitorNotificationActivity.this, "Data Successfully Submitted",
+                        Toast.LENGTH_LONG).show();
+                finish();
 
             }
 
             @Override
             public void onFailure(Call<UnitRestMeta> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+                Toasty.error(VisitorNotificationActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
 
             }
         });
