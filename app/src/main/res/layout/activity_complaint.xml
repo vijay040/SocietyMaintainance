@@ -47,6 +47,14 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:background="@color/view_devider" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="Select Related Department"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_height="wrap_content" />
                 <EditText
                     android:id="@+id/edt_department"
                     android:layout_width="match_parent"
@@ -74,7 +82,7 @@
                 <EditText
                     android:id="@+id/edt_description"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp"
+                    android:layout_height="@dimen/_150sdp"
                     android:layout_below="@+id/edt_department"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/commentbck"
@@ -108,7 +116,7 @@
                     android:id="@+id/btn_submit"
                     android:layout_width="@dimen/_200sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                 android:layout_gravity="center"
                     android:background="@drawable/btn_back"
                     android:text="@string/submit"
