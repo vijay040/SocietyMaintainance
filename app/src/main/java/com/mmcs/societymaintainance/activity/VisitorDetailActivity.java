@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class VisitorDetailActivity extends AppCompatActivity {
     VisitorModel visitorModel;
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
-    ImageView image_visitor;
+    ImageView image_visitor,imgStatus;
     Button btn_close;
     EditText edt_time_out;
     static final int TIME_DIALOG_ID = 1;
@@ -58,6 +58,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
         image_visitor = findViewById(R.id.image_visitor);
         btn_close = findViewById(R.id.btn_close);
         edt_time_out = findViewById(R.id.edt_time_out);
+        imgStatus=findViewById(R.id.imgStatus);
         mSwipeRefreshLayout=findViewById(R.id.mSwipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -68,7 +69,6 @@ public class VisitorDetailActivity extends AppCompatActivity {
             }
         });
         setData();
-
     }
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
@@ -163,6 +163,13 @@ public class VisitorDetailActivity extends AppCompatActivity {
             btn_close.setText("Update");
         else
             edt_time_out.setEnabled(false);
+        if(visitorModel.getStatus().equalsIgnoreCase("PENDING"))
+            imgStatus.setImageResource(R.drawable.ic_stopwatch);
+       else if(visitorModel.getStatus().equalsIgnoreCase("APPROVED"))
+            imgStatus.setImageResource(R.drawable.ic_done);
+       else  if(visitorModel.getStatus().equalsIgnoreCase("REJECTED"))
+            imgStatus.setImageResource(R.drawable.ic_cancel);
+
         txtName.setText(getString(R.string.name) + visitorModel.getName());
         txt_mobile.setText(getString(R.string.mobile_no) + visitorModel.getMobile());
         txt_address.setText(getString(R.string.address) + visitorModel.getAddress());

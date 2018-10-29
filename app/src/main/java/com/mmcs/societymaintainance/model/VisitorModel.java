@@ -17,6 +17,15 @@ public class VisitorModel implements Serializable {
     private String outtime;
     private String image;
     private String vid;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getVid() {
         return vid;

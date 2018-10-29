@@ -6,6 +6,8 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorModel;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
 import com.mmcs.societymaintainance.util.Singleton;
@@ -26,6 +29,7 @@ import retrofit2.Response;
 public class VisitorNotificationActivity extends AppCompatActivity {
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
     ImageView image_visitor;
+    Button reject,accept;
     VisitorModel visitorModels = new VisitorModel();
 
     @Override
@@ -39,11 +43,27 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         txtFloor = findViewById(R.id.txtFloor);
         txtUnit = findViewById(R.id.txtUnit);
         image_visitor = findViewById(R.id.image_visitor);
+        reject=findViewById(R.id.reject);
+        accept=findViewById(R.id.accept);
         RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
         String body = remoteMessage.getNotification().getBody();
         Log.e("body", "body********" + body);
-        String strID[] = body.split("#");
+        final String strID[] = body.split("#");
         getVisitor(strID[1]);
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateStatus(strID[1],"REJECTED");
+            }
+        });
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateStatus(strID[1],"APPROVED");
+            }
+        });
+
+
         Log.e("strID size" + strID.length, "***********************************id*****" + strID[1]);
     }
 
@@ -109,6 +129,21 @@ public class VisitorNotificationActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtIntime.setText(sb);
 
+    }
+
+    private void updateStatus(String id,String status)
+    {
+        Singleton.getInstance().getApi().updateVisitorStatus(id,status).enqueue(new Callback<UnitRestMeta>() {
+            @Override
+            public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<UnitRestMeta> call, Throwable t) {
+
+            }
+        });
     }
 
 }
