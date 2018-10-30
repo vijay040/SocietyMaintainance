@@ -23,6 +23,15 @@ public class LoginModel {
 
     private String type;
 
+    private String member_type;
+
+    public String getMember_type() {
+        return member_type;
+    }
+
+    public void setMember_type(String member_type) {
+        this.member_type = member_type;
+    }
 
     public String getType() {
         return type;

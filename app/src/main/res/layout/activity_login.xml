@@ -1,22 +1,23 @@
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/bgcolor"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="@dimen/_30sdp"
+        android:gravity="center"
         android:padding="@dimen/_10sdp"
         android:text="@string/login_text"
         android:textColor="#9E9E9E"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/image_user"
         android:layout_width="@dimen/_80sdp"
@@ -26,45 +27,48 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_35sdp"
         android:background="@drawable/ic_profile" />
+
     <LinearLayout
         android:id="@+id/login_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/_200sdp"
-        android:orientation="vertical" >
+        android:layout_marginTop="@dimen/_200sdp"
+        android:orientation="vertical">
+
         <Spinner
             android:id="@+id/spnUserType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:entries="@array/array_logintypes"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            />
+            android:layout_marginTop="@dimen/_10sdp"
+            android:entries="@array/array_logintypes"
+            android:gravity="center" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/edt_username"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_email"
-                android:singleLine="true"
                 android:drawablePadding="@dimen/_10sdp"
                 android:hint="@string/email"
-                android:textSize="@dimen/_12sdp"
-                android:inputType="text" />
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="@dimen/_12sdp" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/etPasswordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleTint="@color/text_hint_color"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/text_hint_color">
 
             <EditText
                 android:id="@+id/edt_password"
@@ -80,19 +84,21 @@
             android:id="@+id/loginBtn"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/_30sdp"
-           android:layout_gravity="center"
             android:background="@drawable/btn_back"
             android:text="@string/login"
             android:textColor="@color/white_color" />
+
         <Button
             android:id="@+id/btn_register"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/btn_back"
             android:text="@string/register"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:visibility="gone" />
     </LinearLayout>
-           </RelativeLayout>
+</RelativeLayout>

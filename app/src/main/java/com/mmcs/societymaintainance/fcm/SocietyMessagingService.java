@@ -24,6 +24,7 @@ public class SocietyMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "Society";
     private static Intent intent;
+    public static int id = 0;
 
     /**
      * Called when message is received.
@@ -33,7 +34,7 @@ public class SocietyMessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
+        Log.e("**********", "****************onMessageReceived*******************");
         Log.e("dataChat", remoteMessage.getData() + "");
         Log.e("remoteMessage", "************************" + remoteMessage);
         if (remoteMessage.getData().size() > 0) {
@@ -70,13 +71,12 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         Log.e("body","body********"+body);
         String strID[]=body.split("#");
         Log.e("strID size"+strID.length,"***********************************id*****"+strID[1]);*/
-         if( remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Gest is waiting!"))
-          intent = new Intent(this, VisitorNotificationActivity.class);
+        if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Gest is waiting!"))
+            intent = new Intent(this, VisitorNotificationActivity.class);
 
         intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
 
         sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
-
     }
     // [END receive_message]
 
@@ -86,9 +86,9 @@ public class SocietyMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody, String title) {
-
+        id++;
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, id /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -101,7 +101,25 @@ public class SocietyMessagingService extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
 
     }
+
+   /* public void handleIntent(Intent intent) {
+
+        Log.e("********************","****************Called*******************");
+        try {
+            if (intent.getExtras() != null) {
+                RemoteMessage.Builder builder = new RemoteMessage.Builder("MyFirebaseMessagingService");
+                for (String key : intent.getExtras().keySet()) {
+                    builder.addData(key, intent.getExtras().get(key).toString());
+                }
+                onMessageReceived(builder.build());
+            } else {
+                super.handleIntent(intent);
+            }
+        } catch (Exception e) {
+            super.handleIntent(intent);
+        }
+    }*/
 }
