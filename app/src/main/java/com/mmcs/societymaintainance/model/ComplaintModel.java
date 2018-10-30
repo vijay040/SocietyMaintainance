@@ -9,11 +9,29 @@ import java.io.Serializable;
 public class ComplaintModel implements Serializable {
     private String date;
     private String title;
+    private String floor_no;
+    private String unit_no;
     private String c_description;
     private String status;
     private String complain_id;
     private String department;
     public boolean isVisible = false;
+
+    public String getFloor_no() {
+        return floor_no;
+    }
+
+    public void setFloor_no(String floor_no) {
+        this.floor_no = floor_no;
+    }
+
+    public String getUnit_no() {
+        return unit_no;
+    }
+
+    public void setUnit_no(String unit_no) {
+        this.unit_no = unit_no;
+    }
 
     public String getStatus() {
         return status;

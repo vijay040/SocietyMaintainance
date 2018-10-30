@@ -62,6 +62,23 @@
         android:text="@string/desc"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_9sdp" />
+    <TextView
+        android:id="@+id/txtFloor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/floor"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_9sdp" />
+
+    <TextView
+        android:id="@+id/txtUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/unit_no"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_9sdp" />
 
     <EditText
         android:id="@+id/edt_comment"

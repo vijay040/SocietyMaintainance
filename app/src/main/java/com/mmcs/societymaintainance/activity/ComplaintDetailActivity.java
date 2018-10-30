@@ -16,7 +16,7 @@ import com.mmcs.societymaintainance.model.ComplaintModel;
 
 public class ComplaintDetailActivity extends AppCompatActivity {
 ComplaintModel complaintModel;
-TextView txtDepartment,txtTitle,txtDate,txt_c_des,txtStatus;
+TextView txtDepartment,txtTitle,txtDate,txt_c_des,txtStatus, txtFloor, txtUnit;
 EditText edt_comment;
 Button cancel,resolved;
     @Override
@@ -29,9 +29,13 @@ Button cancel,resolved;
         txtDate=findViewById(R.id.txtDate);
         txt_c_des=findViewById(R.id.txt_c_des);
         txtStatus=findViewById(R.id.txtStatus);
+        txtFloor = findViewById(R.id.txtFloor);
+        txtUnit = findViewById(R.id.txtUnit);
         cancel=findViewById(R.id.cancel);
         resolved=findViewById(R.id.resolved);
         edt_comment=findViewById(R.id.edt_comment);
+        txtFloor.setText(getString(R.string.floor) + complaintModel.getFloor_no());
+        txtUnit.setText(getString(R.string.unit_no) + complaintModel.getUnit_no());
 
         txtDepartment.setText(getString(R.string.dept)+complaintModel.getDepartment());
         txtTitle.setText(getString(R.string.titl)+complaintModel.getTitle());
@@ -56,6 +60,16 @@ Button cancel,resolved;
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtTitle.setText(sb);
+
+        sb = new SpannableStringBuilder(txtFloor.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtFloor.setText(sb);
+
+        sb = new SpannableStringBuilder(txtUnit.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtUnit.setText(sb);
 
         sb = new SpannableStringBuilder(txtDate.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
