@@ -67,6 +67,8 @@ public class ComplaintAdapter extends BaseAdapter {
 
         TextView  txt_c_des= view.findViewById(R.id.txt_c_des);
         txt_c_des.setText(context.getString(R.string.desc)+list.get(i).getC_description());
+        TextView txtstatus=view.findViewById(R.id.txtstatus);
+        txtstatus.setText(context.getString(R.string.status)+list.get(i).getStatus());
 
         ImageView imz_down=view.findViewById(R.id.imz_down);
         final ImageView   hide=view.findViewById(R.id.imz_down);

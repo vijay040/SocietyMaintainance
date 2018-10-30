@@ -39,6 +39,8 @@
     <string name="comp_detail">Complaint Detail</string>
     <string name="accept">ACCEPT</string>
     <string name="reject">REJECT</string>
+    <string name="resolved">RESOLVED</string>
+    <string name="cancl">CANCEL</string>
     <string name="employee_list">Employee List</string>
     <string name="add_visitor">Add Visitor</string>
     <string name="add_employee">Add Employee</string>

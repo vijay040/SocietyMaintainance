@@ -10,9 +10,18 @@ public class ComplaintModel implements Serializable {
     private String date;
     private String title;
     private String c_description;
+    private String status;
     private String complain_id;
     private String department;
     public boolean isVisible = false;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getDepartment() {
         return department;

@@ -16,9 +16,9 @@ import com.mmcs.societymaintainance.model.ComplaintModel;
 
 public class ComplaintDetailActivity extends AppCompatActivity {
 ComplaintModel complaintModel;
-TextView txtDepartment,txtTitle,txtDate,txt_c_des;
+TextView txtDepartment,txtTitle,txtDate,txt_c_des,txtStatus;
 EditText edt_comment;
-Button btn_close;
+Button cancel,resolved;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,19 +28,23 @@ Button btn_close;
         txtTitle=findViewById(R.id.txtTitle);
         txtDate=findViewById(R.id.txtDate);
         txt_c_des=findViewById(R.id.txt_c_des);
-        btn_close=findViewById(R.id.btn_close);
+        txtStatus=findViewById(R.id.txtStatus);
+        cancel=findViewById(R.id.cancel);
+        resolved=findViewById(R.id.resolved);
         edt_comment=findViewById(R.id.edt_comment);
-        btn_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         txtDepartment.setText(getString(R.string.dept)+complaintModel.getDepartment());
         txtTitle.setText(getString(R.string.titl)+complaintModel.getTitle());
         txtDate.setText(getString(R.string.date)+complaintModel.getDate());
         txt_c_des.setText(getString(R.string.desc)+complaintModel.getC_description());
+        txtStatus.setText(getString(R.string.status)+complaintModel.getStatus());
+        if (complaintModel.getStatus().equalsIgnoreCase("PENDING"))
+        {
+            edt_comment.setVisibility(View.VISIBLE);
+            cancel.setVisibility(View.VISIBLE);
+            resolved.setVisibility(View.VISIBLE);
+
+        }
 
         SpannableStringBuilder sb = new SpannableStringBuilder(txtDepartment.getText());
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
@@ -57,6 +61,10 @@ Button btn_close;
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtDate.setText(sb);
+        sb = new SpannableStringBuilder(txtStatus.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtStatus.setText(sb);
 
         sb = new SpannableStringBuilder(txt_c_des.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));

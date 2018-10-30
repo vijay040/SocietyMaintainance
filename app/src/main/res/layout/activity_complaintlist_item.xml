@@ -53,9 +53,10 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/txtTitle"
             android:gravity="right"
+            android:textStyle="bold"
             android:paddingRight="@dimen/_25sdp"
             android:text="@string/status"
-            android:textColor="@color/text_color"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_8sdp" />
 
         <ImageView
