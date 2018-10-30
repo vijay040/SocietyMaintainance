@@ -11,7 +11,16 @@ public class ComplaintModel implements Serializable {
     private String title;
     private String c_description;
     private String complain_id;
+    private String department;
     public boolean isVisible = false;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public boolean isVisible() {
         return isVisible;

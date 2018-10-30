@@ -61,7 +61,9 @@ public class ComplaintAdapter extends BaseAdapter {
         TextView txtTitle = view.findViewById(R.id.txtTitle);
         txtTitle.setText(context.getString(R.string.titl)+list.get(i).getTitle());
         TextView   txtDate = view.findViewById(R.id.txtDate);
+        TextView txtDepartment= view.findViewById(R.id.txtDepartment);
         txtDate.setText(context.getString(R.string.date)+list.get(i).getDate());
+        txtDepartment.setText("Department:"+list.get(i).getDepartment());
 
         TextView  txt_c_des= view.findViewById(R.id.txt_c_des);
         txt_c_des.setText(context.getString(R.string.desc)+list.get(i).getC_description());
