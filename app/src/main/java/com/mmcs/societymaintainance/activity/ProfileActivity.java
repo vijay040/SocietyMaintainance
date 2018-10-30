@@ -17,7 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
     LoginModel loginModel;
     Shprefrences sh;
     ImageView imgProfile;
-  EditText edt_txt_first_name,edt_txt_last_name,edt_email_id,edt_Flate_no,edt_phone,edt_Address;
+  EditText edt_txt_first_name,edt_txt_last_name,edt_email_id,edt_Flate_no,edt_phone,edt_Address,edt_designation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -30,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         edt_email_id=findViewById(R.id.edt_email_id);
         edt_Flate_no=findViewById(R.id.edt_Flate_no);
         edt_phone=findViewById(R.id.edt_phone);
+        edt_designation=findViewById(R.id.edt_designation);
         edt_Address=findViewById(R.id.edt_Address);
         sh=new Shprefrences(this);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
@@ -38,6 +39,9 @@ public class ProfileActivity extends AppCompatActivity {
         edt_Flate_no.setText(loginModel.getFloor_no());
         edt_phone.setText(loginModel.getContact());
         edt_Address.setText(loginModel.getPre_address());
+        edt_designation.setText(loginModel.getMember_type());
+        if (loginModel.getType().equalsIgnoreCase("3"))
+            edt_designation.setVisibility(View.VISIBLE);
         setTitle();
         back();
 

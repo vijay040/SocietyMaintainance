@@ -72,7 +72,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@color/white_color"
-                    android:drawableRight="@drawable/ic_edit"
+                  android:editable="false"
                     android:hint="@string/edt_txt__name"
                     android:paddingLeft="@dimen/_15sdp"
                     android:singleLine="true"
@@ -91,19 +91,17 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@color/white_color"
-                    android:drawableRight="@drawable/ic_edit"
+                  android:editable="false"
                     android:hint="@string/edt_txt_last_name"
                     android:paddingLeft="@dimen/_15sdp"
                     android:singleLine="true"
                     android:textColor="#6d6e71"
                     android:textSize="@dimen/_11sdp" />
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/view_devider" />
-
 
             <EditText
                 android:id="@+id/edt_email_id"
@@ -112,9 +110,9 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white_color"
-                android:drawableLeft="@drawable/ic_email"
                 android:drawablePadding="@dimen/_20sdp"
-                android:drawableRight="@drawable/ic_edit"
+              android:editable="false"
+                android:drawableLeft="@drawable/ic_email"
                 android:hint="@string/EmailAddress"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
@@ -136,7 +134,7 @@
                 android:background="@color/white_color"
                 android:drawableLeft="@drawable/ic_homepage"
                 android:drawablePadding="@dimen/_20sdp"
-                android:drawableRight="@drawable/ic_edit"
+               android:editable="false"
                 android:hint="@string/flate_no"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
@@ -157,8 +155,29 @@
                 android:background="@color/white_color"
                 android:drawableLeft="@drawable/ic_phone"
                 android:drawablePadding="@dimen/_20sdp"
-                android:drawableRight="@drawable/ic_edit"
+               android:editable="false"
                 android:hint="@string/mobile"
+                android:paddingLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/view_devider" />
+
+            <EditText
+                android:id="@+id/edt_designation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@color/white_color"
+                android:drawableLeft="@drawable/ic_design"
+                android:drawablePadding="@dimen/_20sdp"
+                android:visibility="gone"
+              android:editable="false"
+                android:hint="@string/desi"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
@@ -181,7 +200,7 @@
                 android:background="@color/white_color"
                 android:drawableLeft="@drawable/ic_loc"
                 android:drawablePadding="@dimen/_20sdp"
-                android:drawableRight="@drawable/ic_edit"
+               android:editable="false"
                 android:hint="@string/address"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"

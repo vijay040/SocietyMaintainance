@@ -36,6 +36,7 @@
     <string name="visitor_list">Visitor List</string>
     <string name="owner_list">Owner List</string>
     <string name="complaint_list">Complaint List</string>
+    <string name="comp_detail">Complaint Detail</string>
     <string name="accept">ACCEPT</string>
     <string name="reject">REJECT</string>
     <string name="employee_list">Employee List</string>
@@ -56,6 +57,7 @@
     <string name="visitor_name">Visitor Name</string>
     <string name="title">Title</string>
     <string name="titl">Title:</string>
+    <string name="dept">Department:</string>
     <string name="des">Description</string>
     <string name="desc">Description:</string>
     <string name="contact_no">Contact No.</string>
@@ -91,6 +93,7 @@
     <string name="time_in">In Time:</string>
     <string name="visitor_model">VISITORMODEL</string>
     <string name="employee_model">EMPLOYEEMODEL</string>
+    <string name="comp_model">COMPLAINTMODEL</string>
     <string name="driver_model">DRIVERMODEL</string>
     <string name="maid_model">MAIDMODEL</string>
     <string name="owner_model">OWNERMODEL</string>
@@ -117,12 +120,14 @@
     <string name="edt_txt_last_name">Last Name</string>
     <string name="EmailAddress">Email Address</string>
     <string name="mobile">Moblie No.</string>
+    <string name="desi">Designation</string>
     <string name="contact">Contact No.</string>
     <string name="email_add">Email:</string>
     <string name="location">Location</string>
     <string name="current_date">Current Date</string>
     <string name="sign_in">SIGNIN</string>
     <string name="date">Date:</string>
+    <string name="status">Status:</string>
     <string name="confirm_pass">Confirm Password</string>
     <string name="present_address">Present Address</string>
     <string name="present_add">Present Address:</string>

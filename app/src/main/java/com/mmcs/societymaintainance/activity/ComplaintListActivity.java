@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -50,6 +51,16 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
         txtAdd=findViewById(R.id.txtAdd);
         back();
         setTitle();
+        listComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ComplaintAdapter adapter = (ComplaintAdapter) adapterView.getAdapter();
+                ComplaintModel model = adapter.list.get(i);
+                Intent intent = new Intent(ComplaintListActivity.this, ComplaintDetailActivity.class);
+                intent.putExtra(getString(R.string.comp_model), model);
+                startActivity(intent);
+            }
+        });
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,8 +123,9 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
             String title=filterlist.getTitle().toLowerCase();
             String des =filterlist.getC_description().toLowerCase();
             String date =filterlist.getDate().toLowerCase();
+            String dept=filterlist.getDepartment().toLowerCase();
 
-            if(title.contains(s)||des.contains(s)||date.contains(s)) {
+            if(title.contains(s)||des.contains(s)||date.contains(s)||dept.contains(s)) {
                 newlist.add(filterlist);
             }
         }

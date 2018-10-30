@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgcolor"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/txtDepartment"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/dept"
+        android:textColor="#000"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/titl"
+        android:textColor="#000"
+        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:singleLine="true"
+        android:text="@string/date"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_8sdp" />
+    <TextView
+        android:id="@+id/txt_c_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:singleLine="true"
+        android:text="@string/desc"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_9sdp" />
+
+    <EditText
+        android:id="@+id/edt_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_below="@+id/edt_department"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:hint="@string/comment"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#000"
+        android:textSize="@dimen/_11sdp"
+        android:textColorHint="#000" />
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/btn"
+        android:text="@string/ok"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:textColor="@color/white_color"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_15sdp" />
+
+</LinearLayout>
+

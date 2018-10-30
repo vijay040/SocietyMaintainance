@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgcolor"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/txtDepartment"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/dept"
+        android:textColor="#000"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/titl"
+        android:textColor="#000"
+        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:singleLine="true"
+        android:text="@string/date"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_8sdp" />
+    <TextView
+        android:id="@+id/txt_c_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:singleLine="true"
+        android:text="@string/desc"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_9sdp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:background="@drawable/btnreject"
+            android:text="@string/reject"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:background="@drawable/btnaccept"
+            android:text="@string/accept"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
