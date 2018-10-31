@@ -58,11 +58,15 @@ public interface RetrofitApi {
     @POST("unitlist_get_api.php")
     Call<UnitRestMeta> getUnitList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
-    @FormUrlEncoded
+       @FormUrlEncoded
     @POST("get_designation_api.php")
     Call<DesignationRestMeta> getDesignationList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
+   /* @FormUrlEncoded
+    @POST("get_designation_api.php")
+    Call<DesignationRestMeta> getEmployeeDepartment(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
+*/
     @Multipart
     @POST("add_visitor_post_api.php")
     Call<LoginResMeta> postVisitor(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
@@ -124,5 +128,9 @@ public interface RetrofitApi {
 
     @POST("get_complain_byid_api.php")
     Call<ComplaintRestMeta> getComplainById(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("complain_action_api.php")
+    Call<ComplaintRestMeta> complainAction(@Field("c_id") String c_id, @Field("assign_id") String assign_id);
 
 }

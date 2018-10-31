@@ -16,32 +16,41 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.ComplaintModel;
 import com.mmcs.societymaintainance.model.ComplaintRestMeta;
+import com.mmcs.societymaintainance.model.LoginModel;
+import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ComplaintNotificationActivity extends AppCompatActivity {
-    TextView txtDepartment,txtTitle,txtDate,txt_c_des,txtFloor,txtUnit,txtStatus;
-    Button reject,accept;
+    TextView txtDepartment, txtTitle, txtDate, txt_c_des, txtFloor, txtUnit, txtStatus;
+    Button reject, accept;
     ComplaintModel model;
+    LoginModel loginModel;
     ProgressBar progress;
+    Shprefrences sh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_notification);
-        txtDepartment=findViewById(R.id.txtDepartment);
-        txtTitle=findViewById(R.id.txtTitle);
-        txtDate=findViewById(R.id.txtDate);
-        txt_c_des=findViewById(R.id.txt_c_des);
-        txtFloor=findViewById(R.id.txtFloor);
-        txtUnit=findViewById(R.id.txtUnit);
-        txtStatus=findViewById(R.id.txtStatus);
+        txtDepartment = findViewById(R.id.txtDepartment);
+        txtTitle = findViewById(R.id.txtTitle);
+        txtDate = findViewById(R.id.txtDate);
+        txt_c_des = findViewById(R.id.txt_c_des);
+        txtFloor = findViewById(R.id.txtFloor);
+        txtUnit = findViewById(R.id.txtUnit);
+        txtStatus = findViewById(R.id.txtStatus);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
-        accept=findViewById(R.id.accept);
-        reject=findViewById(R.id.reject);
+        accept = findViewById(R.id.accept);
+        reject = findViewById(R.id.reject);
+        sh = new Shprefrences(this);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
+
         RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
         String body = remoteMessage.getNotification().getBody();
         Log.e("body", "body********" + body);
@@ -49,6 +58,20 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
         getComplain(strID[1]);
         back();
         setTitle();
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progress.setVisibility(View.VISIBLE);
+                complainAction();
+            }
+        });
+
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
@@ -57,8 +80,8 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().getComplainById(id).enqueue(new Callback<ComplaintRestMeta>() {
             @Override
             public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
-                 model=response.body().getResponse().get(0);
-                 setData();
+                model = response.body().getResponse().get(0);
+                setData();
                 progress.setVisibility(View.GONE);
             }
 
@@ -79,18 +102,20 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
             }
         });
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.comp_detail));
     }
-    private void setData(){
+
+    private void setData() {
         txtDepartment.setText(getString(R.string.dept) + model.getDepartment());
         txtTitle.setText(getString(R.string.titl) + model.getTitle());
         txtDate.setText(getString(R.string.date) + model.getDate());
         txt_c_des.setText(getString(R.string.desc) + model.getC_description());
         txtFloor.setText(getString(R.string.floor) + model.getFloor_no());
         txtUnit.setText(getString(R.string.unit_no) + model.getUnit_no());
-        txtStatus.setText(getString(R.string.status)+model.getStatus());
+        txtStatus.setText(getString(R.string.status) + model.getStatus());
 
         SpannableStringBuilder sb = new SpannableStringBuilder(txtDepartment.getText());
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
@@ -122,5 +147,28 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtStatus.setText(sb);
 
+    }
+
+    private void complainAction() {
+        Singleton.getInstance().getApi().complainAction(model.getComplain_id(), loginModel.getId()).enqueue(new Callback<ComplaintRestMeta>() {
+            @Override
+            public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
+                progress.setVisibility(View.GONE);
+                ComplaintModel m=response.body().getResponse().get(0);
+                if(m.getCode().equalsIgnoreCase("200"))
+                {
+                    Toasty.success(ComplaintNotificationActivity.this, ""+m.getMessage());
+                    finish();
+                }
+                else
+                    Toasty.error(ComplaintNotificationActivity.this, ""+m.getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<ComplaintRestMeta> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+                Toasty.error(ComplaintNotificationActivity.this, "Please try again!");
+            }
+        });
     }
 }

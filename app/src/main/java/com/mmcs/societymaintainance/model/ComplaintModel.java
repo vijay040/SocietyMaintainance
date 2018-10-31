@@ -18,6 +18,24 @@ public class ComplaintModel implements Serializable {
     private String assign_id;
     private String assign_to;
     public boolean isVisible = false;
+    private String message;
+    private String code;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getAssign_id() {
         return assign_id;
