@@ -2,6 +2,9 @@ package com.mmcs.societymaintainance.adaptor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.EmployeeModel;
 import com.mmcs.societymaintainance.model.OwnerModel;
@@ -73,7 +77,7 @@ public class OwnerAdapter  extends BaseAdapter {
         TextView txtEmail=view.findViewById(R.id.txtEmail);
         txtEmail.setText(context.getString(R.string.email_add)+list.get(i).getEmail());
 
-        ImageView img = view.findViewById(R.id.img);
+   final   ImageView img = view.findViewById(R.id.img);
         ImageView imz_down=view.findViewById(R.id.imz_down);
         final ImageView   hide=view.findViewById(R.id.imz_down);
         RelativeLayout relativeLayout=view.findViewById(R.id.relativelayout);
@@ -101,8 +105,18 @@ public class OwnerAdapter  extends BaseAdapter {
                 }
             }
         });
-        Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.no_image).transform(new CircleTransform(context))
-                .diskCacheStrategy(DiskCacheStrategy.ALL).into(img);
+        /*Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.no_image).transform(new CircleTransform(context))
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(img);*/
+
+        Glide.with(context).load(list.get(i).getImage()).asBitmap().centerCrop().dontAnimate().placeholder(R.drawable.no_image).error(R.drawable.no_image).into(new BitmapImageViewTarget(img) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                img.setImageDrawable(circularBitmapDrawable);
+            }
+        });
         return view;
     }
 }

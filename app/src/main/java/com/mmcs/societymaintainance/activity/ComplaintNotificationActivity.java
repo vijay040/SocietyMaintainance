@@ -2,9 +2,13 @@ package com.mmcs.societymaintainance.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,9 +23,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ComplaintNotificationActivity extends AppCompatActivity {
-    TextView txtDepartment,txtTitle,txtDate,txt_c_des;
+    TextView txtDepartment,txtTitle,txtDate,txt_c_des,txtFloor,txtUnit,txtStatus;
     Button reject,accept;
     ComplaintModel model;
+    ProgressBar progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,11 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
         txtTitle=findViewById(R.id.txtTitle);
         txtDate=findViewById(R.id.txtDate);
         txt_c_des=findViewById(R.id.txt_c_des);
+        txtFloor=findViewById(R.id.txtFloor);
+        txtUnit=findViewById(R.id.txtUnit);
+        txtStatus=findViewById(R.id.txtStatus);
+        progress = findViewById(R.id.progress);
+        progress.setVisibility(View.VISIBLE);
         accept=findViewById(R.id.accept);
         reject=findViewById(R.id.reject);
         RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
@@ -39,6 +49,7 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
         getComplain(strID[1]);
         back();
         setTitle();
+
     }
 
     private void getComplain(String id) {
@@ -47,10 +58,13 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
                  model=response.body().getResponse().get(0);
+                 setData();
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ComplaintRestMeta> call, Throwable t) {
+                progress.setVisibility(View.GONE);
 
             }
         });
@@ -68,5 +82,45 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.comp_detail));
+    }
+    private void setData(){
+        txtDepartment.setText(getString(R.string.dept) + model.getDepartment());
+        txtTitle.setText(getString(R.string.titl) + model.getTitle());
+        txtDate.setText(getString(R.string.date) + model.getDate());
+        txt_c_des.setText(getString(R.string.desc) + model.getC_description());
+        txtFloor.setText(getString(R.string.floor) + model.getFloor_no());
+        txtUnit.setText(getString(R.string.unit_no) + model.getUnit_no());
+        txtStatus.setText(getString(R.string.status)+model.getStatus());
+
+        SpannableStringBuilder sb = new SpannableStringBuilder(txtDepartment.getText());
+        ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+
+        sb.setSpan(fcs, 0, 11, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtDepartment.setText(sb);
+
+        sb = new SpannableStringBuilder(txtTitle.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtTitle.setText(sb);
+
+        sb = new SpannableStringBuilder(txtFloor.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtFloor.setText(sb);
+
+        sb = new SpannableStringBuilder(txtUnit.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtUnit.setText(sb);
+
+        sb = new SpannableStringBuilder(txtDate.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtDate.setText(sb);
+        sb = new SpannableStringBuilder(txtStatus.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtStatus.setText(sb);
+
     }
 }
