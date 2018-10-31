@@ -120,7 +120,7 @@ public class AddComplaintActivity extends AppCompatActivity implements  SearchVi
         });
     }
     private void postComplaint(String user_id,String type ,String branchId, String title,String des,String date,String month,String year){
-        Singleton.getInstance().getApi().postComplaint(user_id,type ,""+branchId,DeptId,title,des,date,month,year).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postComplaint(user_id,type ,""+branchId,DeptId,title,des,date,month,year,loginModel.getFloor_no(),loginModel.getUnit_no()).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 progress.setVisibility(View.GONE);

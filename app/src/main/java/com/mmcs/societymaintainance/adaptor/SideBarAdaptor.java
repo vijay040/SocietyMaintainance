@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.ComplaintListActivity;
+import com.mmcs.societymaintainance.activity.DrawerActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
@@ -98,6 +99,7 @@ Shprefrences sh;
                         ctx.startActivity(new Intent(ctx, MaidActivity.class));
                         break;
                     case "Logout":
+                        ((DrawerActivity)ctx).logOut();
                         sh.clearData();
                         Toast.makeText(ctx, ctx.getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(ctx, LoginActivity.class);

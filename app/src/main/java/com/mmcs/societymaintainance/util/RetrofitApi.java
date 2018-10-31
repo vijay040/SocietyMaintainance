@@ -82,8 +82,8 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("add_complain_post_api.php")
     Call<LoginResMeta> postComplaint(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType,@Field("branch_id") String branch_id,@Field("dept") String dept,@Field("txtCTitle") String txtCTitle
-            ,@Field("txtCDescription") String txtCDescription ,@Field("txtCDate") String txtCDate,@Field("xmonth") String xmonth,@Field("xyear") String xyear
-
+            ,@Field("txtCDescription") String txtCDescription ,@Field("txtCDate") String txtCDate,@Field("xmonth") String xmonth,@Field("xyear") String xyear,
+                                     @Field("floor_id") String floor_id,@Field("unit_id") String unit_id
     );
 
 
@@ -111,4 +111,9 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("update_fcm_token.php")
     Call<UnitRestMeta> updateToken(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("fcm_token") String fcm_token);
+
+    @FormUrlEncoded
+    @POST("logout_api.php")
+    Call<UnitRestMeta> logOut(@Field("id") String id);
+
 }

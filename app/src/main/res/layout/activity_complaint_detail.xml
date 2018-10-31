@@ -89,6 +89,7 @@
         android:background="@drawable/commentbck"
         android:visibility="gone"
         android:gravity="top"
+        android:padding="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:hint="@string/comment"

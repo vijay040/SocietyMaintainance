@@ -207,12 +207,6 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
 
-        if (getIntent().getExtras() != null) {
-            RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
-            String body = remoteMessage.getNotification().getBody();
-            Log.e("************", "****body*******" + body);
-        }
-
 
     }
 
@@ -256,4 +250,19 @@ public class DrawerActivity extends AppCompatActivity {
         });
     }
 
+
+    public void logOut()
+    {
+        Singleton.getInstance().getApi().logOut(loginModel.getId()).enqueue(new Callback<UnitRestMeta>() {
+            @Override
+            public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<UnitRestMeta> call, Throwable t) {
+
+            }
+        });
+    }
 }
