@@ -82,10 +82,10 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_complain);
             list.add(item);
 
-            item = new HomeItemModel();
+           /* item = new HomeItemModel();
             item.setTitle("Add Employee");
             item.setImage(R.drawable.ic_add_member);
-            list.add(item);
+            list.add(item);*/
 
             item = new HomeItemModel();
             item.setTitle("Driver");
@@ -112,10 +112,10 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_attendance);
             list.add(item);
 
-            item = new HomeItemModel();
+           /* item = new HomeItemModel();
             item.setTitle("Complaint");
             item.setImage(R.drawable.ic_complain);
-            list.add(item);
+            list.add(item);*/
 
             item = new HomeItemModel();
             item.setTitle("Logout");
