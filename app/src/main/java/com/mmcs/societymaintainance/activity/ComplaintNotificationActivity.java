@@ -157,17 +157,17 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
                 ComplaintModel m=response.body().getResponse().get(0);
                 if(m.getCode().equalsIgnoreCase("200"))
                 {
-                    Toasty.success(ComplaintNotificationActivity.this, ""+m.getMessage());
+                    Toasty.success(ComplaintNotificationActivity.this, ""+m.getMessage()).show();
                     finish();
                 }
                 else
-                    Toasty.error(ComplaintNotificationActivity.this, ""+m.getMessage());
+                    Toasty.error(ComplaintNotificationActivity.this, ""+m.getMessage()).show();
             }
 
             @Override
             public void onFailure(Call<ComplaintRestMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(ComplaintNotificationActivity.this, "Please try again!");
+                Toasty.error(ComplaintNotificationActivity.this, "Please try again!").show();
             }
         });
     }

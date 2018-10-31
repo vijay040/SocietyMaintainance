@@ -47,6 +47,7 @@ ProgressBar progress;
         txtFloor = findViewById(R.id.txtFloor);
         txtUnit = findViewById(R.id.txtUnit);
         progress=findViewById(R.id.progress);
+        progress.setVisibility(View.VISIBLE);
         image_visitor = findViewById(R.id.image_visitor);
         reject=findViewById(R.id.reject);
         accept=findViewById(R.id.accept);
@@ -83,11 +84,12 @@ ProgressBar progress;
             public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
                 visitorModels=response.body().getResponse().get(0);
                 setData();
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<VisitorRestMeta> call, Throwable t) {
-
+                progress.setVisibility(View.GONE);
             }
         });
     }
