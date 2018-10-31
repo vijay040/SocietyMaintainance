@@ -15,7 +15,25 @@ public class ComplaintModel implements Serializable {
     private String status;
     private String complain_id;
     private String department;
+    private String assign_id;
+    private String assign_to;
     public boolean isVisible = false;
+
+    public String getAssign_id() {
+        return assign_id;
+    }
+
+    public void setAssign_id(String assign_id) {
+        this.assign_id = assign_id;
+    }
+
+    public String getAssign_to() {
+        return assign_to;
+    }
+
+    public void setAssign_to(String assign_to) {
+        this.assign_to = assign_to;
+    }
 
     public String getFloor_no() {
         return floor_no;

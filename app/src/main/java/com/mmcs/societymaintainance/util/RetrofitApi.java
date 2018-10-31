@@ -120,5 +120,9 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("logout_api.php")
     Call<UnitRestMeta> logOut(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType);
+    @FormUrlEncoded
+
+    @POST("get_complain_byid_api.php")
+    Call<ComplaintRestMeta> getComplainById(@Field("id") String id);
 
 }

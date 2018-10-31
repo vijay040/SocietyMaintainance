@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.activity.ComplaintNotificationActivity;
 import com.mmcs.societymaintainance.activity.VisitorNotificationActivity;
 
 public class SocietyMessagingService extends FirebaseMessagingService {
@@ -31,8 +32,8 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         intent = new Intent(this, VisitorNotificationActivity.class);
         if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Gest is waiting!"))
             intent = new Intent(this, VisitorNotificationActivity.class);
-        else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Gest is waiting!"))
-            intent = new Intent(this, VisitorNotificationActivity.class);
+        else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("New complain registered!"))
+            intent = new Intent(this, ComplaintNotificationActivity.class);
 
         intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
         sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());

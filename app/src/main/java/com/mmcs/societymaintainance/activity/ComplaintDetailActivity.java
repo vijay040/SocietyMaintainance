@@ -59,12 +59,10 @@ Button btn_ok,resolved;
         txtDate.setText(getString(R.string.date)+complaintModel.getDate());
         txt_c_des.setText(getString(R.string.desc)+complaintModel.getC_description());
         txtStatus.setText(getString(R.string.status)+complaintModel.getStatus());
-        if (complaintModel.getStatus().equalsIgnoreCase("PENDING"))
+        if (complaintModel.getStatus().equalsIgnoreCase("PENDING") && complaintModel.getAssign_id().equalsIgnoreCase(loginModel.getId()))
         {
             edt_comment.setVisibility(View.VISIBLE);
-            btn_ok.setVisibility(View.VISIBLE);
             resolved.setVisibility(View.VISIBLE);
-
         }
        else
             btn_ok.setVisibility(View.VISIBLE);
