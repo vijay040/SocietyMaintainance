@@ -126,8 +126,9 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
             String des =filterlist.getC_description().toLowerCase();
             String date =filterlist.getDate().toLowerCase();
             String dept=filterlist.getDepartment().toLowerCase();
+            String status= filterlist.getStatus().toLowerCase();
 
-            if(title.contains(s)||des.contains(s)||date.contains(s)||dept.contains(s)) {
+            if(title.contains(s)||des.contains(s)||date.contains(s)||dept.contains(s)||status.contains(s)) {
                 newlist.add(filterlist);
             }
         }

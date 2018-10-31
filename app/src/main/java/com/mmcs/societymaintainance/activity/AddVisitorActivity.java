@@ -215,7 +215,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
         });
 
 
-        edt_time_in.setOnClickListener(new View.OnClickListener() {
+      /*  edt_time_in.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -231,7 +231,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
                 showDialog(TIME_DIALOG_ID2);
 
             }
-        });
+        });*/
         edt_floor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -303,7 +303,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
     }
 
 
-    @Override
+   /* @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
 
@@ -351,7 +351,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
 
             }
         }
-    };
+    };*/
 
     AlertDialog alertDialog;
     ArrayList<FloorModel> floorList = new ArrayList<>();

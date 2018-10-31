@@ -2,6 +2,8 @@ package com.mmcs.societymaintainance.adaptor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +99,22 @@ public class ComplaintAdapter extends BaseAdapter {
                 }
             }
         });
+        if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
+
+            switch (list.get(i).getStatus()) {
+                case "PENDING":
+//Pending
+                    String status = "<font color=#3F51B5>" +context.getString(R.string.status) + "</font>" + "<font color=#EF6C00>" + list.get(i).getStatus() + "</font>";
+                    txtstatus.setText(Html.fromHtml(status));
+                    break;
+
+                case "RESOLVED":
+                    String status1 = "<font color=#3F51B5>" +context.getString(R.string.status) + "</font>" + "<font color=#00C853>" + list.get(i).getStatus() + "</font>";
+                    txtstatus.setText(Html.fromHtml(status1));
+                    break;
+
+            }
+        }
 
         return view;
     }

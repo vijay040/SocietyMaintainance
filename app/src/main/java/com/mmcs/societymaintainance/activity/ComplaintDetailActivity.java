@@ -2,6 +2,7 @@ package com.mmcs.societymaintainance.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -125,6 +126,22 @@ Button btn_ok,resolved;
         txt_c_des.setText(sb);
         setTitle();
         back();
+        if(complaintModel.getStatus() != null && !complaintModel.getStatus().equals("")) {
+
+            switch (complaintModel.getStatus()) {
+                case "PENDING":
+//Pending
+                    String status = "<font color=#3F51B5>" +getString(R.string.status) + "</font>" + "<font color=#EF6C00>" + complaintModel.getStatus() + "</font>";
+                    txtStatus.setText(Html.fromHtml(status));
+                    break;
+
+                case "RESOLVED":
+                    String status1 = "<font color=#3F51B5>" +getString(R.string.status) + "</font>" + "<font color=#00C853>" + complaintModel.getStatus() + "</font>";
+                    txtStatus.setText(Html.fromHtml(status1));
+                    break;
+
+            }
+        }
 
     }
     private void back() {
