@@ -98,6 +98,14 @@
         android:textColor="#000"
         android:textSize="@dimen/_11sdp"
         android:textColorHint="#000" />
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/progressbar"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,14 +114,14 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/cancel"
+            android:id="@+id/btn_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_15sdp"
             android:layout_weight="1"
             android:visibility="gone"
             android:background="@drawable/btnreject"
-            android:text="@string/cancl"
+            android:text="@string/ok"
             android:textColor="#ffffff"
             android:textStyle="bold" />
 

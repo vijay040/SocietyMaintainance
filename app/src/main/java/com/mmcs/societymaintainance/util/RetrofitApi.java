@@ -85,6 +85,11 @@ public interface RetrofitApi {
             ,@Field("txtCDescription") String txtCDescription ,@Field("txtCDate") String txtCDate,@Field("xmonth") String xmonth,@Field("xyear") String xyear,
                                      @Field("floor_id") String floor_id,@Field("unit_id") String unit_id
     );
+    @FormUrlEncoded
+    @POST("update_complain_api.php")
+    Call<ComplaintRestMeta> postComplaintStatus(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType,@Field("branch_id") String branch_id, @Field("status") String status,@Field("comment") String comment,@Field("c_id") String c_id
+
+    );
 
 
     @Multipart
