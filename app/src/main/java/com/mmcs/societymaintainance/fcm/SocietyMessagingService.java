@@ -65,12 +65,12 @@ public class SocietyMessagingService extends FirebaseMessagingService {
 
     }
 
-   /* public void handleIntent(Intent intent) {
-
-        Log.e("********************","****************Called*******************");
+    @Override
+    public void handleIntent(Intent intent) {
+        //super.handleIntent(intent);
         try {
             if (intent.getExtras() != null) {
-                RemoteMessage.Builder builder = new RemoteMessage.Builder("MyFirebaseMessagingService");
+                RemoteMessage.Builder builder = new RemoteMessage.Builder("SocietyMessagingService");
                 for (String key : intent.getExtras().keySet()) {
                     builder.addData(key, intent.getExtras().get(key).toString());
                 }
@@ -81,5 +81,6 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         } catch (Exception e) {
             super.handleIntent(intent);
         }
-    }*/
+    }
+
 }
