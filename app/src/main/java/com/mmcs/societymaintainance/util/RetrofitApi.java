@@ -114,6 +114,6 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("logout_api.php")
-    Call<UnitRestMeta> logOut(@Field("id") String id);
+    Call<UnitRestMeta> logOut(@Field("id") String id,@Field("ddlLoginType") String ddlLoginType);
 
 }

@@ -253,7 +253,7 @@ public class DrawerActivity extends AppCompatActivity {
 
     public void logOut()
     {
-        Singleton.getInstance().getApi().logOut(loginModel.getId()).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().logOut(loginModel.getId(),loginModel.getType()).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
 
