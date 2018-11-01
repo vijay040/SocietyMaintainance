@@ -25,6 +25,16 @@ public class LoginModel {
 
     private String member_type;
 
+    private String unit;
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     public String getMember_type() {
         return member_type;
     }

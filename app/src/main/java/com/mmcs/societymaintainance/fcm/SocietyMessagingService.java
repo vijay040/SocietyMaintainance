@@ -30,7 +30,7 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
 
         intent = new Intent(this, VisitorNotificationActivity.class);
-        if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Gest is waiting!"))
+        if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi Guest is waiting!"))
             intent = new Intent(this, VisitorNotificationActivity.class);
         else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("New complain registered!"))
             intent = new Intent(this, ComplaintNotificationActivity.class);

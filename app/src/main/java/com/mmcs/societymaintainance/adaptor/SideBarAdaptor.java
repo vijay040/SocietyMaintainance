@@ -65,7 +65,7 @@ Shprefrences sh;
 
         TextView title = view.findViewById(R.id.txtTitle);
         title.setText(list.get(i).getTitle());
-      ImageView imgUserProfile=view.findViewById(R.id.ic);
+        ImageView imgUserProfile=view.findViewById(R.id.ic);
         imgUserProfile.setBackground(ctx.getResources().getDrawable(list.get(i).getImage()));
         RelativeLayout relativeLayout=view.findViewById(R.id.relativeLayout);
         relativeLayout.setOnClickListener(new View.OnClickListener() {

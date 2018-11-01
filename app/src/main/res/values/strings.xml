@@ -153,6 +153,7 @@
     <string name="successfully_registered">Successfully Registered</string>
     <string name="login_model">LOGIN_MODEL</string>
     <string name="you_have_logged_out_successfully">You have logout successfully!</string>
+    <string name="signout">Singout</string>
     <string-array name="types">
         <item>Name</item>
         <item>Contact No.</item>

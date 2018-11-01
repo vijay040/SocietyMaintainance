@@ -18,8 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.AttandenceModel;
+import com.mmcs.societymaintainance.model.LoginModel;
+import com.mmcs.societymaintainance.model.ResAttandance;
 import com.mmcs.societymaintainance.util.AppLocationService;
 import com.mmcs.societymaintainance.util.MyLocation;
+import com.mmcs.societymaintainance.util.Shprefrences;
+import com.mmcs.societymaintainance.util.Singleton;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,24 +33,29 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AttendanceActivity extends AppCompatActivity {
     ImageView signin;
     TextView textViewsignin;
     LocationManager locationManager;
-    public static String currentLocation="";
+    public static String currentLocation = "";
     private String status = "signin";
     boolean isLogin = false;
-   // Shprefrences sh;
+    Shprefrences sh;
     ProgressBar progress;
     TextView txtLocation, texDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        sh = new Shprefrences(this);
         setContentView(R.layout.activity_attendance);
         progress = findViewById(R.id.progressbar);
-        progress.setVisibility(View.VISIBLE);
         signin = findViewById(R.id.imageView);
         texDate = findViewById(R.id.texDate);
         textViewsignin = findViewById(R.id.textview_signin);
@@ -55,17 +65,18 @@ public class AttendanceActivity extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         texDate.setText(createddate);
-       // getAttandanceStatus();
-        // getSupportActionBar().setTitle("Attendance");
-       /* signin.setOnClickListener(new View.OnClickListener() {
+        getAttandanceStatus();
+        signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progress.setVisibility(View.VISIBLE);
                 postAttandance();
             }
-        });*/
+        });
         back();
         setTitle();
     }
+
     AppLocationService appLocationService;
     Location nwLocation;
 
@@ -119,10 +130,12 @@ public class AttendanceActivity extends AppCompatActivity {
         }
         return address;
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.attendance));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -132,39 +145,43 @@ public class AttendanceActivity extends AppCompatActivity {
             }
         });
     }
-   /* private void postAttandance() {
+
+    private void postAttandance() {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
 
-        if(currentLocation.equalsIgnoreCase("")) {
-            Toast.makeText(AttandanceActivity.this, "Please wait while fetching location!", Toast.LENGTH_SHORT).show();
+        if (currentLocation.equalsIgnoreCase("")) {
+            Toast.makeText(AttendanceActivity.this, "Please wait while fetching location!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (status.equalsIgnoreCase("signin")) {
             status = "signout";
-            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
-            textViewsignin.setText(getString(R.string.SIGNIN));
+            signin.setBackground(ContextCompat.getDrawable(AttendanceActivity.this, R.drawable.ic_signin));
+            textViewsignin.setText(getString(R.string.sign_in));
         } else {
             status = "signin";
-            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
-            textViewsignin.setText(getString(R.string.SIGNOUT));
+            signin.setBackground(ContextCompat.getDrawable(AttendanceActivity.this, R.drawable.ic_signout));
+            textViewsignin.setText(getString(R.string.logout));
         }
-        Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status, "",model.getType()).enqueue(new Callback<ResAttandance>() {
             @Override
-            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
+                progress.setVisibility(View.GONE);
             }
 
             @Override
-            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+            public void onFailure(Call<ResAttandance> call, Throwable t) {
+                progress.setVisibility(View.GONE);
             }
         });
 
     }
 
     private void getAttandanceStatus() {
+        progress.setVisibility(View.VISIBLE);
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
+        Singleton.getInstance().getApi().getAttandanceStatus(model.getId(),model.getType()).enqueue(new Callback<ResAttandance>() {
             @Override
             public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
 
@@ -172,11 +189,11 @@ public class AttendanceActivity extends AppCompatActivity {
                 if (model.size() > 0)
                     status = model.get(0).getStatus();
                 if (status.equalsIgnoreCase("signin")) {
-                    signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
-                    textViewsignin.setText(getString(R.string.SIGNOUT));
+                    signin.setBackground(ContextCompat.getDrawable(AttendanceActivity.this, R.drawable.ic_signout));
+                    textViewsignin.setText(getString(R.string.signout));
                 } else {
-                    signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
-                    textViewsignin.setText(getString(R.string.SIGNIN));
+                    signin.setBackground(ContextCompat.getDrawable(AttendanceActivity.this, R.drawable.ic_signin));
+                    textViewsignin.setText(getString(R.string.sign_in));
                 }
                 progress.setVisibility(View.GONE);
             }
@@ -187,5 +204,5 @@ public class AttendanceActivity extends AppCompatActivity {
             }
         });
 
-    }*/
+    }
 }

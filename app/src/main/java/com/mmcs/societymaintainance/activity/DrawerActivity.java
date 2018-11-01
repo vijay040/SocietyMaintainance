@@ -66,7 +66,7 @@ public class DrawerActivity extends AppCompatActivity {
         updateToken();
         txtName.setText(loginModel.getName());
         txtEmail.setText(loginModel.getEmail());
-        txtFlateNo.setText(loginModel.getFloor_no());
+        txtFlateNo.setText(loginModel.getUnit());
         String type = sh.getString("TYPE", "");
 
         HomeItemModel item = new HomeItemModel();
@@ -112,10 +112,10 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_attendance);
             list.add(item);
 
-           /* item = new HomeItemModel();
+            item = new HomeItemModel();
             item.setTitle("Complaint");
             item.setImage(R.drawable.ic_complain);
-            list.add(item);*/
+            list.add(item);
 
             item = new HomeItemModel();
             item.setTitle("Logout");
@@ -211,7 +211,6 @@ public class DrawerActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 

@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         edt_txt_first_name.setText(loginModel.getName());
         edt_email_id.setText(loginModel.getEmail());
-        edt_Flate_no.setText(loginModel.getFloor_no());
+        edt_Flate_no.setText(loginModel.getUnit());
         edt_phone.setText(loginModel.getContact());
         edt_Address.setText(loginModel.getPre_address());
         edt_designation.setText(loginModel.getMember_type());

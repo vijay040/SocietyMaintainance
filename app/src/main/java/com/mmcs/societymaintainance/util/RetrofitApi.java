@@ -6,6 +6,7 @@ import com.mmcs.societymaintainance.model.EmployeeRestMeta;
 import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.LoginResMeta;
 import com.mmcs.societymaintainance.model.OwnerRestMeta;
+import com.mmcs.societymaintainance.model.ResAttandance;
 import com.mmcs.societymaintainance.model.ResponseMeta;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
@@ -132,5 +133,18 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("complain_action_api.php")
     Call<ComplaintRestMeta> complainAction(@Field("c_id") String c_id, @Field("assign_id") String assign_id);
+
+
+    @FormUrlEncoded
+    @POST("attendance_post_api.php")
+    Call<ResAttandance> postAttendance(@Field("user_id") String user_id, @Field("location") String location, @Field("date_time") String datetime, @Field("status") String status,@Field("date") String date,@Field("type") String type
+
+    );
+
+    @FormUrlEncoded
+    @POST("attendance_get_api.php")
+    Call<ResAttandance> getAttandanceStatus(@Field("user_id") String user_id ,@Field("type") String type
+
+    );
 
 }
