@@ -132,6 +132,7 @@ public class OwnerListActivity extends AppCompatActivity implements SearchView.O
                 newlist.add(filterlist);
             }
         }
+        if(ownerAdapter!=null)
         ownerAdapter.filter(newlist);
         return true;
     }

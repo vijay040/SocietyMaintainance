@@ -491,8 +491,10 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         Singleton.getInstance().getApi().getFloorList(userid,type ,branchid).enqueue(new Callback<ResponseMeta>() {
             @Override
             public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
-                floorList = response.body().getResponse();
-                progress.setVisibility(View.GONE);
+                if(response!=null && response.body()!=null) {
+                    floorList = response.body().getResponse();
+                    progress.setVisibility(View.GONE);
+                }
             }
 
             @Override

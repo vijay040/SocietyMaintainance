@@ -49,7 +49,7 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
         editTextName.setOnQueryTextListener(this);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         txtAdd=findViewById(R.id.txtAdd);
-        if(loginModel.getType().equalsIgnoreCase("1"))
+        if(loginModel.getType().equalsIgnoreCase("1")||loginModel.getType().equalsIgnoreCase("3"))
             txtAdd.setVisibility(View.GONE);
         back();
         setTitle();

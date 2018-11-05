@@ -473,7 +473,7 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
         if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), "" + branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"),  branchid);
         RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), txtIssueDate);
