@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 
 public class EmergancyAlarmActivity extends AppCompatActivity {
@@ -29,6 +30,9 @@ Button btnOk;
         image=findViewById(R.id.image);
         edt_message=findViewById(R.id.edt_message);
         btnOk=findViewById(R.id.btnOk);
+        RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
+        String body = remoteMessage.getNotification().getBody();
+        edt_message.setText(body);
         Animation shake = AnimationUtils.loadAnimation(EmergancyAlarmActivity.this, R.anim.shake);
         image.startAnimation(shake);
         setTitle();

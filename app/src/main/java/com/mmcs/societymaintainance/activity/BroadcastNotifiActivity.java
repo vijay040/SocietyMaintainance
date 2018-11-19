@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 
 public class BroadcastNotifiActivity extends AppCompatActivity {
@@ -22,6 +23,9 @@ Button btnOk;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcast_notifi);
         edt_message=findViewById(R.id.edt_message);
+        RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
+        String body = remoteMessage.getNotification().getBody();
+        edt_message.setText(body);
         btnOk=findViewById(R.id.btnOk);
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
