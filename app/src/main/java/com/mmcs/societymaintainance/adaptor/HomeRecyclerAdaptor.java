@@ -50,7 +50,6 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
         View view = mInflater.inflate(R.layout.item_home_inf, parent, false);
          imgUserProfile=view.findViewById(R.id.imgUserProfile);
         txtTitle=view.findViewById(R.id.txt_title);
-
         layUser=view.findViewById(R.id.layUser);
 
         return new ViewHolder(view);
@@ -67,7 +66,6 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
             layUser.setVisibility(View.GONE);
         }
         layUser.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 switch (list.get(position).getTitle())
