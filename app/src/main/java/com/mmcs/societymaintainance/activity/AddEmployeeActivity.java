@@ -89,12 +89,13 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
     Shprefrences sh;
     String curr_date;
     private static final int GOOGLE_API_CLIENT_ID = 0;
-    private AutoCompleteTextView edt_present_address,edt_permanent_address;
+    private AutoCompleteTextView edt_present_address, edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "AddMemberActivity";
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -119,7 +120,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         btn_take_photo = findViewById(R.id.btn_take_photo);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         mGoogleApiClient = new GoogleApiClient.Builder(AddEmployeeActivity.this)
@@ -141,9 +142,9 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
         }
         if ((MM + 1) < 10)
-             curr_date=(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+            curr_date = (String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         else
-            curr_date=(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+            curr_date = (String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,7 +187,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postEmployee(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
+                    postEmployee(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), name, email, mobile, present_add, permanent_add, national_id, joining_date, password, imageImagePath);
                 }
             }
         });
@@ -215,7 +216,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
             }
         });
 
-        getDesignationList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
+        getDesignationList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
         setTitle();
         back();
 
@@ -235,6 +236,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
             }
         });
     }
+
     Uri fileUri;
 
     private void selectImage() {
@@ -270,15 +272,17 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
+
     String imageImagePath = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
 
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -293,13 +297,14 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
+                    File file = new File(imageImagePath);
+                    resize(file, "");
 
                 }
             }
         }
     }
+
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
         BitmapFactory.Options o = new BitmapFactory.Options();
 
@@ -355,6 +360,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -467,13 +473,16 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
     };
 
 
+    public void getDesignationList(String userid, String type, String branchid) {
 
-    public void getDesignationList(String userid,String type ,String branchid) {
-
-        Singleton.getInstance().getApi().getDesignationList(userid, type ,branchid).enqueue(new Callback<DesignationRestMeta>() {
+        Singleton.getInstance().getApi().getDesignationList(userid, type, branchid).enqueue(new Callback<DesignationRestMeta>() {
             @Override
             public void onResponse(Call<DesignationRestMeta> call, Response<DesignationRestMeta> response) {
                 designationModels = response.body().getResponse();
+                for (int i = 0; i < designationModels.size(); i++) {
+                    if (designationModels.get(i).getDesignation().equalsIgnoreCase("Driver") || designationModels.get(i).getDesignation().equalsIgnoreCase("Maid"))
+                        designationModels.remove(i);
+                }
                 progress.setVisibility(View.GONE);
             }
 
@@ -509,15 +518,16 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         }
         return false;
     }
-    private void postEmployee(String userid,String type ,String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
+
+    private void postEmployee(String userid, String type, String branchid, String name, String email, String mobile, String preaddress, String peradress, String national_id, String date, String password, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("****image*******", "*****imagepath********" + fileUrl);
-        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
+        if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"),"" +branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), "" + branchid);
         RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), name);
         RequestBody requestJoiningDate = RequestBody.create(MediaType.parse("text/plain"), date);
@@ -533,7 +543,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestpreAddress, requestper_Address, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddEmployeeActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -544,7 +554,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(AddEmployeeActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(AddEmployeeActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -602,7 +612,6 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
-
 
 
 }
