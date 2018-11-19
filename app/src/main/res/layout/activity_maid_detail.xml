@@ -128,6 +128,7 @@
                 android:layout_toRightOf="@+id/txt_ending_date"
                 android:hint="@string/ending_date"
                 android:layout_marginLeft="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp"
                 android:drawableRight="@drawable/ic_calendar"
                 android:singleLine="true"
                 android:textColor="#6d6e71"

@@ -1,21 +1,20 @@
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:background="@color/white_color"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
-
     <EditText
         android:id="@+id/edt_message"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_150sdp"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
       android:layout_centerInParent="true"
-        android:background="@drawable/newsbck"
-        android:editable="false"
+        android:background="@drawable/commentbck"
         android:gravity="top"
+        android:editable="false"
         android:hint="@string/message"
         android:paddingLeft="@dimen/_10sdp"
         android:textColor="#000"
@@ -33,4 +32,6 @@
         android:textColor="@color/white_color"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold" />
-        </RelativeLayout>
+
+
+</RelativeLayout>

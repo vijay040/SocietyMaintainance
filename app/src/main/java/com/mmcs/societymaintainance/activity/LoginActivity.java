@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import com.mmcs.societymaintainance.model.LoginResMeta;
 import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     Spinner spnLoginType;
     public static String fcmToken;
     Shprefrences sh;
-
+ProgressBar progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -64,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.relativeLayout);
         spnLoginType = findViewById(R.id.spnUserType);
         sh = new Shprefrences(this);
+        progress=findViewById(R.id.progress);
         String typeList[] = {"Select Login Types", "Admin", "Owner", "Employee", "Renter"};//,"Super Admin"
         spnLoginType.setAdapter(new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item, typeList));
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, R.string.select_logintype, Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-
+                    progress.setVisibility(View.VISIBLE);
                     getLogin(user_name, pass, spnLoginType.getSelectedItemPosition() + "");
 
                 }
@@ -218,8 +221,9 @@ public class LoginActivity extends AppCompatActivity {
                     showWelcomeTitle();
                     finish();
                 } else {
-                    Toast.makeText(LoginActivity.this, "" + response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(LoginActivity.this, "" + response.body().getMsg(), Toast.LENGTH_SHORT).show();
                 }
+                progress.setVisibility(View.GONE);
             }
 
             @Override

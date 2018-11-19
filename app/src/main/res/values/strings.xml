@@ -17,7 +17,10 @@
     <string name="facility_mgmt">Facility and Management</string>
     <string name="send">Send</string>
     <string name="add_dvr">Add Driver</string>
+    <string name="broadcast_msg">Broadcast Message</string>
+    <string name="emergency_alarm">Emergency Alarm</string>
     <string name="add_md">Add Maid</string>
+    <string name="message">Message</string>
     <string name="add_new_employee">Add New Employee</string>
     <string name="add_maid">Add Maid details</string>
     <string name="add_driver">Add Driver Details</string>
