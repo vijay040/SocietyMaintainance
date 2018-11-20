@@ -37,9 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".util.AlarmReciver"
             android:enabled="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD-Ty0w3efIQagx5I21iJdQkRgHml6z0dU" />
@@ -122,7 +124,8 @@
         <activity android:name=".activity.ComplaintDetailActivity" />
         <activity android:name=".activity.ComplaintNotificationActivity" />
         <activity android:name=".activity.BroadcastNotifiActivity" />
-        <activity android:name=".activity.EmergancyAlarmActivity"></activity>
+        <activity android:name=".activity.EmergancyAlarmActivity" />
+        <activity android:name=".activity.BillActivity"></activity>
     </application>
 
 </manifest>
