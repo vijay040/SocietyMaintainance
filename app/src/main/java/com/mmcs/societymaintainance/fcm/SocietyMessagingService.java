@@ -4,6 +4,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -36,8 +38,13 @@ public class SocietyMessagingService extends FirebaseMessagingService {
             intent = new Intent(this, VisitorNotificationActivity.class);
         else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("New complain registered!"))
             intent = new Intent(this, ComplaintNotificationActivity.class);
-        else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("ALARM!"))
+        else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("ALARM!")) {
             intent = new Intent(this, EmergancyAlarmActivity.class);
+            //Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            EmergancyAlarmActivity. r = MediaPlayer.create(this, R.raw.emergency_alarm);
+            EmergancyAlarmActivity. r.setLooping(true);
+            EmergancyAlarmActivity.r.start();
+        }
         else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Broadcast Message!"))
             intent = new Intent(this, BroadcastNotifiActivity.class);
 
@@ -63,6 +70,7 @@ public class SocietyMessagingService extends FirebaseMessagingService {
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
+                .setOngoing(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager =
@@ -89,4 +97,9 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       // EmergancyAlarmActivity.r.stop();
+    }
 }

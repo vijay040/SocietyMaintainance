@@ -1,6 +1,7 @@
 package com.mmcs.societymaintainance.activity;
 
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -21,19 +22,21 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 
 public class EmergancyAlarmActivity extends AppCompatActivity {
-ImageView image;
-EditText edt_message;
-Button btnOk;
-    static Ringtone r;
+    ImageView image;
+    EditText edt_message;
+    Button btnOk;
+    //public static Ringtone r;
+    public static MediaPlayer r;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergancy_alarm);
-        image=findViewById(R.id.image);
-        edt_message=findViewById(R.id.edt_message);
-        btnOk=findViewById(R.id.btnOk);
+        image = findViewById(R.id.image);
+        edt_message = findViewById(R.id.edt_message);
+        btnOk = findViewById(R.id.btnOk);
         RemoteMessage remoteMessage = (RemoteMessage) getIntent().getExtras().get("NOTIFICATION_VALUE");
         String body = remoteMessage.getNotification().getBody();
         edt_message.setText(body);
@@ -42,11 +45,13 @@ Button btnOk;
         setTitle();
         back();
         if (r == null) {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-            r = RingtoneManager.getRingtone(this, notification);
+            //Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            //r = RingtoneManager.getRingtone(this, notification);
+            r = MediaPlayer.create(this, R.raw.emergency_alarm);
+            r.setLooping(true);
         } else
-            r.stop();
-        r.play();
+            r.pause();
+        r.start();
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +61,7 @@ Button btnOk;
             }
         });
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.emergency_alarm));
@@ -78,7 +84,7 @@ Button btnOk;
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(r.isPlaying())
+        if (r.isPlaying())
             r.stop();
     }
 }
