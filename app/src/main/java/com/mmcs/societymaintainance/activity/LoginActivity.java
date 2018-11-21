@@ -60,7 +60,7 @@ ProgressBar progress;
         setContentView(R.layout.activity_login);
         edt_username = findViewById(R.id.edt_username);
         edt_password = findViewById(R.id.edt_password);
-        animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        animShake = AnimationUtils.loadAnimation(this, R.anim.shake_login);
         loginBtn = findViewById(R.id.loginBtn);
         btn_register = findViewById(R.id.btn_register);
         relativeLayout = findViewById(R.id.relativeLayout);
