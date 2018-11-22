@@ -1,5 +1,8 @@
 package com.mmcs.societymaintainance.activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.util.Shprefrences;
@@ -40,6 +46,15 @@ public class ProfileActivity extends AppCompatActivity {
         edt_phone.setText(loginModel.getContact());
         edt_Address.setText(loginModel.getPre_address());
         edt_designation.setText(loginModel.getMember_type());
+        Glide.with(this).load(loginModel.getImage()).asBitmap().centerCrop().dontAnimate().placeholder(R.drawable.ic_userlogin).error(R.drawable.ic_userlogin).into(new BitmapImageViewTarget(imgProfile) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(getApplicationContext().getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                imgProfile.setImageDrawable(circularBitmapDrawable);
+            }
+        });
         if (loginModel.getType().equalsIgnoreCase("3"))
             edt_designation.setVisibility(View.VISIBLE);
         setTitle();

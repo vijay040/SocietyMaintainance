@@ -2,11 +2,14 @@ package com.mmcs.societymaintainance.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +26,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.adaptor.HomeRecyclerAdaptor;
@@ -50,7 +55,8 @@ public class DrawerActivity extends AppCompatActivity {
     Shprefrences sh;
     public static ArrayList<HomeItemModel> list;
     LoginModel loginModel;
-
+    ImageView imgProfile;
+     ImageView imgDrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -59,6 +65,7 @@ public class DrawerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_landing);
         txtName = findViewById(R.id.txtName);
         txtEmail = findViewById(R.id.txtEmail);
+        imgProfile=findViewById(R.id.imgProfile);
         txtFlateNo = findViewById(R.id.txtFlateNo);
         listView = findViewById(R.id.listItem);
         sh = new Shprefrences(this);
@@ -67,6 +74,15 @@ public class DrawerActivity extends AppCompatActivity {
         txtName.setText(loginModel.getName());
         txtEmail.setText(loginModel.getEmail());
         txtFlateNo.setText(loginModel.getUnit());
+        Glide.with(this).load(loginModel.getImage()).asBitmap().centerCrop().dontAnimate().placeholder(R.drawable.ic_userlogin).error(R.drawable.ic_userlogin).into(new BitmapImageViewTarget(imgProfile) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(getApplicationContext().getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                imgProfile.setImageDrawable(circularBitmapDrawable);
+            }
+        });
         String type = sh.getString("TYPE", "");
 
         HomeItemModel item = new HomeItemModel();
@@ -208,7 +224,7 @@ public class DrawerActivity extends AppCompatActivity {
         pushFragment(new FragmentHome());
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
-        final ImageView imgDrawer = findViewById(R.id.imgDrawer);
+        imgDrawer = findViewById(R.id.imgDrawer);
         imgDrawer.setBackground(ContextCompat.getDrawable(DrawerActivity.this, R.drawable.ic_menu));
         setTitle();
 
@@ -242,14 +258,13 @@ public class DrawerActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
-    public void onBackPressed() {
-        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            this.drawerLayout.closeDrawer(GravityCompat.START);
-            ImageView imgDrawer = findViewById(R.id.imgDrawer);
+    protected void onStop() {
+        super.onStop();
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawer(Gravity.LEFT);
             imgDrawer.setBackground(ContextCompat.getDrawable(DrawerActivity.this, R.drawable.ic_menu));
-        } else {
-            super.onBackPressed();
         }
     }
 
