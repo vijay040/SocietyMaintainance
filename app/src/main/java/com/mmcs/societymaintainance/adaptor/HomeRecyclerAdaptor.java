@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
+import com.mmcs.societymaintainance.activity.BillActivity;
 import com.mmcs.societymaintainance.activity.BroadcastNotifiActivity;
 import com.mmcs.societymaintainance.activity.ComplaintListActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
@@ -95,6 +96,9 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         break;
                     case "Maid":
                         context.startActivity(new Intent(context, MaidActivity.class));
+                        break;
+                    case "Your Bill":
+                        context.startActivity(new Intent(context, BillActivity.class));
                         break;
                     case "Logout":
                         sh.clearData();

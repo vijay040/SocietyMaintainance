@@ -97,10 +97,17 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_maid);
             list.add(item);
 
+            /*item = new HomeItemModel();
+            item.setTitle("Your Bill");
+            item.setImage(R.drawable.ic_purse);
+            list.add(item);*/
+
             item = new HomeItemModel();
             item.setTitle("Logout");
             item.setImage(R.drawable.logout);
             list.add(item);
+
+
         } else if (type.equalsIgnoreCase("Employee")) {
             list = new ArrayList<>();
             item.setImage(R.drawable.ic_user);
@@ -182,10 +189,16 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_complain);
             list.add(item);
 
+            /*item = new HomeItemModel();
+            item.setTitle("Your Bill");
+            item.setImage(R.drawable.ic_purse);
+            list.add(item);*/
+
             item = new HomeItemModel();
             item.setTitle("Logout");
             item.setImage(R.drawable.logout);
             list.add(item);
+
         }
 
         SideBarAdaptor adaptor = new SideBarAdaptor(this, list);

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
+import com.mmcs.societymaintainance.activity.BillActivity;
 import com.mmcs.societymaintainance.activity.ComplaintListActivity;
 import com.mmcs.societymaintainance.activity.DrawerActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
@@ -97,6 +98,9 @@ Shprefrences sh;
                         break;
                     case "Maid":
                         ctx.startActivity(new Intent(ctx, MaidActivity.class));
+                        break;
+                    case "Your Bill":
+                        ctx.startActivity(new Intent(ctx, BillActivity.class));
                         break;
                     case "Logout":
                         ((DrawerActivity)ctx).logOut();
