@@ -101,6 +101,7 @@ ProgressBar progress;
         txt_address.setText(getString(R.string.address) + visitorModels.getAddress());
         txtFloor.setText(getString(R.string.floor) + visitorModels.getFloor_no());
         txtUnit.setText(getString(R.string.unit_no) + visitorModels.getUnit_no());
+        txtIntime.setText(getString(R.string.time_in)+visitorModels.getIntime());
         Glide.with(this).load(visitorModels.getImage()).placeholder(R.drawable.no_image).into(image_visitor);
         image_visitor.setOnTouchListener(new ImageMatrixTouchHandler(VisitorNotificationActivity.this));
         SpannableStringBuilder sb = new SpannableStringBuilder(txtName.getText());
