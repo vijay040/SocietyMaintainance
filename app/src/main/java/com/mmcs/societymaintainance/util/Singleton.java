@@ -24,6 +24,7 @@ public class Singleton {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).connectTimeout(10, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES).build();
         Retrofit retrofit = new Retrofit.Builder()
