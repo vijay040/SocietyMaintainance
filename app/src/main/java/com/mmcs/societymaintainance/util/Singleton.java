@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Singleton {
     private static String baseUrL = "";
-    private static String devURL="http://incezo.com/api/";
+    private static String devURL="https://incezo.com/api/";
 
     private RetrofitApi api;
 
