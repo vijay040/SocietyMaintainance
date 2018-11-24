@@ -104,10 +104,6 @@ Shprefrences sh;
                         break;
                     case "Logout":
                         ((DrawerActivity)ctx).logOut();
-                        sh.clearData();
-                        Toast.makeText(ctx, ctx.getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
-                        Intent in = new Intent(ctx, LoginActivity.class);
-                        ctx.startActivity(in);
                         break;
 
                 }

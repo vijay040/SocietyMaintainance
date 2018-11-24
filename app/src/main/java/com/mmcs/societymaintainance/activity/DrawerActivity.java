@@ -288,7 +288,11 @@ public class DrawerActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().logOut(loginModel.getId(),loginModel.getType()).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
-
+                sh.clearData();
+                Toast.makeText(DrawerActivity.this, getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(DrawerActivity.this, LoginActivity.class);
+                DrawerActivity.this.startActivity(in);
+                finish();
             }
 
             @Override
