@@ -9,6 +9,7 @@ import com.mmcs.societymaintainance.model.OwnerRestMeta;
 import com.mmcs.societymaintainance.model.ResAttandance;
 import com.mmcs.societymaintainance.model.ResponseMeta;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
+import com.mmcs.societymaintainance.model.UploadImageResMeta;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
 
 import java.util.ArrayList;
@@ -105,7 +106,13 @@ public interface RetrofitApi {
 
     );
 
+    @Multipart
+    @POST("update_profile_api.php")
+    Call<UploadImageResMeta> updateUserProfile(@Part("id") RequestBody id,@Field("ddlLoginType") RequestBody  ddlLoginType,@Field("branch_id") RequestBody  branch_id
 
+            ,@Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
     @FormUrlEncoded
     @POST("update_visitor_api.php")
     Call<UnitRestMeta> updateVisitor(@Field("vid") String vid, @Field("txtOutTime") String txtOutTime);
