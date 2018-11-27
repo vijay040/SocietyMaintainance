@@ -108,10 +108,8 @@ public interface RetrofitApi {
 
     @Multipart
     @POST("update_profile_api.php")
-    Call<UploadImageResMeta> updateUserProfile(@Part("id") RequestBody id,@Field("ddlLoginType") RequestBody  ddlLoginType,@Field("branch_id") RequestBody  branch_id
-
+    Call<UploadImageResMeta> updateUserProfile(@Part("id") RequestBody id,@Part("ddlLoginType") RequestBody  ddlLoginType,@Part("branch_id") RequestBody  branch_id
             ,@Part("image\"; filename=\"profile.jpg") RequestBody image
-
     );
     @FormUrlEncoded
     @POST("update_visitor_api.php")

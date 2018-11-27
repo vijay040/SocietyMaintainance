@@ -272,12 +272,14 @@ public class ProfileActivity extends AppCompatActivity {
     public void updateUserProfile(String fileUrl) {
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
-        Log.e("***********", "*************" + imagPh.getAbsolutePath());
+        //Log.e("***********", "*************" + imagPh.getAbsolutePath());
         if (imagPh != null)
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), loginModel.getId());
         RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), loginModel.getType());
         RequestBody branch_id = RequestBody.create(MediaType.parse("text/plain"), loginModel.getBranch_id());
+        Log.e("***********", "*************" + imagPh.getAbsolutePath());
+
 
         Singleton.getInstance().getApi().updateUserProfile(requestId,requesttype,branch_id,imgFile).enqueue(new Callback<UploadImageResMeta>() {
             @Override
