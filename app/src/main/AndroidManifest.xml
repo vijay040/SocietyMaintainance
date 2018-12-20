@@ -124,6 +124,7 @@
         <activity android:name=".activity.BroadcastNotifiActivity" />
         <activity android:name=".activity.EmergancyAlarmActivity" />
         <activity android:name=".activity.BillActivity"></activity>
+        <activity android:name=".activity.RegisterNewUserActivity"></activity>
     </application>
 
 </manifest>

@@ -75,7 +75,6 @@ ProgressBar progress;
             }
         });
 
-
         Log.e("strID size" + strID.length, "***********************************id*****" + strID[1]);
     }
 
@@ -154,7 +153,6 @@ ProgressBar progress;
                 Toasty.success(VisitorNotificationActivity.this, "Data Successfully Submitted",
                         Toast.LENGTH_LONG).show();
                 finish();
-
             }
 
             @Override

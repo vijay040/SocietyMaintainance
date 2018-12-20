@@ -72,7 +72,7 @@ ProgressBar progress;
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterNewUserActivity.class);
                 startActivity(intent);
             }
         });

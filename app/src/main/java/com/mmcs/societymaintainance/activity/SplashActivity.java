@@ -20,7 +20,7 @@ import com.mmcs.societymaintainance.util.Shprefrences;
 public class SplashActivity extends AppCompatActivity {
     ImageView image_wlcm, image_view;
     Animation animBlink, animZoom_out;
-Shprefrences sh;
+    Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);

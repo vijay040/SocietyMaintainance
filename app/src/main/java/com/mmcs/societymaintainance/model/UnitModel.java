@@ -41,4 +41,6 @@ public class UnitModel {
     public void setFloor_no(String floor_no) {
         this.floor_no = floor_no;
     }
+
+
 }

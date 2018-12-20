@@ -163,6 +163,7 @@
     <string name="login_model">LOGIN_MODEL</string>
     <string name="you_have_logged_out_successfully">You have logout successfully!</string>
     <string name="signout">Singout</string>
+    <string name="select_branch">Select Branch</string>
     <string-array name="types">
         <item>Name</item>
         <item>Contact No.</item>
@@ -175,5 +176,11 @@
         <item>Renter</item>
         <item>Super Admin</item>
 
+    </string-array>
+
+    <string-array name="array_registertypes">
+        <item>Register Types</item>
+        <item>Owner</item>
+        <item>Renter</item>
     </string-array>
 </resources>

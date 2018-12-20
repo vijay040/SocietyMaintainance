@@ -60,7 +60,13 @@ public interface RetrofitApi {
     @POST("unitlist_get_api.php")
     Call<UnitRestMeta> getUnitList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
-       @FormUrlEncoded
+
+    @FormUrlEncoded
+    @POST("branch_get_api.php")
+    Call<UnitRestMeta> getBranchId(@Field("id") String id);
+
+
+    @FormUrlEncoded
     @POST("get_designation_api.php")
     Call<DesignationRestMeta> getDesignationList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
