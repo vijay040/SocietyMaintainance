@@ -15,6 +15,7 @@ import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.BroadcastNotifiActivity;
 import com.mmcs.societymaintainance.activity.ComplaintNotificationActivity;
 import com.mmcs.societymaintainance.activity.EmergancyAlarmActivity;
+import com.mmcs.societymaintainance.activity.SplashActivity;
 import com.mmcs.societymaintainance.activity.VisitorNotificationActivity;
 
 public class SocietyMessagingService extends FirebaseMessagingService {
@@ -47,6 +48,10 @@ public class SocietyMessagingService extends FirebaseMessagingService {
         }
         else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Broadcast Message!"))
             intent = new Intent(this, BroadcastNotifiActivity.class);
+
+        if(remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi your maid has been CheckedIn!")||
+                remoteMessage.getNotification().getTitle().equalsIgnoreCase("Hi your maid has been CheckedOut!"))
+            intent = new Intent(this, SplashActivity.class);
 
         intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
         sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
