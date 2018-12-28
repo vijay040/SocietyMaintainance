@@ -9,6 +9,8 @@ public class LoginModel {
 
     private String b_contact_no;
 
+   private String contact;
+
     private String added_date;
 
     private String b_address;
@@ -26,6 +28,46 @@ public class LoginModel {
     private String member_type;
 
     private String unit;
+
+    private String nid;
+
+    private String r_floor_no;
+
+    private String image;
+
+    private String password;
+
+    private String r_gone_date;
+
+    private String b_email;
+
+    private String email;
+
+    private String address;
+
+    private String name;
+
+    private String r_month;
+
+    private String b_status;
+
+    private String r_unit_no;
+
+    private String branch_id;
+
+    private String branch_name;
+
+    private String floor_no;
+
+    private String unit_no;
+
+    private String designation;
+
+    private String ending_date;
+
+    private String pre_address;
+
+    private String date;
 
     public String getUnit() {
         return unit;
@@ -283,45 +325,5 @@ public class LoginModel {
         this.date = date;
     }
 
-    private String nid;
 
-    private String r_floor_no;
-
-    private String image;
-
-    private String contact;
-
-    private String password;
-
-    private String r_gone_date;
-
-    private String b_email;
-
-    private String email;
-
-    private String address;
-
-    private String name;
-
-    private String r_month;
-
-    private String b_status;
-
-    private String r_unit_no;
-
-    private String branch_id;
-
-    private String branch_name;
-
-    private String floor_no;
-
-    private String unit_no;
-
-    private String designation;
-
-    private String ending_date;
-
-    private String pre_address;
-
-    private String date;
 }

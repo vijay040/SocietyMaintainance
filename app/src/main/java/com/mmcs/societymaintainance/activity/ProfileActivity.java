@@ -68,7 +68,9 @@ public class ProfileActivity extends AppCompatActivity {
         text_edit=findViewById(R.id.text_edit);
         sh=new Shprefrences(this);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
-        edt_txt_first_name.setText(loginModel.getName());
+        edt_txt_first_name.setText(loginModel.getName().split(" ")[0]);
+        if(loginModel.getName().split(" ").length>1)
+        edt_txt_last_name.setText(loginModel.getName().split(" ")[1]);
         edt_email_id.setText(loginModel.getEmail());
         edt_Flate_no.setText(loginModel.getUnit());
         edt_phone.setText(loginModel.getContact());
