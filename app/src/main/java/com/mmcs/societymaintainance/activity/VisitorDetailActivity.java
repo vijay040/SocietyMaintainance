@@ -37,7 +37,7 @@ import retrofit2.Response;
 
 public class VisitorDetailActivity extends AppCompatActivity {
     VisitorModel visitorModel;
-    TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
+    TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime,txt_visitorid;
     ImageView image_visitor, imgStatus;
     Button btn_close;
     EditText edt_time_out;
@@ -64,6 +64,8 @@ public class VisitorDetailActivity extends AppCompatActivity {
         btn_close = findViewById(R.id.btn_close);
         edt_time_out = findViewById(R.id.edt_time_out);
         imgStatus = findViewById(R.id.imgStatus);
+        txt_visitorid=findViewById(R.id.txt_visitorid);
+        txt_visitorid.setText("Visitor ID:"+visitorModel.getVisitor_id());
         mSwipeRefreshLayout = findViewById(R.id.mSwipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

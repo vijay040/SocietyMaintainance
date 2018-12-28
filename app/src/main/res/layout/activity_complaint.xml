@@ -40,16 +40,18 @@
                     android:paddingLeft="@dimen/_15sdp"
                     android:singleLine="true"
                     android:textColor="#6d6e71"
+                    android:visibility="gone"
                     android:textSize="@dimen/_11sdp" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:background="@color/view_devider" />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:text="Select Related Department"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:textColor="@color/title_color"

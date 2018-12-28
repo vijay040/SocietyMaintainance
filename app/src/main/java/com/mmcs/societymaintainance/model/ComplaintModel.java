@@ -20,6 +20,15 @@ public class ComplaintModel implements Serializable {
     public boolean isVisible = false;
     private String message;
     private String code;
+    private String complain_idd;
+
+    public String getComplain_idd() {
+        return complain_idd;
+    }
+
+    public void setComplain_idd(String complain_idd) {
+        this.complain_idd = complain_idd;
+    }
 
     public String getMessage() {
         return message;

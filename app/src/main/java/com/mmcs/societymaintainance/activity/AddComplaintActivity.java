@@ -84,11 +84,11 @@ public class AddComplaintActivity extends AppCompatActivity implements  SearchVi
                 String description=edt_description.getText().toString();
                 String date=edt_date.getText().toString();
                 String dept=edt_department.getText().toString();
-                if(title.equals("")){
+               /* if(title.equals("")){
                     Toasty.error(AddComplaintActivity.this,"Enter Complaint Title",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(description.equals("")){
+                else*/ if(description.equals("")){
                     Toasty.error(AddComplaintActivity.this,"Enter Complaint Description",Toast.LENGTH_SHORT).show();
                     return;
                 }

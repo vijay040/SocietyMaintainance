@@ -18,6 +18,16 @@ public class VisitorModel implements Serializable {
     private String image;
     private String vid;
     private String status;
+    private String visitor_id;
+
+
+    public String getVisitor_id() {
+        return visitor_id;
+    }
+
+    public void setVisitor_id(String visitor_id) {
+        this.visitor_id = visitor_id;
+    }
 
     public String getStatus() {
         return status;

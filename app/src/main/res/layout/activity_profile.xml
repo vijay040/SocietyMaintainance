@@ -221,7 +221,7 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:text="@string/submit" />
+                android:text="OK" />
 
 
         </LinearLayout>

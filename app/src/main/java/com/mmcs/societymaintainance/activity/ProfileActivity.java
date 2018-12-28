@@ -1,4 +1,5 @@
 package com.mmcs.societymaintainance.activity;
+
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -50,29 +52,34 @@ public class ProfileActivity extends AppCompatActivity {
     TextView text_edit;
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
-  EditText edt_txt_first_name,edt_txt_last_name,edt_email_id,edt_Flate_no,edt_phone,edt_Address,edt_designation;
+    EditText edt_txt_first_name, edt_txt_last_name, edt_email_id, edt_Flate_no, edt_phone, edt_Address, edt_designation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        imgProfile=findViewById(R.id.imgProfile);
-        edt_txt_first_name=findViewById(R.id.edt_txt_first_name);
-        edt_txt_last_name=findViewById(R.id.edt_txt_last_name);
-        edt_email_id=findViewById(R.id.edt_email_id);
-        edt_Flate_no=findViewById(R.id.edt_Flate_no);
-        edt_phone=findViewById(R.id.edt_phone);
-        edt_designation=findViewById(R.id.edt_designation);
-        edt_Address=findViewById(R.id.edt_Address);
-        text_edit=findViewById(R.id.text_edit);
-        sh=new Shprefrences(this);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        imgProfile = findViewById(R.id.imgProfile);
+        edt_txt_first_name = findViewById(R.id.edt_txt_first_name);
+        edt_txt_last_name = findViewById(R.id.edt_txt_last_name);
+        edt_email_id = findViewById(R.id.edt_email_id);
+        edt_Flate_no = findViewById(R.id.edt_Flate_no);
+        edt_phone = findViewById(R.id.edt_phone);
+        edt_designation = findViewById(R.id.edt_designation);
+        edt_Address = findViewById(R.id.edt_Address);
+        text_edit = findViewById(R.id.text_edit);
+        sh = new Shprefrences(this);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         edt_txt_first_name.setText(loginModel.getName().split(" ")[0]);
-        if(loginModel.getName().split(" ").length>1)
-        edt_txt_last_name.setText(loginModel.getName().split(" ")[1]);
+        if (loginModel.getName().split(" ").length > 1)
+            edt_txt_last_name.setText(loginModel.getName().split(" ")[1]);
         edt_email_id.setText(loginModel.getEmail());
-        edt_Flate_no.setText(loginModel.getUnit());
+
+        if (loginModel.getUnit()==null)
+            edt_Flate_no.setVisibility(View.GONE);
+        else
+            edt_Flate_no.setText(loginModel.getUnit());
         edt_phone.setText(loginModel.getContact());
         edt_Address.setText(loginModel.getPre_address());
         edt_designation.setText(loginModel.getMember_type());
@@ -95,12 +102,21 @@ public class ProfileActivity extends AppCompatActivity {
             edt_designation.setVisibility(View.VISIBLE);
         setTitle();
         back();
+       Button btn_submit=findViewById(R.id.btn_submit);
+       btn_submit.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               finish();
+           }
+       });
 
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.profile_title));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +126,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     Uri fileUri;
 
     private void selectImage() {
@@ -137,6 +154,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
     private void openGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
@@ -151,10 +169,10 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
                 Picasso.get().load(fileUri).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
-               updateUserProfile(imageImagePath);
+                updateUserProfile(imageImagePath);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -165,10 +183,10 @@ public class ProfileActivity extends AppCompatActivity {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
-                    Picasso.get().load(file).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100,100).into(imgProfile);
-                   updateUserProfile(imageImagePath);
+                    File file = new File(imageImagePath);
+                    resize(file, "");
+                    Picasso.get().load(file).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100, 100).into(imgProfile);
+                    updateUserProfile(imageImagePath);
                 }
             }
         }
@@ -226,8 +244,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         return selectedImaeUri.getPath();
     }
+
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -239,8 +259,8 @@ public class ProfileActivity extends AppCompatActivity {
             int h = bitmap.getHeight();
             Log.e("width & Height", "width " + bitmap.getWidth());
             if (bitmap.getWidth() > 1200) {
-                w = (bitmap.getWidth() * 30 )/ 100;
-                h =(bitmap.getHeight() * 30) / 100;
+                w = (bitmap.getWidth() * 30) / 100;
+                h = (bitmap.getHeight() * 30) / 100;
             }
 
             Log.e("width & Height", "width " + w + " height " + h);
@@ -271,10 +291,11 @@ public class ProfileActivity extends AppCompatActivity {
             Log.e("Exception", "Exception in resizing image");
         }
     }
+
     public void updateUserProfile(String fileUrl) {
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
-        //Log.e("***********", "*************" + imagPh.getAbsolutePath());
+        Log.e("***********", "*************" + imagPh.getAbsolutePath());
         if (imagPh != null)
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), loginModel.getId());
@@ -283,14 +304,16 @@ public class ProfileActivity extends AppCompatActivity {
         Log.e("***********", "*************" + imagPh.getAbsolutePath());
 
 
-        Singleton.getInstance().getApi().updateUserProfile(requestId,requesttype,branch_id,imgFile).enqueue(new Callback<UploadImageResMeta>() {
+        Singleton.getInstance().getApi().updateUserProfile(requestId, requesttype, branch_id, imgFile).enqueue(new Callback<UploadImageResMeta>() {
             @Override
             public void onResponse(Call<UploadImageResMeta> call, Response<UploadImageResMeta> response) {
-                if (response.body().getCode().equalsIgnoreCase("200")) {
-                    UploadImageModel up = response.body().getData();
-                    loginModel.setImage(up.getImage());
+
+
+                if (response.isSuccessful()) {
+
+                    loginModel.setImage(response.body().getResponse().get(0).getImage());
                     sh.setLoginModel(getString(R.string.login_model), loginModel);
-                    // Picasso.get().load(up.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+                    //Picasso.get().load(up.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
                 }
             }
 
@@ -300,7 +323,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

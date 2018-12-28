@@ -29,13 +29,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ComplaintDetailActivity extends AppCompatActivity {
-ComplaintModel complaintModel;
-TextView txtDepartment,txtTitle,txtDate,txt_c_des,txtStatus, txtFloor, txtUnit;
-EditText edt_comment;
+    ComplaintModel complaintModel;
+    TextView txtDepartment, txtTitle, txtDate, txt_c_des, txtStatus, txtFloor, txtUnit;
+    EditText edt_comment;
     LoginModel loginModel;
-Button btn_ok,resolved;
+    Button btn_ok, resolved;
     Shprefrences sh;
     ProgressBar progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -43,53 +44,51 @@ Button btn_ok,resolved;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_detail);
         complaintModel = (ComplaintModel) getIntent().getSerializableExtra(getString(R.string.comp_model));
-        txtDepartment=findViewById(R.id.txtDepartment);
-        txtTitle=findViewById(R.id.txtTitle);
-        sh=new Shprefrences(this);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
-        txtDate=findViewById(R.id.txtDate);
-        txt_c_des=findViewById(R.id.txt_c_des);
-        txtStatus=findViewById(R.id.txtStatus);
+        txtDepartment = findViewById(R.id.txtDepartment);
+        txtTitle = findViewById(R.id.txtTitle);
+        sh = new Shprefrences(this);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
+        txtDate = findViewById(R.id.txtDate);
+        txt_c_des = findViewById(R.id.txt_c_des);
+        txtStatus = findViewById(R.id.txtStatus);
         txtFloor = findViewById(R.id.txtFloor);
         txtUnit = findViewById(R.id.txtUnit);
-        btn_ok=findViewById(R.id.btn_ok);
+        btn_ok = findViewById(R.id.btn_ok);
         progress = findViewById(R.id.progress);
-        resolved=findViewById(R.id.resolved);
-        edt_comment=findViewById(R.id.edt_comment);
+        resolved = findViewById(R.id.resolved);
+        edt_comment = findViewById(R.id.edt_comment);
         txtFloor.setText(getString(R.string.floor) + complaintModel.getFloor_no());
         txtUnit.setText(getString(R.string.unit_no) + complaintModel.getUnit_no());
 
-        txtDepartment.setText(getString(R.string.dept)+complaintModel.getDepartment());
-        txtTitle.setText(getString(R.string.titl)+complaintModel.getTitle());
-        txtDate.setText(getString(R.string.date)+complaintModel.getDate());
-        txt_c_des.setText(getString(R.string.desc)+complaintModel.getC_description());
-        txtStatus.setText(getString(R.string.status)+complaintModel.getStatus());
-        if (complaintModel.getStatus().equalsIgnoreCase("PENDING") && complaintModel.getAssign_id().equalsIgnoreCase(loginModel.getId()))
-        {
+        txtDepartment.setText(getString(R.string.dept) + complaintModel.getDepartment());
+        txtTitle.setText("Complain ID:" + complaintModel.getComplain_idd());
+        //txtTitle.setVisibility(View.GONE);
+        txtDate.setText(getString(R.string.date) + complaintModel.getDate());
+        txt_c_des.setText(getString(R.string.desc) + complaintModel.getC_description());
+        txtStatus.setText(getString(R.string.status) + complaintModel.getStatus());
+        if (complaintModel.getStatus().equalsIgnoreCase("PENDING") && complaintModel.getAssign_id().equalsIgnoreCase(loginModel.getId())) {
             edt_comment.setVisibility(View.VISIBLE);
             resolved.setVisibility(View.VISIBLE);
-        }
-       else
+        } else
             btn_ok.setVisibility(View.VISIBLE);
 
         resolved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String msg=edt_comment.getText().toString();
-                if (msg.equals("")){
-                    Toasty.error(ComplaintDetailActivity.this,"Please Enter Your Comment", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                String msg = edt_comment.getText().toString();
+                if (msg.equals("")) {
+                    Toasty.error(ComplaintDetailActivity.this, "Please Enter Your Comment", Toast.LENGTH_SHORT).show();
+                } else {
                     progress.setVisibility(View.VISIBLE);
-                postComplaintStatus(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id(),getString(R.string.resolved),msg);
-            }
+                    postComplaintStatus(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), getString(R.string.resolved), msg);
+                }
             }
 
         });
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               finish();
+                finish();
             }
 
         });
@@ -102,7 +101,7 @@ Button btn_ok,resolved;
 
         sb = new SpannableStringBuilder(txtTitle.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 11, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtTitle.setText(sb);
 
         sb = new SpannableStringBuilder(txtFloor.getText());
@@ -130,17 +129,17 @@ Button btn_ok,resolved;
         txt_c_des.setText(sb);
         setTitle();
         back();
-        if(complaintModel.getStatus() != null && !complaintModel.getStatus().equals("")) {
+        if (complaintModel.getStatus() != null && !complaintModel.getStatus().equals("")) {
 
             switch (complaintModel.getStatus()) {
                 case "PENDING":
 //Pending
-                    String status = "<font color=#3F51B5>" +getString(R.string.status) + "</font>" + "<font color=#EF6C00>" + complaintModel.getStatus() + "</font>";
+                    String status = "<font color=#3F51B5>" + getString(R.string.status) + "</font>" + "<font color=#EF6C00>" + complaintModel.getStatus() + "</font>";
                     txtStatus.setText(Html.fromHtml(status));
                     break;
 
                 case "RESOLVED":
-                    String status1 = "<font color=#3F51B5>" +getString(R.string.status) + "</font>" + "<font color=#00C853>" + complaintModel.getStatus() + "</font>";
+                    String status1 = "<font color=#3F51B5>" + getString(R.string.status) + "</font>" + "<font color=#00C853>" + complaintModel.getStatus() + "</font>";
                     txtStatus.setText(Html.fromHtml(status1));
                     break;
 
@@ -148,6 +147,7 @@ Button btn_ok,resolved;
         }
 
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -157,15 +157,16 @@ Button btn_ok,resolved;
             }
         });
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.comp_detail));
     }
-    private void postComplaintStatus(String user_id,String type,String branchId,String status,String comment )
-    {
 
-        Singleton.getInstance().getApi().postComplaintStatus(user_id,type,""+branchId,status,comment,complaintModel.getComplain_id()
-                ).enqueue(new Callback<ComplaintRestMeta>() {
+    private void postComplaintStatus(String user_id, String type, String branchId, String status, String comment) {
+
+        Singleton.getInstance().getApi().postComplaintStatus(user_id, type, "" + branchId, status, comment, complaintModel.getComplain_id()
+        ).enqueue(new Callback<ComplaintRestMeta>() {
             @Override
             public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
                 Toasty.success(ComplaintDetailActivity.this, " Successfully Updated",
@@ -177,7 +178,7 @@ Button btn_ok,resolved;
             @Override
             public void onFailure(Call<ComplaintRestMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(ComplaintDetailActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(ComplaintDetailActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
 
             }
         });

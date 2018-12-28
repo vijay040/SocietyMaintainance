@@ -61,6 +61,7 @@ public class ComplaintAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.activity_complaintlist_item, null);
         }
         TextView txtTitle = view.findViewById(R.id.txtTitle);
+        txtTitle.setVisibility(View.GONE);
         txtTitle.setText(context.getString(R.string.titl)+list.get(i).getTitle());
         TextView   txtDate = view.findViewById(R.id.txtDate);
         TextView txtDepartment= view.findViewById(R.id.txtDepartment);
@@ -85,7 +86,10 @@ public class ComplaintAdapter extends BaseAdapter {
             hide.setImageResource( R.drawable.ic_down);
         }
 
-        imz_down.setOnClickListener(new View.OnClickListener() {
+        lay.setVisibility(View.VISIBLE);
+        hide.setVisibility(View.GONE);
+
+        /*imz_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 list.get(i).isVisible= !list.get(i).isVisible;
@@ -98,7 +102,7 @@ public class ComplaintAdapter extends BaseAdapter {
                     hide.setImageResource( R.drawable.ic_down);
                 }
             }
-        });
+        });*/
         if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
 
             switch (list.get(i).getStatus()) {

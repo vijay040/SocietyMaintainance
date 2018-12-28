@@ -1,33 +1,16 @@
 package com.mmcs.societymaintainance.model;
 
+import java.util.List;
+
 public class UploadImageResMeta {
-    private String message;
 
-    private UploadImageModel data;
+    private List<UploadImageModel> response;
 
-    private String code;
-
-    public String getMessage() {
-        return message;
+    public List<UploadImageModel> getResponse() {
+        return response;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public UploadImageModel getData() {
-        return data;
-    }
-
-    public void setData(UploadImageModel data) {
-        this.data = data;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
+    public void setResponse(List<UploadImageModel> response) {
+        this.response = response;
     }
 }
