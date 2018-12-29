@@ -1,11 +1,9 @@
 package com.mmcs.societymaintainance.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,14 +11,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,7 +27,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -47,7 +43,6 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.adaptor.DesignationAdapter;
 import com.mmcs.societymaintainance.adaptor.PlaceArrayAdapter;
 import com.mmcs.societymaintainance.model.DesignationModel;
 import com.mmcs.societymaintainance.model.DesignationRestMeta;
@@ -70,9 +65,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddDriverActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+public class AddOthersActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
-    EditText edt_joining_date, edt_ending_date, edt_name, edt_email, edt_mobile, edt_password, edt_national_id;
+    EditText edt_joining_date, edt_ending_date, edt_name, edt_email, edt_mobile, edt_password, edt_national_id,edt_type;
     Calendar calendar;
     int DD, MM, YY;
     ImageView imageView;
@@ -101,7 +96,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_driver);
+        setContentView(R.layout.add_others_activity);
         edt_joining_date = findViewById(R.id.edt_joining_date);
         edt_name = findViewById(R.id.edt_name);
         edt_email = findViewById(R.id.edt_email);
@@ -112,17 +107,21 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         edt_present_address = findViewById(R.id.edt_present_address);
         edt_permanent_address = findViewById(R.id.edt_permanent_address);
         edt_national_id = findViewById(R.id.edt_national_id);
+        edt_type= findViewById(R.id.edt_type);
         progress = findViewById(R.id.progress);
         edt_ending_date = findViewById(R.id.edt_ending_date);
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
         btn_take_photo = findViewById(R.id.btn_take_photo);
+       TextView txt_title=findViewById(R.id.txt_title);
+        txt_title.setText("Add Others");
+        txt_title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_team, 0);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
-        mGoogleApiClient = new GoogleApiClient.Builder(AddDriverActivity.this)
+        mGoogleApiClient = new GoogleApiClient.Builder(AddOthersActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
                 .addConnectionCallbacks(this)
@@ -157,34 +156,39 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
                 String national_id = edt_national_id.getText().toString();
                 String joining_date = edt_joining_date.getText().toString();
                 String ending_date = edt_ending_date.getText().toString();
+               String type= edt_type.getText().toString();
                 if (name.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (email.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                } else if (type.equals("")) {
+                    Toasty.error(AddOthersActivity.this, "Enter Registration Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (email.equals("")) {
+                    Toasty.error(AddOthersActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
-                    Toasty.error(AddDriverActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (password.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (present_add.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (permanent_add.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (national_id.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (joining_date.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Select Joining Date", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddOthersActivity.this, "Select Joining Date", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postEmployee(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
+                    postEmployee(type,loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
                 }
             }
         });
@@ -215,7 +219,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText(getString(R.string.add_dvr));
+        title.setText("Add Others");
     }
 
     private void back() {
@@ -231,7 +235,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
     private void selectImage() {
         final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel)};
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(AddDriverActivity.this);
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(AddOthersActivity.this);
         builder.setTitle(getString(R.string.add_photo));
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -435,13 +439,14 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
         return false;
     }
-    private void postEmployee(String userid,String type ,String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
+    private void postEmployee(String regtype,String userid,String type ,String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("****image*******", "*****imagepath********" + fileUrl);
         if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
+        RequestBody requestOtherType = RequestBody.create(MediaType.parse("text/plain"), regtype);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
         RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"),"" +branchid);
         RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), type);
@@ -458,11 +463,10 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         RequestBody requestStatus = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
-
-        Singleton.getInstance().getApi().postDriver(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postOthers(requestOtherType,requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
-                Toasty.success(AddDriverActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
+                Toasty.success(AddOthersActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
                 progress.setVisibility(View.GONE);
                 finish();
             }
@@ -470,7 +474,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(AddDriverActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(AddOthersActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -500,7 +504,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             //Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            Toast.makeText(AddDriverActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddOthersActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
 
         }
     };

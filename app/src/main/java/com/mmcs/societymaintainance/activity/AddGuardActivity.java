@@ -1,11 +1,9 @@
 package com.mmcs.societymaintainance.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,14 +11,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,7 +27,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -47,7 +43,6 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.mmcs.societymaintainance.R;
-import com.mmcs.societymaintainance.adaptor.DesignationAdapter;
 import com.mmcs.societymaintainance.adaptor.PlaceArrayAdapter;
 import com.mmcs.societymaintainance.model.DesignationModel;
 import com.mmcs.societymaintainance.model.DesignationRestMeta;
@@ -70,7 +65,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddDriverActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+public class AddGuardActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     EditText edt_joining_date, edt_ending_date, edt_name, edt_email, edt_mobile, edt_password, edt_national_id;
     Calendar calendar;
@@ -117,12 +112,15 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
         btn_take_photo = findViewById(R.id.btn_take_photo);
+       TextView txt_title=findViewById(R.id.txt_title);
+        txt_title.setText("Add Guard");
+        txt_title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_guard, 0);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
-        mGoogleApiClient = new GoogleApiClient.Builder(AddDriverActivity.this)
+        mGoogleApiClient = new GoogleApiClient.Builder(AddGuardActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
                 .addConnectionCallbacks(this)
@@ -158,29 +156,29 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
                 String joining_date = edt_joining_date.getText().toString();
                 String ending_date = edt_ending_date.getText().toString();
                 if (name.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (email.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
-                    Toasty.error(AddDriverActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (password.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (present_add.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (permanent_add.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (national_id.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (joining_date.equals("")) {
-                    Toasty.error(AddDriverActivity.this, "Select Joining Date", Toast.LENGTH_SHORT).show();
+                    Toasty.error(AddGuardActivity.this, "Select Joining Date", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
@@ -215,7 +213,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText(getString(R.string.add_dvr));
+        title.setText("Add Guard");
     }
 
     private void back() {
@@ -231,7 +229,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
     private void selectImage() {
         final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel)};
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(AddDriverActivity.this);
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(AddGuardActivity.this);
         builder.setTitle(getString(R.string.add_photo));
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -459,10 +457,10 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postDriver(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postGuard(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
-                Toasty.success(AddDriverActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
+                Toasty.success(AddGuardActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
                 progress.setVisibility(View.GONE);
                 finish();
             }
@@ -470,7 +468,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(AddDriverActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(AddGuardActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -500,7 +498,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             //Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            Toast.makeText(AddDriverActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddGuardActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
 
         }
     };

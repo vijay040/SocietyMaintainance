@@ -5,16 +5,17 @@
     <RelativeLayout
         android:id="@+id/layUser"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_120sdp"
+        android:layout_height="@dimen/_110sdp"
         android:layout_gravity="center"
         android:gravity="center"
        >
         <ImageView
             android:id="@+id/imgUserProfile"
-            android:layout_width="@dimen/_70sdp"
+            android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_centerHorizontal="true" />
+
         <TextView
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"

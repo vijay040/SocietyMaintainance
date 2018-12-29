@@ -53,6 +53,32 @@ public interface RetrofitApi {
     Call<EmployeeRestMeta> getEmployeeList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
     @FormUrlEncoded
+    @POST("maid_get_api.php")
+    Call<EmployeeRestMeta> getMaidList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
+
+
+    @FormUrlEncoded
+    @POST("driver_get_api.php")
+    Call<EmployeeRestMeta> getDriverList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
+
+    @FormUrlEncoded
+    @POST("guard_get_api.php")
+    Call<EmployeeRestMeta> getGuardList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
+
+    @FormUrlEncoded
+    @POST("other_get_api.php")
+    Call<EmployeeRestMeta> getOthersList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
+
+    @Multipart
+    @POST("add_other_post_api.php")
+    Call<LoginResMeta> postOthers(@Part("other_type") RequestBody other_type,@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
+                                  @Part("txtEmpName") RequestBody txtEmpName, @Part("txtEmpEmail") RequestBody txtEmpEmail, @Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
+                                  @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate, @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password, @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
+
+    @FormUrlEncoded
     @POST("floorlist_get_api.php")
     Call<ResponseMeta> getFloorList(@Field("id") String id, @Field("ddlLoginType") String ddlLoginType, @Field("branch_id") String branch_id);
 
@@ -111,6 +137,33 @@ public interface RetrofitApi {
                                     @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate, @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password, @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
+
+    @Multipart
+    @POST("add_maid_post_api.php")
+    Call<LoginResMeta> postMaid(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
+                                    @Part("txtEmpName") RequestBody txtEmpName, @Part("txtEmpEmail") RequestBody txtEmpEmail, @Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
+                                    @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate, @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password, @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
+    @Multipart
+    @POST("add_driver_post_api.php")
+    Call<LoginResMeta> postDriver(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
+                                @Part("txtEmpName") RequestBody txtEmpName, @Part("txtEmpEmail") RequestBody txtEmpEmail, @Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
+                                @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate, @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password, @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
+
+
+    @Multipart
+    @POST("add_guard_post_api.php")
+    Call<LoginResMeta> postGuard(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
+                                 @Part("txtEmpName") RequestBody txtEmpName, @Part("txtEmpEmail") RequestBody txtEmpEmail, @Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
+                                 @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate, @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password, @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
 
     @Multipart
     @POST("update_profile_api.php")

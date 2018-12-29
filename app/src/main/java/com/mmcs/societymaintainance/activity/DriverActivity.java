@@ -120,17 +120,13 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
 
     public void getEmployee(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getEmployeeList(userid,type ,branchid).enqueue(new Callback<EmployeeRestMeta>() {
+        Singleton.getInstance().getApi().getDriverList(userid,type ,branchid).enqueue(new Callback<EmployeeRestMeta>() {
             @Override
             public void onResponse(Call<EmployeeRestMeta> call, Response<EmployeeRestMeta> response) {
                 if(response.body()==null)
                     return;
-                ArrayList<EmployeeModel> model=response.body().getResponse();
-                for(EmployeeModel m:model)
-                {
-                    if(m.getMember_type().equalsIgnoreCase("DRIVER"))
-                        employeeModels.add(m);
-                }
+                employeeModels=response.body().getResponse();
+
                 employeeAdapter=new EmployeeAdapter(DriverActivity.this,employeeModels);
                 listEmployee.setAdapter(employeeAdapter);
                 listEmployee.setEmptyView(findViewById(R.id.imz_nodata));

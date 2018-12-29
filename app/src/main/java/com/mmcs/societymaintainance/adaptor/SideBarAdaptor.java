@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
@@ -18,8 +17,9 @@ import com.mmcs.societymaintainance.activity.ComplaintListActivity;
 import com.mmcs.societymaintainance.activity.DrawerActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
-import com.mmcs.societymaintainance.activity.LoginActivity;
+import com.mmcs.societymaintainance.activity.GaurdActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
+import com.mmcs.societymaintainance.activity.OthersActivity;
 import com.mmcs.societymaintainance.activity.OwnerListActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VisitorListActivity;
@@ -86,11 +86,10 @@ Shprefrences sh;
                     case "Complaint":
                         ctx.startActivity(new Intent(ctx, ComplaintListActivity.class));
                         break;
-                    case "Visitor Management":
+                    case "Visitor":
                         ctx.startActivity(new Intent(ctx, VisitorListActivity.class));
                         break;
-
-                    case "Add Employee":
+                    case "Employee":
                         ctx.startActivity(new Intent(ctx, EmployeeListActivity.class));
                         break;
                     case "Driver":
@@ -102,6 +101,11 @@ Shprefrences sh;
                     case "Your Bill":
                         ctx.startActivity(new Intent(ctx, BillActivity.class));
                         break;
+                    case "Guard":
+                        ctx.startActivity(new Intent(ctx, GaurdActivity.class));
+                        break;
+                    case "Others":
+                        ctx.startActivity(new Intent(ctx, OthersActivity.class));
                     case "Logout":
                         ((DrawerActivity)ctx).logOut();
                         break;

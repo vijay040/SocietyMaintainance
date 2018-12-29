@@ -103,6 +103,7 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
         sh = new Shprefrences(this);
         edt_mobile = findViewById(R.id.edt_mobile);
         edt_password = findViewById(R.id.edt_password);
+        edt_password.setVisibility(View.GONE);
         edt_present_address = findViewById(R.id.edt_present_address);
         edt_permanent_address = findViewById(R.id.edt_permanent_address);
         edt_national_id = findViewById(R.id.edt_national_id);
@@ -145,7 +146,7 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
                 String name = edt_name.getText().toString();
                 String email = edt_email.getText().toString();
                 String mobile = edt_mobile.getText().toString();
-                String password = edt_password.getText().toString();
+                String password = edt_password.getText().toString()+"12345";
                 String present_add = edt_present_address.getText().toString();
                 String permanent_add = edt_permanent_address.getText().toString();
                 String national_id = edt_national_id.getText().toString();
@@ -448,12 +449,12 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
-        RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), DesiId);
+        RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestStatus = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postMaid(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddMaidActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

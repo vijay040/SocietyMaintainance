@@ -37,10 +37,11 @@ public class EmployeeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if(list!=null)
+        if (list != null)
             return list.size();
         else return 0;
     }
+
     public void filter(ArrayList<EmployeeModel> newList) {
         list = new ArrayList<>();
         list.addAll(newList);
@@ -64,45 +65,45 @@ public class EmployeeAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.activity_employeelist_item, null);
         }
         TextView txtName = view.findViewById(R.id.txtName);
-        txtName.setText(context.getString(R.string.name)+list.get(i).getName());
-        TextView txtMobile=view.findViewById(R.id.txtMobile);
-        txtMobile.setText(context.getString(R.string.mobile_no)+list.get(i).getContact());
-        TextView txt_present_add=view.findViewById(R.id.txt_present_add);
-        txt_present_add.setText(context.getString(R.string.address)+list.get(i).getPre_address());
+        txtName.setText(context.getString(R.string.name) + list.get(i).getName());
+        TextView txtMobile = view.findViewById(R.id.txtMobile);
+        txtMobile.setText(context.getString(R.string.mobile_no) + list.get(i).getContact());
+        TextView txt_present_add = view.findViewById(R.id.txt_present_add);
+        txt_present_add.setText(context.getString(R.string.address) + list.get(i).getPre_address());
 
-        TextView txtEmail=view.findViewById(R.id.txtEmail);
-        txtEmail.setText(context.getString(R.string.email_add)+list.get(i).getEmail());
-        TextView txtDesignation=view.findViewById(R.id.txtDesignation);
-        txtDesignation.setText(context.getString(R.string.designation)+list.get(i).getMember_type());
-        TextView  txt_joining_date=view.findViewById(R.id.txt_joining_date);
-        txt_joining_date.setText(context.getString(R.string.joining_date)+list.get(i).getDate());
+        TextView txtEmail = view.findViewById(R.id.txtEmail);
+        txtEmail.setText(context.getString(R.string.email_add) + list.get(i).getEmail());
+        TextView txtDesignation = view.findViewById(R.id.txtDesignation);
+        txtDesignation.setText(context.getString(R.string.designation) + list.get(i).getMember_type());
+        if (list.get(i).getMember_type() == null)
+            txtDesignation.setVisibility(View.GONE);
+        TextView txt_joining_date = view.findViewById(R.id.txt_joining_date);
+        txt_joining_date.setText(context.getString(R.string.joining_date) + list.get(i).getDate());
 
 
-    final ImageView img = view.findViewById(R.id.img);
-        ImageView imz_down=view.findViewById(R.id.imz_down);
-        final ImageView   hide=view.findViewById(R.id.imz_down);
-        RelativeLayout relativeLayout=view.findViewById(R.id.relativelayout);
-        final RelativeLayout  lay=view.findViewById(R.id.lay);
-        if(list.get(i).isVisible()) {
+        final ImageView img = view.findViewById(R.id.img);
+        ImageView imz_down = view.findViewById(R.id.imz_down);
+        final ImageView hide = view.findViewById(R.id.imz_down);
+        RelativeLayout relativeLayout = view.findViewById(R.id.relativelayout);
+        final RelativeLayout lay = view.findViewById(R.id.lay);
+        if (list.get(i).isVisible()) {
             lay.setVisibility(View.VISIBLE);
-            hide.setImageResource( R.drawable.ic_up);
-        }
-        else {
+            hide.setImageResource(R.drawable.ic_up);
+        } else {
             lay.setVisibility(View.GONE);
-            hide.setImageResource( R.drawable.ic_down);
+            hide.setImageResource(R.drawable.ic_down);
         }
 
         imz_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                list.get(i).isVisible= !list.get(i).isVisible;
-                if(list.get(i).isVisible()) {
+                list.get(i).isVisible = !list.get(i).isVisible;
+                if (list.get(i).isVisible()) {
                     lay.setVisibility(View.VISIBLE);
                     hide.setImageResource(R.drawable.ic_up);
-                }
-                else {
+                } else {
                     lay.setVisibility(View.GONE);
-                    hide.setImageResource( R.drawable.ic_down);
+                    hide.setImageResource(R.drawable.ic_down);
                 }
             }
         });

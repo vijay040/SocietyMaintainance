@@ -56,6 +56,7 @@ public class MaidDetailActivity extends AppCompatActivity {
         txt_permanent_address=findViewById(R.id.txt_permanent_address);
         txt_joining_date=findViewById(R.id.txt_joining_date);
         txtDesignation=findViewById(R.id.txtDesignation);
+        txtDesignation.setVisibility(View.GONE);
         txtNationalId=findViewById(R.id.txtNationalId);
         edt_ending_date=findViewById(R.id.edt_ending_date);
         txtEnding=findViewById(R.id.txtEnding);

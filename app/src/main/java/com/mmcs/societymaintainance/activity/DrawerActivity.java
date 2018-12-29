@@ -58,7 +58,7 @@ public class DrawerActivity extends AppCompatActivity {
     public static ArrayList<HomeItemModel> list;
     LoginModel loginModel;
     ImageView imgProfile;
-     ImageView imgDrawer;
+    ImageView imgDrawer;
 
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {
@@ -81,7 +81,7 @@ public class DrawerActivity extends AppCompatActivity {
 
         txtName = findViewById(R.id.txtName);
         txtEmail = findViewById(R.id.txtEmail);
-        imgProfile=findViewById(R.id.imgProfile);
+        imgProfile = findViewById(R.id.imgProfile);
         txtFlateNo = findViewById(R.id.txtFlateNo);
         listView = findViewById(R.id.listItem);
         sh = new Shprefrences(this);
@@ -172,18 +172,13 @@ public class DrawerActivity extends AppCompatActivity {
             list.add(item);
 
             item = new HomeItemModel();
-            item.setTitle("Visitor Management");
+            item.setTitle("Visitor");
             item.setImage(R.drawable.ic_visitor);
             list.add(item);
 
             item = new HomeItemModel();
-            item.setTitle("Add Employee");
+            item.setTitle("Employee");
             item.setImage(R.drawable.ic_add_member);
-            list.add(item);
-
-            item = new HomeItemModel();
-            item.setTitle("Driver");
-            item.setImage(R.drawable.ic_driver);
             list.add(item);
 
             item = new HomeItemModel();
@@ -192,14 +187,32 @@ public class DrawerActivity extends AppCompatActivity {
             list.add(item);
 
             item = new HomeItemModel();
+            item.setTitle("Guard");
+            item.setImage(R.drawable.ic_guard);
+            list.add(item);
+
+            item = new HomeItemModel();
+            item.setTitle("Driver");
+            item.setImage(R.drawable.ic_driver);
+            list.add(item);
+
+            item = new HomeItemModel();
             item.setTitle("Maid");
             item.setImage(R.drawable.ic_maid);
             list.add(item);
 
             item = new HomeItemModel();
+            item.setTitle("Others");
+            item.setImage(R.drawable.ic_team);
+            list.add(item);
+
+
+            item = new HomeItemModel();
             item.setTitle("Logout");
             item.setImage(R.drawable.logout);
             list.add(item);
+
+
         } else if (type.equalsIgnoreCase("Renter")) {
             list = new ArrayList<>();
             item.setImage(R.drawable.ic_user);
@@ -207,6 +220,11 @@ public class DrawerActivity extends AppCompatActivity {
             list.add(item);
 
             item = new HomeItemModel();
+            item.setTitle("Complaint");
+            item.setImage(R.drawable.ic_complain);
+            list.add(item);
+
+            item = new HomeItemModel();
             item.setTitle("Driver");
             item.setImage(R.drawable.ic_driver);
             list.add(item);
@@ -214,11 +232,6 @@ public class DrawerActivity extends AppCompatActivity {
             item = new HomeItemModel();
             item.setTitle("Maid");
             item.setImage(R.drawable.ic_maid);
-            list.add(item);
-
-            item = new HomeItemModel();
-            item.setTitle("Complaint");
-            item.setImage(R.drawable.ic_complain);
             list.add(item);
 
             /*item = new HomeItemModel();
@@ -310,9 +323,8 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
 
-    public void logOut()
-    {
-        Singleton.getInstance().getApi().logOut(loginModel.getId(),loginModel.getType()).enqueue(new Callback<UnitRestMeta>() {
+    public void logOut() {
+        Singleton.getInstance().getApi().logOut(loginModel.getId(), loginModel.getType()).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
                 sh.clearData();

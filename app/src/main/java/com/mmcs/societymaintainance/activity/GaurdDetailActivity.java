@@ -2,8 +2,8 @@ package com.mmcs.societymaintainance.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -23,9 +23,7 @@ import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.EmployeeModel;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
-import com.mmcs.societymaintainance.util.CircleTransform;
 import com.mmcs.societymaintainance.util.Singleton;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
@@ -34,9 +32,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DriverDetailActivity extends AppCompatActivity {
+public class GaurdDetailActivity extends AppCompatActivity {
     EmployeeModel employeeModel;
-    TextView txtName, txt_mobile, txt_email, txt_present_address, txt_permanent_address, txt_joining_date, txtEnding, txtDesignation, txtNationalId;
+    TextView txtName,txt_mobile,txt_email,txt_present_address,txt_permanent_address,txt_joining_date,txtEnding,txtDesignation,txtNationalId;
     Button btn_close;
     ImageView image_employee;
     int cur = 0;
@@ -52,19 +50,19 @@ public class DriverDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_detail);
         employeeModel = (EmployeeModel) getIntent().getSerializableExtra(getString(R.string.driver_model));
-        txtName = findViewById(R.id.txtName);
-        txt_mobile = findViewById(R.id.txt_mobile);
-        txt_email = findViewById(R.id.txt_email);
-        txt_present_address = findViewById(R.id.txt_present_address);
-        txt_permanent_address = findViewById(R.id.txt_permanent_address);
-        txt_joining_date = findViewById(R.id.txt_joining_date);
-        txtDesignation = findViewById(R.id.txtDesignation);
+        txtName=findViewById(R.id.txtName);
+        txt_mobile=findViewById(R.id.txt_mobile);
+        txt_email=findViewById(R.id.txt_email);
+        txt_present_address=findViewById(R.id.txt_present_address);
+        txt_permanent_address=findViewById(R.id.txt_permanent_address);
+        txt_joining_date=findViewById(R.id.txt_joining_date);
+        txtDesignation=findViewById(R.id.txtDesignation);
         txtDesignation.setVisibility(View.GONE);
-        txtNationalId = findViewById(R.id.txtNationalId);
-        edt_ending_date = findViewById(R.id.edt_ending_date);
-        txtEnding = findViewById(R.id.txtEnding);
-        btn_close = findViewById(R.id.btn_close);
-        image_employee = findViewById(R.id.image_employee);
+        txtNationalId=findViewById(R.id.txtNationalId);
+        edt_ending_date=findViewById(R.id.edt_ending_date);
+        txtEnding=findViewById(R.id.txtEnding);
+        btn_close=findViewById(R.id.btn_close);
+        image_employee=findViewById(R.id.image_employee);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -90,8 +88,8 @@ public class DriverDetailActivity extends AppCompatActivity {
         txtNationalId.setText(getString(R.string.national) + employeeModel.getNid());
         txtDesignation.setText(getString(R.string.designation) + employeeModel.getMember_type());
         Glide.with(this).load(employeeModel.getImage()).placeholder(R.drawable.no_image).into(image_employee);
-        // Picasso.get().load(employeeModel.getImage()).transform(new CircleTransform()).placeholder(R.drawable.no_image).resize(100, 100).into(image_employee);
-        image_employee.setOnTouchListener(new ImageMatrixTouchHandler(DriverDetailActivity.this));
+       // Picasso.get().load(employeeModel.getImage()).transform(new CircleTransform()).placeholder(R.drawable.no_image).resize(100, 100).into(image_employee);
+        image_employee.setOnTouchListener(new ImageMatrixTouchHandler(GaurdDetailActivity.this));
         edt_ending_date.setText(employeeModel.getEnding_date());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtName.getText());
 
@@ -145,10 +143,11 @@ public class DriverDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (employeeModel.getEnding_date().equalsIgnoreCase("")) {
-                    String time_out = edt_ending_date.getText().toString();
-                    if (time_out.equals("")) {
-                        Toasty.error(DriverDetailActivity.this, "Select Ending Date", Toast.LENGTH_SHORT).show();
-                    } else {
+                    String time_out=edt_ending_date.getText().toString();
+                    if(time_out.equals("")){
+                        Toasty.error(GaurdDetailActivity.this,"Select Ending Date", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
                         updateEmployee(edt_ending_date.getText().toString());
                     }
 
@@ -157,12 +156,10 @@ public class DriverDetailActivity extends AppCompatActivity {
             }
         });
     }
-
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText(getString(R.string.driver_detail));
+        title.setText("Housekeeping Details");
     }
-
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +169,6 @@ public class DriverDetailActivity extends AppCompatActivity {
             }
         });
     }
-
     private void updateEmployee(String ending_date) {
         Singleton.getInstance().getApi().updateEmployee(employeeModel.getId(), ending_date).enqueue(new Callback<UnitRestMeta>() {
             @Override
@@ -186,7 +182,6 @@ public class DriverDetailActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -195,7 +190,7 @@ public class DriverDetailActivity extends AppCompatActivity {
                 cur = DATE_DIALOG_ID;
                 DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-                return datePickerDialog;
+                return  datePickerDialog;
 
         }
 
@@ -208,7 +203,7 @@ public class DriverDetailActivity extends AppCompatActivity {
 
             if (cur == DATE_DIALOG_ID) {
                 // set selected date into textview
-                if ((m + 1) < 10)
+                if  ((m + 1) < 10)
                     edt_ending_date.setText(String.valueOf(d) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(y));
                 else
                     edt_ending_date.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));

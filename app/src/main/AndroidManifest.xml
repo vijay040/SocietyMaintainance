@@ -88,6 +88,9 @@
         <activity android:name=".activity.MaidDetailActivity" />
         <activity android:name=".activity.ComplaintListActivity" />
         <activity android:name=".activity.VisitorNotificationActivity" />
+        <activity android:name=".activity.GaurdActivity" />
+        <activity android:name=".activity.GaurdDetailActivity" />
+        <activity android:name=".activity.AddGuardActivity" />
 
         <service
             android:name=".fcm.SocietyIstanceIDService"
@@ -125,6 +128,9 @@
         <activity android:name=".activity.EmergancyAlarmActivity" />
         <activity android:name=".activity.BillActivity"></activity>
         <activity android:name=".activity.RegisterNewUserActivity"></activity>
+        <activity android:name=".activity.OthersActivity"></activity>
+        <activity android:name=".activity.AddOthersActivity"></activity>
+        <activity android:name=".activity.OthersDetailActivity"></activity>
     </application>
 
 </manifest>

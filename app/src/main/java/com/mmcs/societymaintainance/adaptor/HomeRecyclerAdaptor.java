@@ -14,12 +14,13 @@ import android.widget.Toast;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.AttendanceActivity;
 import com.mmcs.societymaintainance.activity.BillActivity;
-import com.mmcs.societymaintainance.activity.BroadcastNotifiActivity;
 import com.mmcs.societymaintainance.activity.ComplaintListActivity;
 import com.mmcs.societymaintainance.activity.DriverActivity;
 import com.mmcs.societymaintainance.activity.EmployeeListActivity;
+import com.mmcs.societymaintainance.activity.GaurdActivity;
 import com.mmcs.societymaintainance.activity.LoginActivity;
 import com.mmcs.societymaintainance.activity.MaidActivity;
+import com.mmcs.societymaintainance.activity.OthersActivity;
 import com.mmcs.societymaintainance.activity.OwnerListActivity;
 import com.mmcs.societymaintainance.activity.ProfileActivity;
 import com.mmcs.societymaintainance.activity.VisitorListActivity;
@@ -83,11 +84,11 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                     case "Complaint":
                         context.startActivity(new Intent(context, ComplaintListActivity.class));
                         break;
-                    case "Visitor Management":
+                    case "Visitor":
                         context.startActivity(new Intent(context, VisitorListActivity.class));
                         break;
 
-                    case "Add Employee":
+                    case "Employee":
                         context.startActivity(new Intent(context, EmployeeListActivity.class));
                         break;
 
@@ -100,6 +101,13 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                     case "Your Bill":
                         context.startActivity(new Intent(context, BillActivity.class));
                         break;
+                    case "Guard":
+                        context.startActivity(new Intent(context, GaurdActivity.class));
+                        break;
+                    case "Others":
+                        context.startActivity(new Intent(context, OthersActivity.class));
+                        break;
+
                     case "Logout":
                         sh.clearData();
                         Toast.makeText(context, context.getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();

@@ -538,7 +538,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
-        RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), DesiId);
+        RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestStatus = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
