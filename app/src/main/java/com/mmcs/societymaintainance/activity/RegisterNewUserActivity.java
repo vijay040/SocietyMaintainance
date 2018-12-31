@@ -90,7 +90,7 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private static final String TAG = "AddOwnerActivity";
     private PlaceArrayAdapter mPlaceArrayAdapter;
-    String userType = "1";
+    String userType = "0";
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
 
@@ -650,10 +650,7 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
             Toast.makeText(this, "Please select Register Type", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (spnUserType.getSelectedItemPosition() == 1)
-            userType = "2";
-        else
-            userType = "4";
+        userType = spnUserType.getSelectedItemPosition()+"";
 
         Singleton.getInstance().getApi().getBranchId("0000" + spnUserType.getSelectedItemPosition()).enqueue(new Callback<UnitRestMeta>() {
             @Override

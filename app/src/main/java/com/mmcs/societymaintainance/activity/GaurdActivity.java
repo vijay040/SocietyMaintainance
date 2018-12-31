@@ -52,7 +52,7 @@ public class GaurdActivity extends AppCompatActivity implements SearchView.OnQue
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
-        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+       // getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +65,7 @@ public class GaurdActivity extends AppCompatActivity implements SearchView.OnQue
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 EmployeeAdapter adapter = (EmployeeAdapter) adapterView.getAdapter();
                 EmployeeModel model = adapter.list.get(i);
-                Intent intent = new Intent(GaurdActivity.this, DriverDetailActivity.class);
+                Intent intent = new Intent(GaurdActivity.this, GaurdDetailActivity.class);
                 intent.putExtra(getString(R.string.driver_model), model);
                 startActivity(intent);
             }
@@ -76,6 +76,14 @@ public class GaurdActivity extends AppCompatActivity implements SearchView.OnQue
         TextView title = (TextView) findViewById(R.id.title);
         title.setText("Guards");
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+    }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener(){

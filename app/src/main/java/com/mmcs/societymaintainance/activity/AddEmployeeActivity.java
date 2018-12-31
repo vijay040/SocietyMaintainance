@@ -155,7 +155,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                 String present_add = edt_present_address.getText().toString();
                 String permanent_add = edt_permanent_address.getText().toString();
                 String national_id = edt_national_id.getText().toString();
-                String designation = edt_designation.getText().toString();
+              //  String designation = edt_designation.getText().toString();
                 String joining_date = edt_joining_date.getText().toString();
                 String ending_date = edt_ending_date.getText().toString();
                 if (name.equals("")) {
@@ -179,7 +179,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                 } else if (national_id.equals("")) {
                     Toasty.error(AddEmployeeActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (designation.equals("")) {
+                } else if (DesiId.equals("")) {
                     Toasty.error(AddEmployeeActivity.this, "Select Designation", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (joining_date.equals("")) {
@@ -400,7 +400,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
     AlertDialog alertDialog;
     ArrayList<DesignationModel> designationModels;
     DesignationAdapter designationAdapter;
-    String DesiId;
+    String DesiId="";
     private int popupId = 0;
 
     private void showDesignationPopup() {
@@ -538,12 +538,13 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
-        RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody requestdesign = RequestBody.create(MediaType.parse("text/plain"), DesiId);
         RequestBody requestStatus = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestpreAddress, requestper_Address, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestpreAddress,
+      requestper_Address, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddEmployeeActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

@@ -168,7 +168,7 @@ public class MaidDetailActivity extends AppCompatActivity {
         });
     }
     private void updateEmployee(String ending_date) {
-        Singleton.getInstance().getApi().updateEmployee(employeeModel.getId(), ending_date).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().updateOthers(employeeModel.getId(), ending_date,"MAID").enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
                 finish();

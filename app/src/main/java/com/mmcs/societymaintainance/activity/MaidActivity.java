@@ -60,7 +60,7 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
-        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+       // getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +87,14 @@ public class MaidActivity extends AppCompatActivity implements SearchView.OnQuer
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.maid));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+    }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener(){

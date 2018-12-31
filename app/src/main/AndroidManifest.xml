@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -28,10 +29,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SliderActivity">
+        <activity android:name=".activity.SliderActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -51,46 +51,62 @@
             android:name=".activity.ProfileActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.AddComplaintActivity"
+            android:name=".activity.AddComplaintActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.SplashActivity" />
-        <activity android:name=".activity.NoticeActivity" />
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.NoticeActivity" android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.AddVisitorActivity"
+            android:name=".activity.AddVisitorActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.AddOwnerActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.AddVendorAvtivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.VehicleActivity" />
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait" />
+        <activity android:name=".activity.VehicleActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegistrationActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.AttendanceActivity" />
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait" />
+        <activity android:name=".activity.AttendanceActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.AddEmployeeActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.DriverActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MaidActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.VisitorListActivity" />
-        <activity android:name=".activity.VisitorDetailActivity" />
-        <activity android:name=".activity.EmployeeListActivity" />
-        <activity android:name=".activity.EmployeeDetailActivity" />
-        <activity android:name=".activity.OwnerListActivity" />
-        <activity android:name=".activity.OwnerDetailActivity" />
-        <activity android:name=".activity.DriverDetailActivity" />
-        <activity android:name=".activity.MaidDetailActivity" />
-        <activity android:name=".activity.ComplaintListActivity" />
-        <activity android:name=".activity.VisitorNotificationActivity" />
-        <activity android:name=".activity.GaurdActivity" />
-        <activity android:name=".activity.GaurdDetailActivity" />
-        <activity android:name=".activity.AddGuardActivity" />
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.VisitorListActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.VisitorDetailActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.EmployeeListActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.EmployeeDetailActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.OwnerListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.OwnerDetailActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DriverDetailActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.MaidDetailActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ComplaintListActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.VisitorNotificationActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GaurdActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.GaurdDetailActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.AddGuardActivity"
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="portrait"/>
 
         <service
             android:name=".fcm.SocietyIstanceIDService"
@@ -120,17 +136,39 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/them_color" />
 
-        <activity android:name=".activity.AddDriverActivity" />
-        <activity android:name=".activity.AddMaidActivity" />
-        <activity android:name=".activity.ComplaintDetailActivity" />
-        <activity android:name=".activity.ComplaintNotificationActivity" />
-        <activity android:name=".activity.BroadcastNotifiActivity" />
-        <activity android:name=".activity.EmergancyAlarmActivity" />
-        <activity android:name=".activity.BillActivity"></activity>
-        <activity android:name=".activity.RegisterNewUserActivity"></activity>
-        <activity android:name=".activity.OthersActivity"></activity>
-        <activity android:name=".activity.AddOthersActivity"></activity>
-        <activity android:name=".activity.OthersDetailActivity"></activity>
+        <activity
+            android:name=".activity.AddDriverActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.AddMaidActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.ComplaintDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.ComplaintNotificationActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.BroadcastNotifiActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.EmergancyAlarmActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.BillActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".activity.RegisterNewUserActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".activity.OthersActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".activity.AddOthersActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".activity.OthersDetailActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

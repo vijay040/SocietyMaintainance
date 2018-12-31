@@ -37,7 +37,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@color/white_color"
-                android:hint="@string/name"
+                android:hint="Name"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"

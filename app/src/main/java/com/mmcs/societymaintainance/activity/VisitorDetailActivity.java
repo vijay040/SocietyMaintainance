@@ -218,7 +218,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
 
         sb = new SpannableStringBuilder(txtFloor.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtFloor.setText(sb);
 
         sb = new SpannableStringBuilder(txtUnit.getText());

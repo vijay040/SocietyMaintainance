@@ -40,7 +40,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("complain_get_api.php")
-    Call<ComplaintRestMeta> getComplaintList(@Field("id") String id, @Field("ddlLoginType") String type, @Field("branch_id") String branch_id);
+    Call<ComplaintRestMeta> getComplaintList(@Field("id") String id, @Field("ddlLoginType") String type, @Field("branch_id") String branch_id, @Field("floor_id") String floor_id,@Field("unit_id") String unit_id);
 
 
     @FormUrlEncoded
@@ -133,8 +133,13 @@ public interface RetrofitApi {
     @Multipart
     @POST("add_employee_post_api.php")
     Call<LoginResMeta> postEmployee(@Part("id") RequestBody id, @Part("ddlLoginType") RequestBody ddlLoginType, @Part("branch_id") RequestBody branch_id,
-                                    @Part("txtEmpName") RequestBody txtEmpName, @Part("txtEmpEmail") RequestBody txtEmpEmail, @Part("txtEmpContact") RequestBody txtEmpContact, @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
-                                    @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID, @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate, @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password, @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
+                                    @Part("txtEmpName") RequestBody txtEmpName, @Part("txtEmpEmail") RequestBody txtEmpEmail,
+                                    @Part("txtEmpContact") RequestBody txtEmpContact,
+                                    @Part("txtEmpPreAddress") RequestBody txtEmpPreAddress,
+                                    @Part("txtEmpPerAddress") RequestBody txtEmpPerAddress, @Part("txtEmpNID") RequestBody txtEmpNID,
+                                    @Part("ddlMemberType") RequestBody ddlMemberType, @Part("txtEmpDate") RequestBody txtEmpDate,
+                                    @Part("txtEndingDate") RequestBody txtEndingDate, @Part("e_password") RequestBody e_password,
+                                    @Part("e_status") RequestBody e_status, @Part("added_date") RequestBody added_date, @Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
 
@@ -181,6 +186,11 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("update_employee_api.php")
     Call<UnitRestMeta> updateEmployee(@Field("eid") String eid, @Field("ending_date") String ending_date);
+
+    @FormUrlEncoded
+    @POST("update_other_api.php")
+    Call<UnitRestMeta> updateOthers(@Field("eid") String eid, @Field("ending_date") String ending_date,@Field("other_type") String other_type);
+
 
     @FormUrlEncoded
     @POST("update_fcm_token.php")

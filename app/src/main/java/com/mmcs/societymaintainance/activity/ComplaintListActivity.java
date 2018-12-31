@@ -96,7 +96,7 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
 
     public void getComplaintList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getComplaintList(userid,type ,branchid).enqueue(new Callback<ComplaintRestMeta>() {
+        Singleton.getInstance().getApi().getComplaintList(userid,type ,branchid,loginModel.getFloor_no(),loginModel.getUnit_no()).enqueue(new Callback<ComplaintRestMeta>() {
             @Override
             public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
                 if(response.body()==null)

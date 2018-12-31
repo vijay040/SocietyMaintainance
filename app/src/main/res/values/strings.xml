@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Magic Society</string>
+    <string name="app_name">AVRWA</string>
     <string name="email">Enter Email</string>
     <string name="password">Enter Password</string>
     <string name="login">LOG IN</string>
-    <string name="login_text">LogIn To Magic Society</string>
+    <string name="login_text">Login To AVRWA</string>
     <string name="submit">Submit</string>
     <string name="my_profile">My Profile</string>
     <string name="complaint">Complaint</string>
@@ -153,7 +153,7 @@
     <string name="enter_name">Enter Your Name</string>
     <string name="enter_contact">Enter Contact No.</string>
     <string name="enter_email">Enter Valid Email</string>
-    <string name="floor">Floor No:</string>
+    <string name="floor">Tower:</string>
     <string name="ok">OK</string>
     <string name="unit_no">Unit No:</string>
     <string name="designation">Designation:</string>

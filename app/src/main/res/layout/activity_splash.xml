@@ -7,12 +7,13 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/image_wlcm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_80sdp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_80sdp"
-        android:background="@drawable/title" />
+        android:background="@drawable/avrwa" />
+
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="@dimen/_200sdp"
@@ -20,6 +21,3 @@
         android:src="@drawable/ic_splashlogo"
         android:layout_centerInParent="true" />
      </RelativeLayout>
-
-
-

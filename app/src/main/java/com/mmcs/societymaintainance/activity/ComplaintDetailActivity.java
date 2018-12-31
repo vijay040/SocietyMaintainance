@@ -66,8 +66,13 @@ public class ComplaintDetailActivity extends AppCompatActivity {
         txtDate.setText(getString(R.string.date) + complaintModel.getDate());
         txt_c_des.setText(getString(R.string.desc) + complaintModel.getC_description());
         txtStatus.setText(getString(R.string.status) + complaintModel.getStatus());
-        if (complaintModel.getStatus().equalsIgnoreCase("PENDING") && complaintModel.getAssign_id().equalsIgnoreCase(loginModel.getId())) {
+        final String type=  sh.getString("TYPE", "");
+        if (complaintModel.getStatus().equalsIgnoreCase("ASSIGNED") && complaintModel.getAssign_id().equalsIgnoreCase(loginModel.getId())) {
             edt_comment.setVisibility(View.VISIBLE);
+            resolved.setText("RESOLVED");
+            resolved.setVisibility(View.VISIBLE);
+        } else if (complaintModel.getStatus().equalsIgnoreCase("PENDING") && type.equalsIgnoreCase("Employee")) {
+            resolved.setText("ASSIGN TO YOU");
             resolved.setVisibility(View.VISIBLE);
         } else
             btn_ok.setVisibility(View.VISIBLE);
@@ -76,6 +81,11 @@ public class ComplaintDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = edt_comment.getText().toString();
+                if (complaintModel.getStatus().equalsIgnoreCase("PENDING") && type.equalsIgnoreCase("Employee")) {
+                    complainAction();
+                    return;
+                }
+
                 if (msg.equals("")) {
                     Toasty.error(ComplaintDetailActivity.this, "Please Enter Your Comment", Toast.LENGTH_SHORT).show();
                 } else {
@@ -106,7 +116,7 @@ public class ComplaintDetailActivity extends AppCompatActivity {
 
         sb = new SpannableStringBuilder(txtFloor.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtFloor.setText(sb);
 
         sb = new SpannableStringBuilder(txtUnit.getText());
@@ -180,6 +190,28 @@ public class ComplaintDetailActivity extends AppCompatActivity {
                 progress.setVisibility(View.GONE);
                 Toasty.error(ComplaintDetailActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+    }
+
+
+    private void complainAction() {
+        Singleton.getInstance().getApi().complainAction(complaintModel.getComplain_id(), loginModel.getId()).enqueue(new Callback<ComplaintRestMeta>() {
+            @Override
+            public void onResponse(Call<ComplaintRestMeta> call, Response<ComplaintRestMeta> response) {
+                progress.setVisibility(View.GONE);
+                ComplaintModel m = response.body().getResponse().get(0);
+                if (m.getCode().equalsIgnoreCase("200")) {
+                    Toasty.success(ComplaintDetailActivity.this, "" + m.getMessage()).show();
+                    finish();
+                } else
+                    Toasty.error(ComplaintDetailActivity.this, "" + m.getMessage()).show();
+            }
+
+            @Override
+            public void onFailure(Call<ComplaintRestMeta> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+                Toasty.error(ComplaintDetailActivity.this, "Please try again!").show();
             }
         });
     }

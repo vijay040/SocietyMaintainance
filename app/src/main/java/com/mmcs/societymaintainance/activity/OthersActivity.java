@@ -52,7 +52,7 @@ public class OthersActivity extends AppCompatActivity implements SearchView.OnQu
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
-        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+      //  getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +72,14 @@ public class OthersActivity extends AppCompatActivity implements SearchView.OnQu
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+    }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText("Others");

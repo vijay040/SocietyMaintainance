@@ -112,7 +112,7 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
         btn_take_photo = findViewById(R.id.btn_take_photo);
-       TextView txt_title=findViewById(R.id.txt_title);
+        TextView txt_title=findViewById(R.id.txt_title);
         txt_title.setText("Add Guard");
         txt_title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_guard, 0);
         calendar = Calendar.getInstance();

@@ -111,7 +111,6 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/btn_back"
             android:text="@string/register"
-            android:visibility="gone"
             android:textColor="@color/white_color" />
     </LinearLayout>
 </RelativeLayout>

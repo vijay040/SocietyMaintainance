@@ -158,7 +158,7 @@ public class GaurdDetailActivity extends AppCompatActivity {
     }
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText("Housekeeping Details");
+        title.setText("Guard Details");
     }
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
@@ -170,7 +170,7 @@ public class GaurdDetailActivity extends AppCompatActivity {
         });
     }
     private void updateEmployee(String ending_date) {
-        Singleton.getInstance().getApi().updateEmployee(employeeModel.getId(), ending_date).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().updateOthers(employeeModel.getId(), ending_date,"GUARD").enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
                 finish();
