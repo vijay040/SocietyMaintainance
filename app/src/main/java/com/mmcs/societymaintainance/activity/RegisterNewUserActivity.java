@@ -643,7 +643,7 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
 
     ArrayList<UnitModel> branchModels;
     UnitAdapter branchAdapter;
-    String branchId="";
+    String branchId="1";
 
     private void getBranchID() {
         if (spnUserType.getSelectedItemPosition() == 0) {
