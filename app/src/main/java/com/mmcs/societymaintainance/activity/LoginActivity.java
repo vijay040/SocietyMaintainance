@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     Spinner spnLoginType;
     public static String fcmToken;
     Shprefrences sh;
+    public static String registerEnabled="false";
 ProgressBar progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,9 @@ ProgressBar progress;
         spnLoginType = findViewById(R.id.spnUserType);
         sh = new Shprefrences(this);
         progress=findViewById(R.id.progress);
+        if(registerEnabled.equalsIgnoreCase("true"))
+            btn_register.setVisibility(View.VISIBLE);
+
         String typeList[] = {"Select Login Types", "Admin", "Owner", "Employee", "Renter"};//,"Super Admin"
         spnLoginType.setAdapter(new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item, typeList));
         btn_register.setOnClickListener(new View.OnClickListener() {

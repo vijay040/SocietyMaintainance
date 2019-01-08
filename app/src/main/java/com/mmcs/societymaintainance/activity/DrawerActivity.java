@@ -114,10 +114,11 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_complain);
             list.add(item);
 
-           /* item = new HomeItemModel();
-            item.setTitle("Add Employee");
-            item.setImage(R.drawable.ic_add_member);
-            list.add(item);*/
+            item = new HomeItemModel();
+            item.setTitle("Visitor");
+            item.setImage(R.drawable.ic_visitor);
+            list.add(item);
+
 
             item = new HomeItemModel();
             item.setTitle("Driver");
@@ -223,6 +224,12 @@ public class DrawerActivity extends AppCompatActivity {
             item.setTitle("Complaint");
             item.setImage(R.drawable.ic_complain);
             list.add(item);
+
+            item = new HomeItemModel();
+            item.setTitle("Visitor");
+            item.setImage(R.drawable.ic_visitor);
+            list.add(item);
+
 
             item = new HomeItemModel();
             item.setTitle("Driver");

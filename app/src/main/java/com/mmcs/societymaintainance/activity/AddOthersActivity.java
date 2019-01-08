@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,7 +68,7 @@ import retrofit2.Response;
 
 public class AddOthersActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
-    EditText edt_joining_date, edt_ending_date, edt_name, edt_email, edt_mobile, edt_password, edt_national_id,edt_type;
+    EditText edt_joining_date, edt_ending_date, edt_name, edt_email, edt_mobile, edt_password, edt_national_id, edt_type;
     Calendar calendar;
     int DD, MM, YY;
     ImageView imageView;
@@ -78,13 +79,14 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
     static final int DATE_DIALOG_ID2 = 2;
     int cur = 0;
     ProgressBar progress;
+    Spinner spnIDType;
     public static String imgUrl;
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
     String curr_date;
     private static final int GOOGLE_API_CLIENT_ID = 0;
-    private AutoCompleteTextView edt_present_address,edt_permanent_address;
+    private AutoCompleteTextView edt_present_address, edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "AddMemberActivity";
     private PlaceArrayAdapter mPlaceArrayAdapter;
@@ -107,18 +109,19 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
         edt_present_address = findViewById(R.id.edt_present_address);
         edt_permanent_address = findViewById(R.id.edt_permanent_address);
         edt_national_id = findViewById(R.id.edt_national_id);
-        edt_type= findViewById(R.id.edt_type);
+        edt_type = findViewById(R.id.edt_type);
         progress = findViewById(R.id.progress);
         edt_ending_date = findViewById(R.id.edt_ending_date);
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
+        spnIDType = findViewById(R.id.spnIDType);
         btn_take_photo = findViewById(R.id.btn_take_photo);
-       TextView txt_title=findViewById(R.id.txt_title);
+        TextView txt_title = findViewById(R.id.txt_title);
         txt_title.setText("Add Others");
         txt_title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_team, 0);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         mGoogleApiClient = new GoogleApiClient.Builder(AddOthersActivity.this)
@@ -135,36 +138,35 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
         edt_present_address.setThreshold(1);
         edt_permanent_address.setAdapter(mPlaceArrayAdapter);
         edt_permanent_address.setThreshold(1);
-        getDesignationList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
+        getDesignationList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
         }
         if ((MM + 1) < 10)
-            curr_date=(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+            curr_date = (String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         else
-            curr_date=(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+            curr_date = (String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = edt_name.getText().toString();
                 String email = edt_email.getText().toString();
                 String mobile = edt_mobile.getText().toString();
-                String password = edt_password.getText().toString()+"12345";
+                String password = edt_password.getText().toString() + "12345";
                 String present_add = edt_present_address.getText().toString();
                 String permanent_add = edt_permanent_address.getText().toString();
                 String national_id = edt_national_id.getText().toString();
                 String joining_date = edt_joining_date.getText().toString();
                 String ending_date = edt_ending_date.getText().toString();
-               String type= edt_type.getText().toString();
+                String type = edt_type.getText().toString();
                 if (name.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (type.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Registration Type", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (email.equals("")) {
+                } else if (email.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
@@ -179,16 +181,18 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
                 } else if (permanent_add.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddOthersActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (national_id.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (joining_date.equals("")) {
+                } else if (joining_date.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Select Joining Date", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postEmployee(type,loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
+                    postEmployee(type, loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), name, email, mobile, present_add, permanent_add, national_id, joining_date, password, imageImagePath);
                 }
             }
         });
@@ -231,6 +235,7 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
             }
         });
     }
+
     Uri fileUri;
 
     private void selectImage() {
@@ -266,15 +271,17 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
+
     String imageImagePath = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
 
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -289,13 +296,14 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
+                    File file = new File(imageImagePath);
+                    resize(file, "");
 
                 }
             }
         }
     }
+
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
         BitmapFactory.Options o = new BitmapFactory.Options();
 
@@ -351,6 +359,7 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -385,9 +394,6 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
             Log.e("Exception", "Exception in resizing image");
         }
     }
-
-
-
 
 
     @Override
@@ -427,8 +433,6 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
     };
 
 
-
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -439,16 +443,17 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
 
         return false;
     }
-    private void postEmployee(String regtype,String userid,String type ,String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
+
+    private void postEmployee(String regtype, String userid, String type, String branchid, String name, String email, String mobile, String preaddress, String peradress, String national_id, String date, String password, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("****image*******", "*****imagepath********" + fileUrl);
-        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
+        if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestOtherType = RequestBody.create(MediaType.parse("text/plain"), regtype);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"),"" +branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), "" + branchid);
         RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), name);
         RequestBody requestJoiningDate = RequestBody.create(MediaType.parse("text/plain"), date);
@@ -456,6 +461,7 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
         RequestBody requestpreAddress = RequestBody.create(MediaType.parse("text/plain"), preaddress);
         RequestBody requestper_Address = RequestBody.create(MediaType.parse("text/plain"), peradress);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem() + "");
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
@@ -463,7 +469,7 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
         RequestBody requestStatus = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
-        Singleton.getInstance().getApi().postOthers(requestOtherType,requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postOthers(requestOtherType, requestUserId, requesttype, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestpreAddress, requestper_Address, requestIDType, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddOthersActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -474,7 +480,7 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(AddOthersActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(AddOthersActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -532,18 +538,20 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
+
     ArrayList<DesignationModel> designationModels;
     String DesiId;
-    public void getDesignationList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getDesignationList(userid, type ,branchid).enqueue(new Callback<DesignationRestMeta>() {
+    public void getDesignationList(String userid, String type, String branchid) {
+
+        Singleton.getInstance().getApi().getDesignationList(userid, type, branchid).enqueue(new Callback<DesignationRestMeta>() {
             @Override
             public void onResponse(Call<DesignationRestMeta> call, Response<DesignationRestMeta> response) {
                 designationModels = response.body().getResponse();
                 progress.setVisibility(View.GONE);
-                for (DesignationModel m:designationModels) {
-                    if(m.getDesignation().equalsIgnoreCase("Driver"))
-                        DesiId=m.getId();
+                for (DesignationModel m : designationModels) {
+                    if (m.getDesignation().equalsIgnoreCase("Driver"))
+                        DesiId = m.getId();
                 }
             }
 
@@ -554,7 +562,6 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
             }
         });
     }
-
 
 
 }

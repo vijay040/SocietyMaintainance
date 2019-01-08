@@ -21,6 +21,15 @@ public class ComplaintModel implements Serializable {
     private String message;
     private String code;
     private String complain_idd;
+    private String unit;
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public String getComplain_idd() {
         return complain_idd;

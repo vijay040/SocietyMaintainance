@@ -21,6 +21,7 @@ private String pre_address;
 private String per_address;
 private String nid;
 private String image;
+private String unit;
 
     public String getUnit_no() {
         return unit_no;
@@ -132,5 +133,13 @@ private String image;
 
     public void setVisible(boolean visible) {
         isVisible = visible;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

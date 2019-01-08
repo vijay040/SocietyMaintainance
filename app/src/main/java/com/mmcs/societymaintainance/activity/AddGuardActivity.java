@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +87,7 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edt_present_address,edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
+    Spinner spnIDType;
     private static final String TAG = "AddMemberActivity";
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
@@ -111,6 +113,7 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
         edt_ending_date = findViewById(R.id.edt_ending_date);
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
+        spnIDType = findViewById(R.id.spnIDType);
         btn_take_photo = findViewById(R.id.btn_take_photo);
         TextView txt_title=findViewById(R.id.txt_title);
         txt_title.setText("Add Guard");
@@ -173,7 +176,12 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
                 } else if (permanent_add.equals("")) {
                     Toasty.error(AddGuardActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (national_id.equals("")) {
+                }
+                else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddGuardActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (national_id.equals("")) {
                     Toasty.error(AddGuardActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -449,6 +457,7 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
         RequestBody requestpreAddress = RequestBody.create(MediaType.parse("text/plain"), preaddress);
         RequestBody requestper_Address = RequestBody.create(MediaType.parse("text/plain"), peradress);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem() + "");
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
@@ -457,7 +466,7 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postGuard(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postGuard(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestIDType,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddGuardActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

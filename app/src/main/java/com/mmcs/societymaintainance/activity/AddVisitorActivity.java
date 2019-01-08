@@ -303,55 +303,6 @@ public class AddVisitorActivity extends AppCompatActivity implements GoogleApiCl
     }
 
 
-   /* @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-
-            case TIME_DIALOG_ID:
-                System.out.println("onCreateDialog  : " + id);
-                cur = TIME_DIALOG_ID;
-                return new TimePickerDialog(this, onTimeSetListener, H, M, false);
-            case TIME_DIALOG_ID2:
-                System.out.println("onCreateDialog  : " + id);
-                cur = TIME_DIALOG_ID2;
-                return new TimePickerDialog(this, onTimeSetListener, H, M, false);
-
-        }
-
-        return null;
-    }
-
-    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker timePicker, int h, int m) {
-            // timePicker.is24HourView();
-            if (cur == TIME_DIALOG_ID) {
-                // set selected date into textview
-                if (h < 12 && h >= 0) {
-                    edt_time_in.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
-                } else {
-                    h -= 12;
-                    if (h == 0) {
-                        h = 12;
-                    }
-                    edt_time_in.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
-                }
-
-
-            } else {
-                if (h < 12 && h >= 0) {
-                    edt_time_out.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
-                } else {
-                    h -= 12;
-                    if (h == 0) {
-                        h = 12;
-                    }
-                    edt_time_out.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
-                }
-
-            }
-        }
-    };*/
 
     AlertDialog alertDialog;
     ArrayList<FloorModel> floorList = new ArrayList<>();

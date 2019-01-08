@@ -34,6 +34,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,8 +89,9 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
     String curr_date;
+    Spinner spnIDType;
     private static final int GOOGLE_API_CLIENT_ID = 0;
-    private AutoCompleteTextView edt_present_address,edt_permanent_address;
+    private AutoCompleteTextView edt_present_address, edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "AddMemberActivity";
     private PlaceArrayAdapter mPlaceArrayAdapter;
@@ -116,10 +118,11 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         edt_ending_date = findViewById(R.id.edt_ending_date);
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
+        spnIDType = findViewById(R.id.spnIDType);
         btn_take_photo = findViewById(R.id.btn_take_photo);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         mGoogleApiClient = new GoogleApiClient.Builder(AddDriverActivity.this)
@@ -136,22 +139,22 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         edt_present_address.setThreshold(1);
         edt_permanent_address.setAdapter(mPlaceArrayAdapter);
         edt_permanent_address.setThreshold(1);
-        getDesignationList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
+        getDesignationList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
         }
         if ((MM + 1) < 10)
-            curr_date=(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+            curr_date = (String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         else
-            curr_date=(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+            curr_date = (String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = edt_name.getText().toString();
                 String email = edt_email.getText().toString();
                 String mobile = edt_mobile.getText().toString();
-                String password = edt_password.getText().toString()+"12345";
+                String password = edt_password.getText().toString() + "12345";
                 String present_add = edt_present_address.getText().toString();
                 String permanent_add = edt_permanent_address.getText().toString();
                 String national_id = edt_national_id.getText().toString();
@@ -175,16 +178,18 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
                 } else if (permanent_add.equals("")) {
                     Toasty.error(AddDriverActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddDriverActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (national_id.equals("")) {
                     Toasty.error(AddDriverActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (joining_date.equals("")) {
+                } else if (joining_date.equals("")) {
                     Toasty.error(AddDriverActivity.this, "Select Joining Date", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postEmployee(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,joining_date,password,imageImagePath);
+                    postEmployee(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), name, email, mobile, present_add, permanent_add, national_id, joining_date, password, imageImagePath);
                 }
             }
         });
@@ -227,6 +232,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             }
         });
     }
+
     Uri fileUri;
 
     private void selectImage() {
@@ -262,15 +268,17 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
+
     String imageImagePath = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
 
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -285,13 +293,14 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
+                    File file = new File(imageImagePath);
+                    resize(file, "");
 
                 }
             }
         }
     }
+
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
         BitmapFactory.Options o = new BitmapFactory.Options();
 
@@ -347,6 +356,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -381,9 +391,6 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             Log.e("Exception", "Exception in resizing image");
         }
     }
-
-
-
 
 
     @Override
@@ -423,8 +430,6 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
     };
 
 
-
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -435,15 +440,16 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
 
         return false;
     }
-    private void postEmployee(String userid,String type ,String branchid,String name ,String email, String mobile,String preaddress ,String peradress,String national_id,String date ,String password,String fileUrl) {
+
+    private void postEmployee(String userid, String type, String branchid, String name, String email, String mobile, String preaddress, String peradress, String national_id, String date, String password, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("****image*******", "*****imagepath********" + fileUrl);
-        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
+        if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"),"" +branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), "" + branchid);
         RequestBody requesttype = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), name);
         RequestBody requestJoiningDate = RequestBody.create(MediaType.parse("text/plain"), date);
@@ -451,6 +457,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
         RequestBody requestpreAddress = RequestBody.create(MediaType.parse("text/plain"), preaddress);
         RequestBody requestper_Address = RequestBody.create(MediaType.parse("text/plain"), peradress);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem() + "");
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
@@ -459,7 +466,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postDriver(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postDriver(requestUserId, requesttype, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestpreAddress, requestper_Address, requestIDType, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddDriverActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -470,7 +477,7 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(AddDriverActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(AddDriverActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -528,18 +535,20 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
+
     ArrayList<DesignationModel> designationModels;
     String DesiId;
-    public void getDesignationList(String userid,String type ,String branchid) {
 
-        Singleton.getInstance().getApi().getDesignationList(userid, type ,branchid).enqueue(new Callback<DesignationRestMeta>() {
+    public void getDesignationList(String userid, String type, String branchid) {
+
+        Singleton.getInstance().getApi().getDesignationList(userid, type, branchid).enqueue(new Callback<DesignationRestMeta>() {
             @Override
             public void onResponse(Call<DesignationRestMeta> call, Response<DesignationRestMeta> response) {
                 designationModels = response.body().getResponse();
                 progress.setVisibility(View.GONE);
-                for (DesignationModel m:designationModels) {
-                    if(m.getDesignation().equalsIgnoreCase("Driver"))
-                        DesiId=m.getId();
+                for (DesignationModel m : designationModels) {
+                    if (m.getDesignation().equalsIgnoreCase("Driver"))
+                        DesiId = m.getId();
                 }
             }
 
@@ -550,7 +559,6 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
             }
         });
     }
-
 
 
 }

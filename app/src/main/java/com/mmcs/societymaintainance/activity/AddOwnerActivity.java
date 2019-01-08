@@ -1,4 +1,5 @@
 package com.mmcs.societymaintainance.activity;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -30,6 +31,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,17 +80,19 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
     EditText edt_owner_name, edt_email, edt_mobile, edt_password, edt_national_id, edt_floor, edt_unit_no;
     private static final int CAMERA_REQUEST = 1888;
     ProgressBar progress;
+    Spinner spnIDType;
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
     LoginModel loginModel;
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
-    private AutoCompleteTextView edt_present_address,edt_permanent_address;
+    private AutoCompleteTextView edt_present_address, edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private static final String TAG = "AddOwnerActivity";
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -107,7 +111,8 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         edt_floor = findViewById(R.id.edt_floor);
         edt_unit_no = findViewById(R.id.edt_unit_no);
         progress = findViewById(R.id.progress);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        spnIDType = findViewById(R.id.spnIDType);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         progress.setVisibility(View.VISIBLE);
         btn_take_photo = findViewById(R.id.btn_take_photo);
         btn_save = findViewById(R.id.btn_save);
@@ -151,8 +156,8 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 showUnitPopup();
             }
         });
-        getFloorList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
-        getUnitList(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id());
+        getFloorList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
+        getUnitList(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +188,9 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 } else if (permanent_add.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddOwnerActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (national_id.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
@@ -194,22 +202,23 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postOwner(loginModel.getId(),loginModel.getType() ,loginModel.getBranch_id(), name,email,mobile,present_add,permanent_add,national_id,password,imageImagePath);
+                    postOwner(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), name, email, mobile, present_add, permanent_add, national_id, password, imageImagePath);
                 }
             }
         });
         setTitle();
         back();
     }
-    private void postOwner(String userid,String type ,String branchid,String txtName ,String email, String txtMobile,String txtPreAddress ,String txtPerAddress,String NID, String pass,String fileUrl) {
+
+    private void postOwner(String userid, String type, String branchid, String txtName, String email, String txtMobile, String txtPreAddress, String txtPerAddress, String NID, String pass, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("***********", "*************" + fileUrl);
-        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
+        if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
-        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), ""+branchid);
+        RequestBody requestUserbranch = RequestBody.create(MediaType.parse("text/plain"), "" + branchid);
         RequestBody requestType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody requesttxtName = RequestBody.create(MediaType.parse("text/plain"), txtName);
         RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);
@@ -218,10 +227,11 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         RequestBody requestPerAddress = RequestBody.create(MediaType.parse("text/plain"), txtPerAddress);
         RequestBody requestFloor = RequestBody.create(MediaType.parse("text/plain"), floorId);
         RequestBody requestUnit = RequestBody.create(MediaType.parse("text/plain"), unitId);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem() + "");
         RequestBody requestNational = RequestBody.create(MediaType.parse("text/plain"), NID);
         RequestBody requestPass = RequestBody.create(MediaType.parse("text/plain"), pass);
 
-        Singleton.getInstance().getApi().postOwner(requestUserId,requestType ,requestUserbranch, requesttxtName,requestEmail ,requestMobile, requestPreAddress, requestPerAddress,requestNational,requestPass,requestFloor,requestUnit ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postOwner(requestUserId, requestType, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestPreAddress, requestPerAddress, requestIDType, requestNational, requestPass, requestFloor, requestUnit, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddOwnerActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -232,19 +242,21 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toasty.error(AddOwnerActivity.this,"Sorry Try Again", Toast.LENGTH_SHORT).show();
+                Toasty.error(AddOwnerActivity.this, "Sorry Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     String imageImagePath = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
 
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -258,13 +270,14 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
+                    File file = new File(imageImagePath);
+                    resize(file, "");
 
                 }
             }
         }
     }
+
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
         BitmapFactory.Options o = new BitmapFactory.Options();
 
@@ -320,6 +333,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -369,6 +383,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
             }
         });
     }
+
     Uri fileUri;
 
     private void selectImage() {
@@ -406,7 +421,6 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
     }
 
 
-
     AlertDialog alertDialog;
     ArrayList<FloorModel> floorList = new ArrayList<>();
     FloorPopupAdapter floorPopupAdapter;
@@ -440,7 +454,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 FloorModel obj = (FloorModel) listFloor.getAdapter().getItem(position);
                 edt_floor.setText(obj.getFloor_no());
                 floorId = obj.getFid();
-                Log.e("fid"+obj.getFid(),"obj.getNum"+obj.getFloor_no());
+                Log.e("fid" + obj.getFid(), "obj.getNum" + obj.getFloor_no());
                 alertDialog.dismiss();
             }
         });
@@ -476,22 +490,22 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 UnitModel obj = (UnitModel) listUnit.getAdapter().getItem(position);
-                edt_unit_no.setText(obj.getFloor_no()+" "+obj.getUnit_no());
+                edt_unit_no.setText(obj.getFloor_no() + " " + obj.getUnit_no());
                 unitId = obj.getUid();
                 floorId = obj.getFid();
-                Log.e("uid"+obj.getUid(),"obj.getNum"+obj.getUnit_no());
-                Log.e("floorno"+obj.getUnit_no(),"floorno"+obj.getUnit_no());
+                Log.e("uid" + obj.getUid(), "obj.getNum" + obj.getUnit_no());
+                Log.e("floorno" + obj.getUnit_no(), "floorno" + obj.getUnit_no());
                 alertDialog.dismiss();
             }
         });
 
     }
 
-    public void getFloorList(String userid,String type ,String branchid) {
-        Singleton.getInstance().getApi().getFloorList(userid,type ,branchid).enqueue(new Callback<ResponseMeta>() {
+    public void getFloorList(String userid, String type, String branchid) {
+        Singleton.getInstance().getApi().getFloorList(userid, type, branchid).enqueue(new Callback<ResponseMeta>() {
             @Override
             public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
-                if(response!=null && response.body()!=null) {
+                if (response != null && response.body() != null) {
                     floorList = response.body().getResponse();
                     progress.setVisibility(View.GONE);
                 }
@@ -505,9 +519,9 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         });
     }
 
-    public void getUnitList(String userid,String type ,String branchid) {
+    public void getUnitList(String userid, String type, String branchid) {
 
-        Singleton.getInstance().getApi().getUnitList(userid,type ,branchid).enqueue(new Callback<UnitRestMeta>() {
+        Singleton.getInstance().getApi().getUnitList(userid, type, branchid).enqueue(new Callback<UnitRestMeta>() {
             @Override
             public void onResponse(Call<UnitRestMeta> call, Response<UnitRestMeta> response) {
                 unitModels = response.body().getResponse();
@@ -535,9 +549,9 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
             case 2:
                 ArrayList<UnitModel> newlist1 = new ArrayList<>();
                 for (UnitModel list : unitModels) {
-                    String  unit = list.getUnit_no().toLowerCase();
-                    String fl=list.getFloor_no().toLowerCase();
-                    if (unit.contains(s)||fl.contains(s)) {
+                    String unit = list.getUnit_no().toLowerCase();
+                    String fl = list.getFloor_no().toLowerCase();
+                    if (unit.contains(s) || fl.contains(s)) {
                         newlist1.add(list);
                     }
                 }
@@ -546,6 +560,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
         }
         return false;
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override

@@ -78,7 +78,7 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
     ImageView imageView;
     Button btn_take_photo, btn_save;
     EditText edt_owner_name, edt_branch, edt_email, edt_mobile, edt_password, edt_national_id, edt_floor, edt_unit_no;
-    Spinner spnUserType;
+    Spinner spnUserType,spnIDType;
     private static final int CAMERA_REQUEST = 1888;
     ProgressBar progress;
     private static final int SELECT_PHOTO = 200;
@@ -101,6 +101,7 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_newuser);
         spnUserType = findViewById(R.id.spnUserType);
+        spnIDType= findViewById(R.id.spnIDType);
         imageView = findViewById(R.id.imageView);
         edt_owner_name = findViewById(R.id.edt_owner_name);
         edt_email = findViewById(R.id.edt_email);
@@ -217,7 +218,12 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
                 } else if (permanent_add.equals("")) {
                     Toasty.error(RegisterNewUserActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (national_id.equals("")) {
+                }
+                if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(RegisterNewUserActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (national_id.equals("")) {
                     Toasty.error(RegisterNewUserActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
                 }/* else if (floor.equals("")) {
@@ -254,10 +260,11 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
         RequestBody requestPerAddress = RequestBody.create(MediaType.parse("text/plain"), txtPerAddress);
         RequestBody requestFloor = RequestBody.create(MediaType.parse("text/plain"), floorId);
         RequestBody requestUnit = RequestBody.create(MediaType.parse("text/plain"), unitId);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem()+"");
         RequestBody requestNational = RequestBody.create(MediaType.parse("text/plain"), NID);
         RequestBody requestPass = RequestBody.create(MediaType.parse("text/plain"), pass);
 
-        Singleton.getInstance().getApi().postOwner(requestUserId, requestType, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestPreAddress, requestPerAddress, requestNational, requestPass, requestFloor, requestUnit, imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postOwner(requestUserId, requestType, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestPreAddress, requestPerAddress, requestIDType,requestNational, requestPass, requestFloor, requestUnit, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(RegisterNewUserActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();
@@ -577,7 +584,13 @@ public class RegisterNewUserActivity extends AppCompatActivity implements Google
                 for (UnitModel list : unitModels) {
                     String unit = list.getUnit_no().toLowerCase();
                     String fl = list.getFloor_no().toLowerCase();
-                    if (unit.contains(s) || fl.contains(s)) {
+                    String unitf=unit+" "+fl;
+                    s = s.replaceAll("\\s+", "");
+                    unit = unit.replaceAll("\\s+", "");
+                    fl = fl.replaceAll("\\s+", "");
+                    unitf = unitf.replaceAll("\\s+", "");
+
+                    if (unit.contains(s) || fl.contains(s) || unitf.contains(s)) {
                         newlist1.add(list);
                     }
                 }

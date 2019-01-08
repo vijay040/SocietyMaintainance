@@ -3,6 +3,7 @@ package com.mmcs.societymaintainance.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,28 +32,35 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
     ListView listVisitor;
     ProgressBar progressBar;
     RelativeLayout txtAdd;
-    ArrayList<VisitorModel> visitorModels=new ArrayList();
+    ArrayList<VisitorModel> visitorModels = new ArrayList();
     Shprefrences sh;
     VisitorAdapter visitorAdapter;
     LoginModel loginModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visitor_list);
-        listVisitor=findViewById(R.id.listVisitor);
-        progressBar=findViewById(R.id.progress);
-        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        listVisitor = findViewById(R.id.listVisitor);
+        progressBar = findViewById(R.id.progress);
+        SearchView editTextName = (SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        txtAdd=findViewById(R.id.txtAdd);
-        sh=new Shprefrences(this);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+
+
+        txtAdd = findViewById(R.id.txtAdd);
+        sh = new Shprefrences(this);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
+        String type = sh.getString("TYPE", "");
+        if (type.equalsIgnoreCase("Owner") || type.equalsIgnoreCase("Renter"))
+            txtAdd.setVisibility(View.GONE);
+
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(VisitorListActivity.this,AddVisitorActivity.class));
+                startActivity(new Intent(VisitorListActivity.this, AddVisitorActivity.class));
             }
         });
 
@@ -70,10 +78,12 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
         setTitle();
         back();
     }
+
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.visitor_list));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -83,22 +93,23 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
-        getVisitors(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        getVisitors(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
     }
 
-    public void getVisitors(String userid,String type ,String branchid) {
+    public void getVisitors(String userid, String type, String branchid) {
 
-        Singleton.getInstance().getApi().getVisitorList(userid,type ,branchid).enqueue(new Callback<VisitorRestMeta>() {
+        Singleton.getInstance().getApi().getVisitorList(userid, type, branchid).enqueue(new Callback<VisitorRestMeta>() {
             @Override
             public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
-                if(response.body()==null)
+                if (response.body() == null)
                     return;
-                visitorModels=response.body().getResponse();
-                visitorAdapter=new VisitorAdapter(VisitorListActivity.this,visitorModels);
+                visitorModels = response.body().getResponse();
+                visitorAdapter = new VisitorAdapter(VisitorListActivity.this, visitorModels);
                 listVisitor.setAdapter(visitorAdapter);
                 listVisitor.setEmptyView(findViewById(R.id.imz_nodata));
                 progressBar.setVisibility(View.GONE);
@@ -120,20 +131,30 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
 
     @Override
     public boolean onQueryTextChange(String s) {
-        s=s.toLowerCase();
-        ArrayList<VisitorModel> newlist=new ArrayList<>();
-        for(VisitorModel filterlist:visitorModels)
-        {
-            String name=filterlist.getName().toLowerCase();
-            String address =filterlist.getAddress().toLowerCase();
-            String floor =filterlist.getFloor_no().toLowerCase();
-            String unit =filterlist.getUnit_no().toLowerCase();
-            String mob =filterlist.getMobile().toLowerCase();
-            if(name.contains(s)||address.contains(s)||floor.contains(s)||unit.contains(s)||mob.contains(s)) {
+        s = s.toLowerCase();
+        ArrayList<VisitorModel> newlist = new ArrayList<>();
+        for (VisitorModel filterlist : visitorModels) {
+            String name = filterlist.getName().toLowerCase();
+            String address = filterlist.getAddress().toLowerCase();
+            String floor = filterlist.getFloor_no().toLowerCase();
+            String unit = filterlist.getUnit().toLowerCase();
+            String mob = filterlist.getMobile().toLowerCase();
+
+            s = s.replaceAll("\\s+", "");
+            name = name.replaceAll("\\s+", "");
+            address = address.replaceAll("\\s+", "");
+            floor = floor.replaceAll("\\s+", "");
+            unit = unit.replaceAll("\\s+", "");
+            mob = mob.replaceAll("\\s+", "");
+
+           // if (name.contains(s) || address.contains(s) || floor.contains(s) || unit.contains(s) || mob.contains(s)) {
+            if (name.contains(s) || address.contains(s)||  unit.contains(s) || mob.contains(s)) {
                 newlist.add(filterlist);
             }
         }
         visitorAdapter.filter(newlist);
         return true;
     }
+
+
 }

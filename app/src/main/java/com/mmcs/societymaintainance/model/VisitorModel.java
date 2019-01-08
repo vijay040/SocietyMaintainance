@@ -19,7 +19,17 @@ public class VisitorModel implements Serializable {
     private String vid;
     private String status;
     private String visitor_id;
+    private String visit_date;
+    private String unit;
 
+
+    public String getVisit_date() {
+        return visit_date;
+    }
+
+    public void setVisit_date(String visit_date) {
+        this.visit_date = visit_date;
+    }
 
     public String getVisitor_id() {
         return visitor_id;
@@ -115,5 +125,13 @@ public class VisitorModel implements Serializable {
 
     public void setVisible(boolean visible) {
         isVisible = visible;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

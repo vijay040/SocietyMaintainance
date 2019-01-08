@@ -18,9 +18,16 @@ import android.widget.Toast;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.LoginModel;
+import com.mmcs.societymaintainance.model.SettingsModel;
+import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.util.Shprefrences;
+import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
     ImageView image_wlcm, image_view;
@@ -44,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent();
+       /* Intent intent = new Intent();
 
         String manufacturer = android.os.Build.MANUFACTURER;
 
@@ -70,10 +77,11 @@ public class SplashActivity extends AppCompatActivity {
 
         if (arrayList.size() > 0) {
             startActivity(intent);
-        }
+        }*/
 
 
         // set animation listener
+        getSettings();
         Handler h = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
@@ -92,6 +100,27 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 4000);
 
+    }
+
+    public void getSettings()
+    {
+        Singleton.getInstance().getApi().getSettings("").enqueue(new Callback<SettingsModel>() {
+            @Override
+            public void onResponse(Call<SettingsModel> call, Response<SettingsModel> response) {
+
+                if(response.isSuccessful())
+                {
+                    SettingsModel m=response.body();
+                    LoginActivity.registerEnabled=m.getRegister_enabled();
+                    Log.e("*********","******************"+m.getRegister_enabled());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SettingsModel> call, Throwable t) {
+
+            }
+        });
     }
 
 

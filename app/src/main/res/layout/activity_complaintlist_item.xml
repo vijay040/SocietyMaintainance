@@ -45,6 +45,17 @@
             android:text="@string/date"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/txtUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDate"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:singleLine="true"
+            android:text="Unit"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
         <TextView
             android:id="@+id/txtstatus"
             android:layout_width="wrap_content"
@@ -73,7 +84,7 @@
             android:id="@+id/lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtDate"
+            android:layout_below="@+id/txtUnit"
             android:layout_toRightOf="@+id/img">
 
             <TextView

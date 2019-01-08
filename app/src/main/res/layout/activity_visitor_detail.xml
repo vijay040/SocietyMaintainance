@@ -66,6 +66,17 @@
                 android:src="@drawable/ic_profile" />
 
 
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Date"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/txtName"

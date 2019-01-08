@@ -128,11 +128,17 @@ public class OwnerListActivity extends AppCompatActivity implements SearchView.O
         for(OwnerModel filterlist:ownerModels)
         {
             String name=filterlist.getName().toLowerCase();
-            String floor =filterlist.getFloor_no().toLowerCase();
-           String unit =filterlist.getUnit_no().toLowerCase();
+            String unit =filterlist.getUnit().toLowerCase();
             String mob =filterlist.getContact().toLowerCase();
             String email =filterlist.getContact().toLowerCase();
-            if(name.contains(s)||mob.contains(s)||email.equals(s)||floor.contains(s)||unit.contains(s)) {
+
+            s = s.replaceAll("\\s+", "");
+            name = name.replaceAll("\\s+", "");
+            unit = unit.replaceAll("\\s+", "");
+            mob = mob.replaceAll("\\s+", "");
+
+
+            if(name.contains(s)||mob.contains(s)||email.equals(s)||unit.contains(s)) {
                 newlist.add(filterlist);
             }
         }

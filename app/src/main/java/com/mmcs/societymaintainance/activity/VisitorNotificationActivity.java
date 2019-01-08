@@ -1,5 +1,6 @@
 package com.mmcs.societymaintainance.activity;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -35,9 +36,9 @@ public class VisitorNotificationActivity extends AppCompatActivity {
     TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime;
     ImageView image_visitor;
     Button reject,accept;
-ProgressBar progress;
+    ProgressBar progress;
     VisitorModel visitorModels = new VisitorModel();
-
+    public static MediaPlayer r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -75,6 +76,10 @@ ProgressBar progress;
             }
         });
 
+
+        if (r != null) {
+            r.stop();
+        }
         Log.e("strID size" + strID.length, "***********************************id*****" + strID[1]);
     }
 
@@ -85,8 +90,10 @@ ProgressBar progress;
         Singleton.getInstance().getApi().getVisitorById(id).enqueue(new Callback<VisitorRestMeta>() {
             @Override
             public void onResponse(Call<VisitorRestMeta> call, Response<VisitorRestMeta> response) {
-                visitorModels=response.body().getResponse().get(0);
-                setData();
+                if(response.body().getResponse().size()>0) {
+                    visitorModels = response.body().getResponse().get(0);
+                    setData();
+                }
                 progress.setVisibility(View.GONE);
             }
 

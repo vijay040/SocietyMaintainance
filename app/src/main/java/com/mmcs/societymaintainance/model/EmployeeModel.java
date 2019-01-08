@@ -16,6 +16,7 @@ public class EmployeeModel implements Serializable {
     private String name;
     private String pre_address;
     private String ending_date;
+    private String work_detail;
 
     public String getEnding_date() {
         return ending_date;
@@ -115,5 +116,13 @@ public class EmployeeModel implements Serializable {
 
     public void setVisible(boolean visible) {
         isVisible = visible;
+    }
+
+    public String getWork_detail() {
+        return work_detail;
+    }
+
+    public void setWork_detail(String work_detail) {
+        this.work_detail = work_detail;
     }
 }

@@ -23,9 +23,11 @@ import android.widget.Toast;
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
 import com.mmcs.societymaintainance.model.VisitorModel;
 import com.mmcs.societymaintainance.model.VisitorRestMeta;
+import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.Calendar;
@@ -37,7 +39,7 @@ import retrofit2.Response;
 
 public class VisitorDetailActivity extends AppCompatActivity {
     VisitorModel visitorModel;
-    TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime,txt_visitorid;
+    TextView txtName, txt_mobile, txt_address, txtFloor, txtUnit, txtIntime, txt_visitorid, txtDate;
     ImageView image_visitor, imgStatus;
     Button btn_close;
     EditText edt_time_out;
@@ -46,6 +48,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
     int H, M;
     Calendar calendar;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    Shprefrences sh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class VisitorDetailActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visitor_detail);
+        sh=new Shprefrences(this);
         visitorModel = (VisitorModel) getIntent().getSerializableExtra(getString(R.string.visitor_model));
         txtName = findViewById(R.id.txtName);
         txt_mobile = findViewById(R.id.txt_mobile);
@@ -64,8 +68,10 @@ public class VisitorDetailActivity extends AppCompatActivity {
         btn_close = findViewById(R.id.btn_close);
         edt_time_out = findViewById(R.id.edt_time_out);
         imgStatus = findViewById(R.id.imgStatus);
-        txt_visitorid=findViewById(R.id.txt_visitorid);
-        txt_visitorid.setText("Visitor ID:"+visitorModel.getVisitor_id());
+        txt_visitorid = findViewById(R.id.txt_visitorid);
+        txtDate = findViewById(R.id.txtDate);
+        txtDate.setText("Visit Date:" + visitorModel.getVisit_date());
+        txt_visitorid.setText("Visitor ID:" + visitorModel.getVisitor_id());
         mSwipeRefreshLayout = findViewById(R.id.mSwipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -161,12 +167,15 @@ public class VisitorDetailActivity extends AppCompatActivity {
     }
 
     private void setData() {
+
+
         calendar = Calendar.getInstance();
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
         back();
         setTitle();
-        if (visitorModel.getOuttime().equalsIgnoreCase(""))
+        LoginModel loginModel = sh.getLoginModel(getString(R.string.login_model));
+        if (visitorModel.getOuttime().equalsIgnoreCase("") && loginModel.getType().equalsIgnoreCase("1"))
             btn_close.setText("Update");
         else
             edt_time_out.setEnabled(false);

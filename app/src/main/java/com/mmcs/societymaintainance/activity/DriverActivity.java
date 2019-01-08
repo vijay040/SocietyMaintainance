@@ -39,32 +39,36 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
     ListView listEmployee;
     ProgressBar progressBar;
     Shprefrences sh;
-    ArrayList<EmployeeModel> employeeModels=new ArrayList();
+    ArrayList<EmployeeModel> employeeModels = new ArrayList();
     EmployeeAdapter employeeAdapter;
     RelativeLayout txtAdd;
     LoginModel loginModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
-        listEmployee=findViewById(R.id.listEmployee);
-        progressBar=findViewById(R.id.progress);
-        txtAdd=findViewById(R.id.txtAdd);
-        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        listEmployee = findViewById(R.id.listEmployee);
+        progressBar = findViewById(R.id.progress);
+        txtAdd = findViewById(R.id.txtAdd);
+        SearchView editTextName = (SearchView) findViewById(R.id.edt);
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        sh=new Shprefrences(this);
-        loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
+        sh = new Shprefrences(this);
+        loginModel = sh.getLoginModel(getResources().getString(R.string.login_model));
         setTitle();
         back();
         progressBar.setVisibility(View.VISIBLE);
         //getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        String type = sh.getString("TYPE", "");
+        if (type.equalsIgnoreCase("Admin"))
+            txtAdd.setVisibility(View.GONE);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(DriverActivity.this,AddDriverActivity.class);
+                Intent intent = new Intent(DriverActivity.this, AddDriverActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,24 +83,27 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
             }
         });
 
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        getEmployee(loginModel.getId(),loginModel.getType(),loginModel.getBranch_id());
+        getEmployee(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id());
     }
 
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.driver));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
-        drawerIcon.setOnClickListener(new View.OnClickListener(){
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 finish();
             }
         });
@@ -109,16 +116,15 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
 
     @Override
     public boolean onQueryTextChange(String s) {
-        s=s.toLowerCase();
-        ArrayList<EmployeeModel> newlist=new ArrayList<>();
-        for(EmployeeModel filterlist:employeeModels)
-        {
-            String name=filterlist.getName().toLowerCase();
-            String address =filterlist.getPre_address().toLowerCase();
-            String email =filterlist.getEmail().toLowerCase();
-            String desi =filterlist.getMember_type().toLowerCase();
-            String mob =filterlist.getContact().toLowerCase();
-            if(name.contains(s)||address.contains(s)||email.contains(s)||desi.contains(s)||mob.contains(s)) {
+        s = s.toLowerCase();
+        ArrayList<EmployeeModel> newlist = new ArrayList<>();
+        for (EmployeeModel filterlist : employeeModels) {
+            String name = filterlist.getName().toLowerCase();
+            String address = filterlist.getPre_address().toLowerCase();
+            String email = filterlist.getEmail().toLowerCase();
+            String desi = filterlist.getMember_type().toLowerCase();
+            String mob = filterlist.getContact().toLowerCase();
+            if (name.contains(s) || address.contains(s) || email.contains(s) || desi.contains(s) || mob.contains(s)) {
                 newlist.add(filterlist);
             }
         }
@@ -126,16 +132,16 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
         return true;
     }
 
-    public void getEmployee(String userid,String type ,String branchid) {
+    public void getEmployee(String userid, String type, String branchid) {
 
-        Singleton.getInstance().getApi().getDriverList(userid,type ,branchid).enqueue(new Callback<EmployeeRestMeta>() {
+        Singleton.getInstance().getApi().getDriverList(userid, type, branchid).enqueue(new Callback<EmployeeRestMeta>() {
             @Override
             public void onResponse(Call<EmployeeRestMeta> call, Response<EmployeeRestMeta> response) {
-                if(response.body()==null)
+                if (response.body() == null)
                     return;
-                employeeModels=response.body().getResponse();
+                employeeModels = response.body().getResponse();
 
-                employeeAdapter=new EmployeeAdapter(DriverActivity.this,employeeModels);
+                employeeAdapter = new EmployeeAdapter(DriverActivity.this, employeeModels);
                 listEmployee.setAdapter(employeeAdapter);
                 listEmployee.setEmptyView(findViewById(R.id.imz_nodata));
                 progressBar.setVisibility(View.GONE);

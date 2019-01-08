@@ -34,6 +34,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,6 +88,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
+    Spinner spnIDType;
     String curr_date;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edt_present_address, edt_permanent_address;
@@ -117,6 +119,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         edt_ending_date = findViewById(R.id.edt_ending_date);
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
+        spnIDType = findViewById(R.id.spnIDType);
         btn_take_photo = findViewById(R.id.btn_take_photo);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
@@ -155,7 +158,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                 String present_add = edt_present_address.getText().toString();
                 String permanent_add = edt_permanent_address.getText().toString();
                 String national_id = edt_national_id.getText().toString();
-              //  String designation = edt_designation.getText().toString();
+                //  String designation = edt_designation.getText().toString();
                 String joining_date = edt_joining_date.getText().toString();
                 String ending_date = edt_ending_date.getText().toString();
                 if (name.equals("")) {
@@ -175,6 +178,9 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
                     return;
                 } else if (permanent_add.equals("")) {
                     Toasty.error(AddEmployeeActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddEmployeeActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (national_id.equals("")) {
                     Toasty.error(AddEmployeeActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
@@ -400,7 +406,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
     AlertDialog alertDialog;
     ArrayList<DesignationModel> designationModels;
     DesignationAdapter designationAdapter;
-    String DesiId="";
+    String DesiId = "";
     private int popupId = 0;
 
     private void showDesignationPopup() {
@@ -535,6 +541,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
         RequestBody requestpreAddress = RequestBody.create(MediaType.parse("text/plain"), preaddress);
         RequestBody requestper_Address = RequestBody.create(MediaType.parse("text/plain"), peradress);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem() + "");
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
@@ -544,7 +551,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements GoogleApiC
 
 
         Singleton.getInstance().getApi().postEmployee(requestUserId, requesttype, requestUserbranch, requesttxtName, requestEmail, requestMobile, requestpreAddress,
-      requestper_Address, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
+                requestper_Address, requestIDType, requestNational_id, requestdesign, requestJoiningDate, requestEndingDate, requestpassword, requestStatus, requestcurrentdate, imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddEmployeeActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

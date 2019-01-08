@@ -87,7 +87,7 @@ Button btn_close;
 
         sb = new SpannableStringBuilder(txtNationalId.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtNationalId.setText(sb);
 
         sb = new SpannableStringBuilder(txtFloor.getText());

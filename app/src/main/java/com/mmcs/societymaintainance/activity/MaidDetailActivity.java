@@ -22,7 +22,9 @@ import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.model.EmployeeModel;
+import com.mmcs.societymaintainance.model.LoginModel;
 import com.mmcs.societymaintainance.model.UnitRestMeta;
+import com.mmcs.societymaintainance.util.Shprefrences;
 import com.mmcs.societymaintainance.util.Singleton;
 
 import java.util.Calendar;
@@ -34,7 +36,8 @@ import retrofit2.Response;
 
 public class MaidDetailActivity extends AppCompatActivity {
     EmployeeModel employeeModel;
-    TextView txtName,txt_mobile,txt_email,txt_present_address,txt_permanent_address,txt_joining_date,txtEnding,txtDesignation,txtNationalId;
+    TextView txtName,txt_mobile,txt_email,txt_present_address,txt_permanent_address,txt_joining_date,
+            txtEnding,txtDesignation,txtNationalId,txtWorkplace;
     Button btn_close;
     ImageView image_employee;
     int cur = 0;
@@ -52,6 +55,7 @@ public class MaidDetailActivity extends AppCompatActivity {
         txtName=findViewById(R.id.txtName);
         txt_mobile=findViewById(R.id.txt_mobile);
         txt_email=findViewById(R.id.txt_email);
+        txtWorkplace=findViewById(R.id.txtWorkplace);
         txt_present_address=findViewById(R.id.txt_present_address);
         txt_permanent_address=findViewById(R.id.txt_permanent_address);
         txt_joining_date=findViewById(R.id.txt_joining_date);
@@ -66,7 +70,9 @@ public class MaidDetailActivity extends AppCompatActivity {
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
-        if (employeeModel.getEnding_date().equalsIgnoreCase(""))
+        Shprefrences sh=new Shprefrences(this);
+        LoginModel loginModel = sh.getLoginModel(getString(R.string.login_model));
+        if (employeeModel.getEnding_date().equalsIgnoreCase("")&& loginModel.getType().equalsIgnoreCase("1"))
             btn_close.setText("Update");
         else
             edt_ending_date.setEnabled(false);
@@ -86,6 +92,7 @@ public class MaidDetailActivity extends AppCompatActivity {
         txt_joining_date.setText(getString(R.string.joining_date) + employeeModel.getDate());
         txtNationalId.setText(getString(R.string.national) + employeeModel.getNid());
         txtDesignation.setText(getString(R.string.designation) + employeeModel.getMember_type());
+        txtWorkplace.setText("Working UNIT Details: "+employeeModel.getWork_detail());
         Glide.with(this).load(employeeModel.getImage()).placeholder(R.drawable.no_image).into(image_employee);
         image_employee.setOnTouchListener(new ImageMatrixTouchHandler(MaidDetailActivity.this));
         edt_ending_date.setText(employeeModel.getEnding_date());
@@ -129,7 +136,7 @@ public class MaidDetailActivity extends AppCompatActivity {
 
         sb = new SpannableStringBuilder(txtNationalId.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtNationalId.setText(sb);
 
 

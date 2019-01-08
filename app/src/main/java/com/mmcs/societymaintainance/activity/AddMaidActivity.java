@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,6 +84,7 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
     private static final int SELECT_PHOTO = 200;
     Shprefrences sh;
     String curr_date;
+    Spinner spnIDType;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edt_present_address,edt_permanent_address;
     private GoogleApiClient mGoogleApiClient;
@@ -112,6 +114,7 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
         btn_save = findViewById(R.id.btn_save);
         imageView = findViewById(R.id.imageView);
         btn_take_photo = findViewById(R.id.btn_take_photo);
+        spnIDType = findViewById(R.id.spnIDType);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         loginModel=sh.getLoginModel(getResources().getString(R.string.login_model));
@@ -170,7 +173,12 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
                 } else if (permanent_add.equals("")) {
                     Toasty.error(AddMaidActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (national_id.equals("")) {
+                }
+                else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddMaidActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (national_id.equals("")) {
                     Toasty.error(AddMaidActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -446,6 +454,7 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
         RequestBody requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
         RequestBody requestpreAddress = RequestBody.create(MediaType.parse("text/plain"), preaddress);
         RequestBody requestper_Address = RequestBody.create(MediaType.parse("text/plain"), peradress);
+        RequestBody requestIDType = RequestBody.create(MediaType.parse("text/plain"), spnIDType.getSelectedItem() + "");
         RequestBody requestNational_id = RequestBody.create(MediaType.parse("text/plain"), national_id);
         RequestBody requestpassword = RequestBody.create(MediaType.parse("text/plain"), password);
         RequestBody requestcurrentdate = RequestBody.create(MediaType.parse("text/plain"), curr_date);
@@ -454,7 +463,7 @@ public class AddMaidActivity extends AppCompatActivity implements GoogleApiClien
         RequestBody requestEndingDate = RequestBody.create(MediaType.parse("text/plain"), "");
 
 
-        Singleton.getInstance().getApi().postMaid(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().postMaid(requestUserId, requesttype,requestUserbranch, requesttxtName,requestEmail ,requestMobile,requestpreAddress,requestper_Address,requestIDType,requestNational_id,requestdesign,requestJoiningDate,requestEndingDate,requestpassword,requestStatus,requestcurrentdate ,imgFile).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 Toasty.success(AddMaidActivity.this, "Successfully Posted", Toast.LENGTH_SHORT).show();

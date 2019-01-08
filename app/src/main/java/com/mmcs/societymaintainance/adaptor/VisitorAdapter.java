@@ -77,6 +77,15 @@ public class VisitorAdapter extends BaseAdapter {
         txt_time_in.setText(context.getString(R.string.time_in)+list.get(i).getIntime());
       TextView txt_time_out=view.findViewById(R.id.txt_time_out);
         txt_time_out.setText(context.getString(R.string.time_out)+list.get(i).getOuttime());
+
+        TextView txtDate=view.findViewById(R.id.txtDate);
+        txtDate.setText("Visit Date:"+list.get(i).getVisit_date());
+
+        TextView txtStatus=view.findViewById(R.id.txtStatus);
+        txtStatus.setText(context.getString(R.string.status)+list.get(i).getStatus());
+
+
+
       final ImageView img = view.findViewById(R.id.img);
         ImageView imz_down=view.findViewById(R.id.imz_down);
         final ImageView   hide=view.findViewById(R.id.imz_down);

@@ -1,5 +1,6 @@
 package com.mmcs.societymaintainance.activity;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -34,7 +35,7 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
     LoginModel loginModel;
     ProgressBar progress;
     Shprefrences sh;
-
+    public static MediaPlayer r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -76,6 +77,10 @@ public class ComplaintNotificationActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        if (r != null) {
+            r.stop();
+        }
 
     }
 

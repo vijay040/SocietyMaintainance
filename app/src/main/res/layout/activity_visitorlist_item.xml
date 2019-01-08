@@ -7,8 +7,8 @@
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_5sdp">
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <ImageView
             android:id="@+id/img"
@@ -41,14 +41,38 @@
             android:textSize="@dimen/_8sdp" />
 
         <TextView
-            android:id="@+id/txtAddress"
+            android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtMobile"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
-            android:text="@string/address"
+            android:singleLine="true"
+            android:text="Date"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDate"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
             android:ems="15"
+            android:text="@string/address"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtAddress"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:singleLine="true"
+            android:text="Status"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_9sdp" />
 
@@ -56,13 +80,14 @@
             android:id="@+id/txtFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtAddress"
+            android:layout_below="@+id/txtStatus"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
             android:singleLine="true"
             android:text="@string/floor"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_9sdp" />
+
         <TextView
             android:id="@+id/txtUnit_no"
             android:layout_width="wrap_content"
@@ -85,6 +110,7 @@
             android:layout_marginEnd="12dp"
             android:padding="@dimen/_15sdp"
             android:src="@drawable/ic_down" />
+
         <RelativeLayout
             android:id="@+id/lay"
             android:layout_width="match_parent"
@@ -101,6 +127,7 @@
                 android:text="@string/time_in"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_9sdp" />
+
             <TextView
                 android:id="@+id/txt_time_out"
                 android:layout_width="wrap_content"

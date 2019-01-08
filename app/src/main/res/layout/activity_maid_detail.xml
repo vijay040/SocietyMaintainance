@@ -96,8 +96,6 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
 
-
-
             <TextView
                 android:id="@+id/txtDesignation"
                 android:layout_width="wrap_content"
@@ -107,6 +105,18 @@
                 android:text="@string/designation"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/txtWorkplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Wprking place"
+                android:textStyle="bold"
+                android:textColor="#800000"
+                android:textSize="@dimen/_10sdp" />
+
 
             <TextView
                 android:id="@+id/txtEnding"

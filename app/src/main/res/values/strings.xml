@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AVRWA</string>
+    <string name="app_name">Amrapali Village</string>
     <string name="email">Enter Email</string>
     <string name="password">Enter Password</string>
     <string name="login">LOG IN</string>
@@ -144,8 +144,8 @@
     <string name="permanent_add">Permanent Address</string>
     <string name="permanent_address">Permanent Address:</string>
     <string name="register">REGISTER</string>
-    <string name="national_id">National ID</string>
-    <string name="national">National ID:</string>
+    <string name="national_id">ID Card Number</string>
+    <string name="national">ID Card Number:</string>
     <string name="select_floor">Select Floor</string>
     <string name="select_designation">Select Designation</string>
     <string name="select_dept">Select Department</string>
@@ -182,5 +182,14 @@
         <item>Register Types</item>
         <item>Owner</item>
         <item>Renter</item>
+    </string-array>
+
+    <string-array name="array_id_types">
+        <item>Register ID Types</item>
+        <item>Aadhaar Card</item>
+        <item>Pan Card</item>
+        <item>Voter ID</item>
+        <item>Passport</item>
+        <item>Driving License</item>
     </string-array>
 </resources>
