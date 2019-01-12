@@ -21,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.societymaintainance.R;
 import com.mmcs.societymaintainance.activity.BroadcastNotifiActivity;
 import com.mmcs.societymaintainance.activity.ComplaintNotificationActivity;
+import com.mmcs.societymaintainance.activity.CourierNotificationActivity;
 import com.mmcs.societymaintainance.activity.EmergancyAlarmActivity;
 import com.mmcs.societymaintainance.activity.SplashActivity;
 import com.mmcs.societymaintainance.activity.VisitorNotificationActivity;
@@ -46,7 +47,14 @@ public class SocietyMessagingService extends FirebaseMessagingService {
             VisitorNotificationActivity.r = MediaPlayer.create(this, R.raw.congratulations);
             VisitorNotificationActivity.r.setLooping(true);
             VisitorNotificationActivity.r.start();
-        } else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("New complain registered!")) {
+        }
+       else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("Your Courier has checked in!")) {
+            intent = new Intent(this, CourierNotificationActivity.class);
+            CourierNotificationActivity.r = MediaPlayer.create(this, R.raw.congratulations);
+            CourierNotificationActivity.r.setLooping(true);
+            CourierNotificationActivity.r.start();
+        }
+        else if (remoteMessage.getNotification().getTitle().equalsIgnoreCase("New complain registered!")) {
             intent = new Intent(this, ComplaintNotificationActivity.class);
             ComplaintNotificationActivity.r = MediaPlayer.create(this, R.raw.dropped);
             ComplaintNotificationActivity.r.setLooping(true);

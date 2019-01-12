@@ -151,22 +151,22 @@ public class AddDriverActivity extends AppCompatActivity implements GoogleApiCli
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = edt_name.getText().toString();
-                String email = edt_email.getText().toString();
-                String mobile = edt_mobile.getText().toString();
+                String name = edt_name.getText()+"";
+                String email = edt_email.getText()+"";
+                String mobile = edt_mobile.getText()+"";
                 String password = edt_password.getText().toString() + "12345";
-                String present_add = edt_present_address.getText().toString();
-                String permanent_add = edt_permanent_address.getText().toString();
-                String national_id = edt_national_id.getText().toString();
-                String joining_date = edt_joining_date.getText().toString();
-                String ending_date = edt_ending_date.getText().toString();
+                String present_add = edt_present_address.getText()+"";
+                String permanent_add = edt_permanent_address.getText()+"";
+                String national_id = edt_national_id.getText()+"";
+                String joining_date = edt_joining_date.getText()+"";
+                String ending_date = edt_ending_date.getText()+"";
                 if (name.equals("")) {
                     Toasty.error(AddDriverActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (email.equals("")) {
+                } /*else if (email.equals("")) {
                     Toasty.error(AddDriverActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
+                }*/ else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
                     Toasty.error(AddDriverActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (password.equals("")) {

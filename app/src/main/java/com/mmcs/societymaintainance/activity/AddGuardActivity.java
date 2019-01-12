@@ -161,10 +161,10 @@ public class AddGuardActivity extends AppCompatActivity implements GoogleApiClie
                 if (name.equals("")) {
                     Toasty.error(AddGuardActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (email.equals("")) {
+                } /*else if (email.equals("")) {
                     Toasty.error(AddGuardActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
+                }*/ else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
                     Toasty.error(AddGuardActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (password.equals("")) {

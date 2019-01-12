@@ -152,9 +152,13 @@
             android:name=".activity.BroadcastNotifiActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activity.CourierNotificationActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".activity.EmergancyAlarmActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+
             android:name=".activity.BillActivity"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity

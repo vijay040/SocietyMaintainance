@@ -80,9 +80,11 @@
                 android:hint="@string/email"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
+                android:visibility="gone"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
             <View
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginRight="@dimen/_10sdp"
