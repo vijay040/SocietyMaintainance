@@ -166,16 +166,16 @@ public class AddOthersActivity extends AppCompatActivity implements GoogleApiCli
                 } else if (type.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Registration Type", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (email.equals("")) {
+                } /*else if (email.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
+                }*/ else if (mobile.trim().isEmpty() || mobile.length() < 10 || mobile.length() > 12) {
                     Toasty.error(AddOthersActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (password.equals("")) {
+                }/* else if (password.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (present_add.equals("")) {
+                }*/ else if (present_add.equals("")) {
                     Toasty.error(AddOthersActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (permanent_add.equals("")) {
