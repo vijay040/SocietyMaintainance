@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:padding="@dimen/_20sdp">
     <ProgressBar
@@ -14,8 +14,27 @@
         android:indeterminateDrawable="@drawable/progressbar"
         />
 
+<RelativeLayout
+   android:layout_centerVertical="true"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_350sdp">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Login"
+        android:textStyle="bold"
+        android:textColor="#000066"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:textSize="@dimen/_25sdp"
+        />
 
     <RelativeLayout
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_100sdp"
         android:layout_alignParentBottom="true"
@@ -124,5 +143,5 @@
 
 
     </RelativeLayout>
-
+</RelativeLayout>
 </RelativeLayout>
