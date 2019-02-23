@@ -4,18 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_color"
+    android:background="@drawable/bg"
     android:orientation="vertical">
-
     <include layout="@layout/toolbar" />
-
-
-    <View
-        android:id="@+id/divider10"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/enter_full_name"
-        android:background="@color/view_devider" />
 
     <ImageView
         android:id="@+id/imgProfile"
@@ -44,19 +35,18 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rounded_lay"
+            android:layout_margin="@dimen/_15sdp"
+            android:padding="@dimen/_10sdp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
             android:orientation="vertical">
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_above="@+id/linear_layout_professional_names"
-                android:background="@color/view_devider" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_professional_names"
@@ -66,12 +56,13 @@
                 android:weightSum="2">
 
                 <EditText
+
                     android:id="@+id/edt_txt_first_name"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:background="@color/white_color"
+                    android:background="@drawable/rounded_edt"
                   android:editable="false"
                     android:hint="@string/edt_txt__name"
                     android:paddingLeft="@dimen/_15sdp"
@@ -79,18 +70,13 @@
                     android:textColor="#6d6e71"
                     android:textSize="@dimen/_11sdp" />
 
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/view_devider" />
 
                 <EditText
                     android:id="@+id/edt_txt_last_name"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:background="@color/white_color"
+                    android:background="@drawable/rounded_edt"
                   android:editable="false"
                     android:hint="@string/edt_txt_last_name"
                     android:paddingLeft="@dimen/_15sdp"
@@ -98,19 +84,14 @@
                     android:textColor="#6d6e71"
                     android:textSize="@dimen/_11sdp" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/view_devider" />
 
             <EditText
                 android:id="@+id/edt_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:background="@color/white_color"
                 android:drawablePadding="@dimen/_20sdp"
+                android:background="@drawable/rounded_edt"
               android:editable="false"
                 android:drawableLeft="@drawable/ic_email"
                 android:hint="@string/EmailAddress"
@@ -119,19 +100,13 @@
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
 
-            <View
-                android:id="@+id/view_personal_number"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/view_devider" />
 
             <EditText
                 android:id="@+id/edt_Flate_no"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:background="@color/white_color"
+                android:background="@drawable/rounded_edt"
                 android:drawableLeft="@drawable/ic_homepage"
                 android:drawablePadding="@dimen/_20sdp"
                android:editable="false"
@@ -140,19 +115,13 @@
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-            <View
-                android:id="@+id/view_flate_no"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/view_devider" />
 
             <EditText
                 android:id="@+id/edt_phone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:background="@color/white_color"
+                android:background="@drawable/rounded_edt"
                 android:drawableLeft="@drawable/ic_phone"
                 android:drawablePadding="@dimen/_20sdp"
                android:editable="false"
@@ -161,10 +130,7 @@
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/view_devider" />
+
 
             <EditText
                 android:id="@+id/edt_designation"
@@ -183,21 +149,12 @@
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
 
-
-            <View
-                android:id="@+id/view_professional_screen_2_email"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/view_devider" />
-
-
-            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+            <EditText
                 android:id="@+id/edt_Address"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:background="@color/white_color"
+                android:background="@drawable/rounded_edt"
                 android:drawableLeft="@drawable/ic_loc"
                 android:drawablePadding="@dimen/_20sdp"
                android:editable="false"
@@ -206,12 +163,7 @@
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:visibility="gone"
-                android:background="@color/view_devider" />
+
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
@@ -221,10 +173,12 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_20sdp"
+                android:textStyle="bold"
                 android:text="OK" />
 
 
         </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

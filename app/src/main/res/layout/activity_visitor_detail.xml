@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgcolor"
+    android:background="@drawable/bg"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
@@ -50,7 +50,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rounded_lay"
+            android:layout_margin="@dimen/_15sdp"
+            android:padding="@dimen/_10sdp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,6 +186,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:drawableRight="@drawable/ic_clock"
                 android:singleLine="true"
+                android:editable="false"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
 
@@ -196,7 +203,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:textSize="@dimen/_15sdp" />
         </LinearLayout>
-
+        </RelativeLayout>
     </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -114,6 +114,7 @@ public class OthersActivity extends AppCompatActivity implements SearchView.OnQu
                 newlist.add(filterlist);
             }
         }
+        if(newlist.size()>0)
         employeeAdapter.filter(newlist);
         return true;
     }
@@ -130,6 +131,8 @@ public class OthersActivity extends AppCompatActivity implements SearchView.OnQu
                 employeeAdapter=new EmployeeAdapter(OthersActivity.this,employeeModels);
                 listEmployee.setAdapter(employeeAdapter);
                 listEmployee.setEmptyView(findViewById(R.id.imz_nodata));
+                if(employeeModels.size()>0)
+                    listEmployee.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
 
             }

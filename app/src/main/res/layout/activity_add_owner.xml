@@ -1,7 +1,7 @@
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white_color"
+    android:background="@drawable/bg"
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
@@ -17,7 +17,13 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rounded_lay"
+            android:layout_margin="@dimen/_15sdp"
+            android:padding="@dimen/_10sdp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -28,19 +34,14 @@
         android:layout_height="@dimen/_38sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:background="@color/white_color"
+        android:background="@drawable/rounded_edt"
         android:hint="@string/owner_name"
         android:layout_marginTop="@dimen/_20sdp"
         android:paddingLeft="@dimen/_15sdp"
         android:singleLine="true"
         android:textColor="#6d6e71"
         android:textSize="@dimen/_11sdp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:background="@color/view_devider" />
+
 
             <EditText
                 android:id="@+id/edt_email"
@@ -48,26 +49,21 @@
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:background="@color/white_color"
+                android:background="@drawable/rounded_edt"
                 android:inputType="textEmailAddress"
                 android:hint="@string/email_add"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:background="@color/view_devider" />
+
             <EditText
                 android:id="@+id/edt_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:background="@color/white_color"
+                android:background="@drawable/rounded_edt"
                 android:inputType="number"
                 android:hint="@string/contact_no"
                 android:maxLength="10"
@@ -76,12 +72,6 @@
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:background="@color/view_devider" />
 
             <EditText
                 android:id="@+id/edt_password"
@@ -89,49 +79,11 @@
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:background="@color/white_color"
+                android:background="@drawable/rounded_edt"
                 android:inputType="textPassword"
                 android:hint="@string/password"
                 android:maxLength="10"
                 android:paddingLeft="@dimen/_15sdp"
-                android:singleLine="true"
-                android:textColor="#6d6e71"
-                android:textSize="@dimen/_11sdp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:background="@color/view_devider" />
-
-            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
-                android:id="@+id/edt_present_address"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:background="@color/white_color"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:drawableLeft="@drawable/ic_loc"
-                android:drawablePadding="@dimen/_5sdp"
-                android:hint="@string/present_address"
-                android:paddingLeft="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="#6d6e71"
-                android:textSize="@dimen/_11sdp" />
-
-            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
-                android:id="@+id/edt_permanent_address"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:background="@color/white_color"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:drawableLeft="@drawable/ic_loc"
-                android:drawablePadding="@dimen/_5sdp"
-                android:hint="@string/permanent_add"
-                android:paddingLeft="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
@@ -143,6 +95,54 @@
                 android:layout_gravity="center"
                 android:indeterminateDrawable="@drawable/progressbar"
                 />
+
+            <EditText
+                android:id="@+id/edt_national_id"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="@drawable/rounded_edt"
+                android:hint="@string/national_id"
+                android:paddingLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/edt_floor"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edt"
+                android:drawableRight="@drawable/dropdownyello"
+                android:editable="false"
+                android:hint="@string/select_floor"
+                android:paddingLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
+
+
+            <EditText
+                android:id="@+id/edt_unit_no"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edt"
+                android:drawableRight="@drawable/dropdownyello"
+                android:editable="false"
+                android:hint="@string/select_unit"
+                android:paddingLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
+
             <Spinner
                 android:id="@+id/spnIDType"
                 android:layout_width="wrap_content"
@@ -153,70 +153,37 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:entries="@array/array_id_types"
                 android:gravity="center" />
+            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                android:id="@+id/edt_present_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@drawable/rounded_edt"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:drawableLeft="@drawable/ic_loc"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="@string/present_address"
+                android:paddingLeft="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp"/>
 
-            <EditText
-                android:id="@+id/edt_national_id"
+            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                android:id="@+id/edt_permanent_address"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@drawable/rounded_edt"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:background="@color/white_color"
-                android:hint="@string/national_id"
-                android:paddingLeft="@dimen/_15sdp"
+                android:drawableLeft="@drawable/ic_loc"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="@string/permanent_add"
+                android:paddingLeft="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:visibility="gone"
-        android:background="@color/view_devider" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/edt_floor"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_weight="1"
-                android:background="@color/white_color"
-                android:drawableRight="@drawable/dropdownyello"
-                android:editable="false"
-                android:hint="@string/select_floor"
-                android:paddingLeft="@dimen/_15sdp"
-                android:singleLine="true"
-                android:textColor="#6d6e71"
-                android:textSize="@dimen/_11sdp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:background="@color/view_devider" />
-
-            <EditText
-                android:id="@+id/edt_unit_no"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_weight="1"
-                android:background="@color/white_color"
-                android:drawableRight="@drawable/dropdownyello"
-                android:editable="false"
-                android:hint="@string/select_unit"
-                android:paddingLeft="@dimen/_15sdp"
-                android:singleLine="true"
-                android:textColor="#6d6e71"
-                android:textSize="@dimen/_11sdp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:background="@color/view_devider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,8 +195,8 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
                     android:layout_weight="2"
                     android:src="@drawable/ic_profile" />
                 <Button
@@ -237,7 +204,11 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="3"
+                    android:background="@drawable/btnaccept"
                     android:layout_gravity="center"
+                    android:textColor="@color/white_color"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10sdp"
                     android:text="Take Photo" />
             </LinearLayout>
 
@@ -252,6 +223,7 @@
         android:layout_marginBottom="@dimen/_20sdp"
         android:layout_height="wrap_content" />
     </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
 

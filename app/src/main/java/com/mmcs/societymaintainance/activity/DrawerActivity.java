@@ -140,7 +140,6 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.logout);
             list.add(item);
 
-
         } else if (type.equalsIgnoreCase("Employee")) {
             list = new ArrayList<>();
             item.setImage(R.drawable.ic_user);
@@ -207,12 +206,10 @@ public class DrawerActivity extends AppCompatActivity {
             item.setImage(R.drawable.ic_team);
             list.add(item);
 
-
             item = new HomeItemModel();
             item.setTitle("Logout");
             item.setImage(R.drawable.logout);
             list.add(item);
-
 
         } else if (type.equalsIgnoreCase("Renter")) {
             list = new ArrayList<>();
@@ -229,7 +226,6 @@ public class DrawerActivity extends AppCompatActivity {
             item.setTitle("Visitor");
             item.setImage(R.drawable.ic_visitor);
             list.add(item);
-
 
             item = new HomeItemModel();
             item.setTitle("Driver");
@@ -250,7 +246,6 @@ public class DrawerActivity extends AppCompatActivity {
             item.setTitle("Logout");
             item.setImage(R.drawable.logout);
             list.add(item);
-
         }
 
         SideBarAdaptor adaptor = new SideBarAdaptor(this, list);

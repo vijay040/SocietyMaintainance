@@ -112,6 +112,8 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
                 visitorAdapter = new VisitorAdapter(VisitorListActivity.this, visitorModels);
                 listVisitor.setAdapter(visitorAdapter);
                 listVisitor.setEmptyView(findViewById(R.id.imz_nodata));
+                if(visitorModels.size()>0)
+                    listVisitor.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
 
             }
@@ -152,6 +154,7 @@ public class VisitorListActivity extends AppCompatActivity implements SearchView
                 newlist.add(filterlist);
             }
         }
+        if(newlist.size()>0)
         visitorAdapter.filter(newlist);
         return true;
     }

@@ -1,7 +1,7 @@
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white_color"
+    android:background="@drawable/bg"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <include layout="@layout/toolbar"
@@ -23,6 +23,14 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rounded_lay"
+            android:layout_margin="@dimen/_15sdp"
+            android:padding="@dimen/_10sdp">
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -280,6 +288,7 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

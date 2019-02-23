@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.mmcs.societymaintainance"
-        minSdkVersion 19
+        minSdkVersion 20
         targetSdkVersion 26
         versionCode 7
         versionName "1.6"
@@ -37,16 +37,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:10.2.1'
     compile 'com.google.android.gms:play-services-places:10.2.1'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:+'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     compile 'com.bogdwellers:pinchtozoom:0.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    /*  implementation 'com.google.firebase:firebase-core:16.0.1'*/
-    /* implementation 'com.google.firebase:firebase-messaging:17.3.4'*/
-    /*compile 'com.google.firebase:firebase-messaging:10.2.1'*/
-    /* compile 'com.google.firebase:firebase-core:16.0.1'
-    compile 'com.google.firebase:firebase-messaging:17.3.4'*/
-
     compile 'com.google.firebase:firebase-messaging:10.2.1'
     compile 'com.google.firebase:firebase-core:10.2.1'
 }

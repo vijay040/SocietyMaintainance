@@ -182,16 +182,7 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 } else if (password.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (present_add.equals("")) {
-                    Toasty.error(AddOwnerActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (permanent_add.equals("")) {
-                    Toasty.error(AddOwnerActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (spnIDType.getSelectedItemPosition() == 0) {
-                    Toasty.error(AddOwnerActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (national_id.equals("")) {
+                }  else if (national_id.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Enter National Id", Toast.LENGTH_SHORT).show();
                     return;
                 }/* else if (floor.equals("")) {
@@ -200,7 +191,16 @@ public class AddOwnerActivity extends AppCompatActivity implements GoogleApiClie
                 }*/ else if (unit.equals("")) {
                     Toasty.error(AddOwnerActivity.this, "Select Unit No.", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
+                }else if (spnIDType.getSelectedItemPosition() == 0) {
+                    Toasty.error(AddOwnerActivity.this, "Select ID Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (present_add.equals("")) {
+                    Toasty.error(AddOwnerActivity.this, "Enter Present Address", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (permanent_add.equals("")) {
+                    Toasty.error(AddOwnerActivity.this, "Enter Permanent Address", Toast.LENGTH_SHORT).show();
+                    return;
+                }  else {
                     progress.setVisibility(View.VISIBLE);
                     postOwner(loginModel.getId(), loginModel.getType(), loginModel.getBranch_id(), name, email, mobile, present_add, permanent_add, national_id, password, imageImagePath);
                 }

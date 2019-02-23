@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgcolor"
+    android:background="@drawable/bg"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
@@ -9,7 +9,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rounded_lay"
+            android:layout_margin="@dimen/_15sdp"
+            android:padding="@dimen/_10sdp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +27,6 @@
                 android:layout_height="@dimen/_160sdp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/ic_profile" />
 
             <TextView
@@ -148,7 +153,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:textSize="@dimen/_15sdp" />
         </LinearLayout>
-
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>
 

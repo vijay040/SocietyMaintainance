@@ -108,6 +108,8 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
                 complaintAdapter = new ComplaintAdapter(ComplaintListActivity.this, complaintModels);
                 listComplaint.setAdapter(complaintAdapter);
                 listComplaint.setEmptyView(findViewById(R.id.imz_nodata));
+                if(complaintModels.size()>0)
+                    listComplaint.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
 
             }
@@ -144,6 +146,7 @@ public class ComplaintListActivity extends AppCompatActivity implements SearchVi
                 newlist.add(filterlist);
             }
         }
+        if(newlist.size()>0)
         complaintAdapter.filter(newlist);
         return true;
     }

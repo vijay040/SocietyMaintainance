@@ -40,7 +40,8 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edt_username, edt_password;
-    Button loginBtn, btn_register;
+    Button loginBtn;
+    TextView btn_register;
     Animation animShake;
     public static int TYPE_WIFI = 1;
     public static int TYPE_MOBILE = 2;

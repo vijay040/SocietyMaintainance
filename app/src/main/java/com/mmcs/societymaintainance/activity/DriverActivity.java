@@ -122,12 +122,13 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
             String name = filterlist.getName().toLowerCase();
             String address = filterlist.getPre_address().toLowerCase();
             String email = filterlist.getEmail().toLowerCase();
-            String desi = filterlist.getMember_type().toLowerCase();
+           // String desi = filterlist.getMember_type().toLowerCase();
             String mob = filterlist.getContact().toLowerCase();
-            if (name.contains(s) || address.contains(s) || email.contains(s) || desi.contains(s) || mob.contains(s)) {
+            if (name.contains(s) || address.contains(s) || email.contains(s)  || mob.contains(s)) {
                 newlist.add(filterlist);
             }
         }
+        if(newlist.size()>0)
         employeeAdapter.filter(newlist);
         return true;
     }
@@ -144,6 +145,8 @@ public class DriverActivity extends AppCompatActivity implements SearchView.OnQu
                 employeeAdapter = new EmployeeAdapter(DriverActivity.this, employeeModels);
                 listEmployee.setAdapter(employeeAdapter);
                 listEmployee.setEmptyView(findViewById(R.id.imz_nodata));
+                if(employeeModels.size()>0)
+                    listEmployee.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
 
             }

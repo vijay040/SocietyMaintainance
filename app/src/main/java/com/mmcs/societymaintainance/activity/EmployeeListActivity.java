@@ -99,10 +99,13 @@ public class EmployeeListActivity extends AppCompatActivity implements SearchVie
             public void onResponse(Call<EmployeeRestMeta> call, Response<EmployeeRestMeta> response) {
                 if(response.body()==null)
                     return;
+
                 employeeModels=response.body().getResponse();
                 employeeAdapter=new EmployeeAdapter(EmployeeListActivity.this,employeeModels);
                 listEmployee.setAdapter(employeeAdapter);
                 listEmployee.setEmptyView(findViewById(R.id.imz_nodata));
+                if(employeeModels.size()>0)
+                    listEmployee.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
 
             }
@@ -137,6 +140,7 @@ public class EmployeeListActivity extends AppCompatActivity implements SearchVie
                 newlist.add(filterlist);
             }
         }
+        if(newlist.size()>0)
         employeeAdapter.filter(newlist);
         return true;
     }

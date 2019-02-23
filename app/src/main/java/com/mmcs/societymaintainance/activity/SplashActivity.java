@@ -50,7 +50,6 @@ public class SplashActivity extends AppCompatActivity {
         sh=new Shprefrences(this);
 
 
-
        /* Intent intent = new Intent();
 
         String manufacturer = android.os.Build.MANUFACTURER;
